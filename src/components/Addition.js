@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
 const Equation = styled.div`
-  font-size: 2rem;
+  font-size: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,7 @@ function getRandom(max) {
   return Math.floor(Math.random() * max);
 }
 
-export default function Addition({ max = 10 }) {
+export default function Addition({ max = 20 }) {
   const [answer, setAnswer] = useState(initialInput);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
@@ -41,8 +41,8 @@ export default function Addition({ max = 10 }) {
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
   useEffect(() => {
-    setDigit1(getRandom(20));
-    setDigit2(getRandom(20));
+    setDigit1(getRandom(max));
+    setDigit2(getRandom(max));
     inputEl.current.focus();
   }, [max]);
 
@@ -64,6 +64,7 @@ export default function Addition({ max = 10 }) {
     setIsCorrect(parseInt(answer, 10) === correctAnswer);
     setTimeout(() => nextProblem(), 1500);
   }
+
   return (
     <div>
       <Equation>
