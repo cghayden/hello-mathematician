@@ -86,6 +86,7 @@ export default function Addition({ max = 20 }) {
         >
           <input
             type="number"
+            pattern="[0-9]*"
             ref={inputEl}
             value={answer}
             name="answer"
