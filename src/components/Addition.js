@@ -85,6 +85,7 @@ export default function Addition({ max = 20 }) {
           onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
         >
           <input
+            type="number"
             ref={inputEl}
             value={answer}
             name="answer"

@@ -55,6 +55,7 @@ export default function Subtraction({ max = 20 }) {
         </p>
         <form method="POST" onSubmit={e => checkAnswer(e, answer, digits)}>
           <input
+            type="number"
             ref={inputEl}
             value={answer}
             name="answer"
