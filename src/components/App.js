@@ -8,7 +8,6 @@ import GlobalStyles from "./GlobalStyles";
 import styled from "styled-components";
 
 const Container = styled.div`
-  font-family: sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -16,7 +15,7 @@ const Container = styled.div`
 `;
 export default function App() {
   return (
-    <React.Fragment className="Fragment">
+    <React.Fragment>
       <GlobalStyles />
       <Container>
         <h1>Hello Mathematician!</h1>
