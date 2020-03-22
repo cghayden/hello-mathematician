@@ -2,17 +2,22 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
 const Equation = styled.div`
-  font-size: 3rem;
+  font-size: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: lightblue; */
+  span {
+    padding-right: 5px;
+  }
   input {
-    font-size: inherit;
+    font-size: 2.75rem;
+    font: inherit;
     border-radius: 5px;
     border: none;
     margin: 0 1rem;
-    width: 5ch;
+    width: 90px;
+    margin: 0;
+    height: 2ch;
   }
   button {
     border: 0;
@@ -68,10 +73,13 @@ export default function Addition({ max = 20 }) {
   return (
     <div>
       <Equation>
-        <p>{digit1}</p>
-        <p>+</p>
-        <p>{digit2}</p>
-        <p>=</p>
+        <p>
+          <span>{digit1}</span>
+          <span>+</span>
+          <span>{digit2}</span>
+          <span>=</span>{" "}
+        </p>
+
         <form
           method="POST"
           onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
@@ -107,3 +115,5 @@ export default function Addition({ max = 20 }) {
     </div>
   );
 }
+
+export { Equation };

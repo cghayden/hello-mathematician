@@ -1,37 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
+import { Equation } from "./Addition";
 
-const Equation = styled.div`
-  font-size: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* background-color: lightblue; */
-  input {
-    font-size: inherit;
-    border-radius: 5px;
-    border: none;
-    margin: 0 1rem;
-    width: 5ch;
-  }
-  button {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-`;
 const initialInput = "";
 
 function getRandom(max) {
   return Math.floor(Math.random() * max);
 }
 export default function Subtraction({ max = 20 }) {
-  console.log("max:", max);
   const [answer, setAnswer] = useState(initialInput);
   const [digits, setDigits] = useState([]);
   const [isCorrect, setIsCorrect] = useState();
@@ -71,10 +46,13 @@ export default function Subtraction({ max = 20 }) {
   return (
     <div>
       <Equation>
-        <p>{digits[0]}</p>
-        <p>-</p>
-        <p>{digits[1]}</p>
-        <p>=</p>
+        <p>
+          <span>{digits[0]}</span>
+
+          <span>-</span>
+          <span>{digits[1]}</span>
+          <span>=</span>
+        </p>
         <form method="POST" onSubmit={e => checkAnswer(e, answer, digits)}>
           <input
             ref={inputEl}

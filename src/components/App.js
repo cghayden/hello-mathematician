@@ -10,7 +10,7 @@ import styled from "styled-components";
 const Container = styled.div`
   text-align: center;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   height: 100vh;
 `;
 export default function App() {

@@ -4,8 +4,16 @@ import { NavLink } from "react-router-dom";
 const Nav = styled.nav`
   ul {
     display: flex;
+    flex-wrap: wrap;
+    font-size: 1.7rem;
     list-style: none;
     justify-content: space-around;
+    padding: 10px;
+    margin: 0;
+
+    li {
+      padding: 0 10px;
+    }
   }
 `;
 
