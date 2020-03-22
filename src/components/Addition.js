@@ -6,7 +6,7 @@ const Equation = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   input {
     font-size: inherit;
     border-radius: 5px;
