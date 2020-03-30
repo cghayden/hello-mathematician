@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Equation } from "./Addition";
+import Equation from "../styles/Equation";
+import NumberInput from "../styles/NumberInput";
+
+import { motion } from "framer-motion";
+import { pageVariants } from "../utils/pageTransitions";
 
 const initialInput = "";
 
@@ -44,7 +48,12 @@ export default function Subtraction({ max = 20 }) {
     setTimeout(() => nextProblem(), 1500);
   }
   return (
-    <div>
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <Equation>
         <p>
           <span>{digits[0]}</span>
@@ -54,7 +63,7 @@ export default function Subtraction({ max = 20 }) {
           <span>=</span>
         </p>
         <form method="POST" onSubmit={e => checkAnswer(e, answer, digits)}>
-          <input
+          <NumberInput
             type="number"
             pattern="[0-9]*"
             ref={inputEl}
@@ -84,6 +93,6 @@ export default function Subtraction({ max = 20 }) {
         ref={wrongAudio}
         src="https://res.cloudinary.com/coreytesting/video/upload/v1584721830/sounds/wrongSoft.mp3"
       />
-    </div>
+    </motion.div>
   );
 }
