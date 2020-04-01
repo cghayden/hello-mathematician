@@ -19,7 +19,7 @@ export default function AdditionController({
   if (playMode === "timed") {
     return (
       <>
-        {!inProgress && showTimer && <p>Press Start to Begin</p>}
+        {/* {!inProgress && showTimer && <p>Press Start to Begin</p>} */}
         {!showTimer && inProgress && (
           <AdditionEquation
             playMode={playMode}

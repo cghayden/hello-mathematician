@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "../styles/Button";
 import MinusCircleSvg from "./MinusCircleSvg";
 import AddCircleSvg from "./AddCircleSvg";
 const variants = {
@@ -16,8 +15,8 @@ export default function Timer({
   showTimer,
   toggleTimer
 }) {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(15);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(0);
   const [starterStep, setStarterStep] = useState(0);
   const [isStarterActive, setIsStarterActive] = useState(false);
 
@@ -43,7 +42,7 @@ export default function Timer({
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isStarterActive, starterStep]);
+  }, [isStarterActive, starterStep, toggleInProgress]);
 
   function addTime() {
     if (seconds === 45) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Switch, Route, useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
@@ -6,7 +6,6 @@ import { theme } from "./themeVariables";
 
 import Navigation from "./Navigation";
 import AdditionController from "./AdditionController";
-import Home from "./Home";
 import SubtractionController from "./SubtractionController";
 import GlobalStyles from "./GlobalStyles";
 import MaxValue from "./MaxValue";
@@ -94,48 +93,3 @@ export default function App() {
     </React.Fragment>
   );
 }
-
-const ExampleTimer = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-
-  function toggle() {
-    setIsActive(!isActive);
-  }
-
-  function reset() {
-    setSeconds(0);
-    setIsActive(false);
-  }
-
-  useEffect(() => {
-    let interval = null;
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-      }, 1000);
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isActive, seconds]);
-
-  return (
-    <div className="app">
-      <div className="time">{seconds}s</div>
-      <div className="row">
-        <button
-          className={`button button-primary button-primary-${
-            isActive ? "active" : "inactive"
-          }`}
-          onClick={toggle}
-        >
-          {isActive ? "Pause" : "Start"}
-        </button>
-        <button className="button" onClick={reset}>
-          Reset
-        </button>
-      </div>
-    </div>
-  );
-};
