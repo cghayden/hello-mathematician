@@ -14,11 +14,7 @@ function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue);
 }
 
-export default function AdditionEquation({
-  maxValue = 20,
-  setScore,
-  playMode
-}) {
+export default function AdditionEquation({ maxValue = 20, setScore }) {
   const [answer, setAnswer] = useState(initialInput);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
@@ -50,11 +46,9 @@ export default function AdditionEquation({
       wrongAudio.current.play();
     }
     setIsCorrect(parseInt(answer, 10) === correctAnswer);
-    setTimeout(() => nextProblem(), 500);
+    setTimeout(() => nextProblem(), 300);
   }
-  //if playMode=practice return equation
 
-  // if playMode = timed,
   return (
     <motion.div
       variants={pageVariants}

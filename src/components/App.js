@@ -7,7 +7,7 @@ import { theme } from "./themeVariables";
 import Navigation from "./Navigation";
 import AdditionController from "./AdditionController";
 import Home from "./Home";
-import Subtraction from "./Subtraction";
+import SubtractionController from "./SubtractionController";
 import GlobalStyles from "./GlobalStyles";
 import MaxValue from "./MaxValue";
 import Timer from "./Timer";
@@ -62,10 +62,12 @@ export default function App() {
                 />
               </Route>
               <Route exact path="/subtraction">
-                <Subtraction
+                <SubtractionController
                   playMode={playMode}
-                  max={maxValue}
+                  maxValue={maxValue}
                   setScore={setScore}
+                  inProgress={inProgress}
+                  showTimer={showTimer}
                 />
               </Route>
             </Switch>
@@ -82,6 +84,7 @@ export default function App() {
           {showScore && playMode === "timed" && (
             <Score
               score={score}
+              setScore={setScore}
               toggleScore={toggleScore}
               toggleTimer={toggleTimer}
             />

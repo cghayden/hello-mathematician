@@ -1,7 +1,7 @@
 import React from "react";
-import AdditionEquation from "./AdditionEquation";
+import SubtractionEquation from "./SubtractionEquation";
 
-export default function AdditionController({
+export default function SubtractionController({
   maxValue = 20,
   setScore,
   playMode,
@@ -10,7 +10,7 @@ export default function AdditionController({
 }) {
   if (playMode === "practice")
     return (
-      <AdditionEquation
+      <SubtractionEquation
         playMode={playMode}
         maxValue={maxValue}
         setScore={setScore}
@@ -21,7 +21,7 @@ export default function AdditionController({
       <>
         {!inProgress && showTimer && <p>Press Start to Begin</p>}
         {!showTimer && inProgress && (
-          <AdditionEquation
+          <SubtractionEquation
             playMode={playMode}
             maxValue={maxValue}
             setScore={setScore}

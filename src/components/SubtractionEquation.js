@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import Equation from "../styles/Equation";
-import NumberInput from "../styles/NumberInput";
-
 import { motion } from "framer-motion";
 import { pageVariants } from "../utils/pageTransitions";
+import Equation from "../styles/Equation";
+import GhostOperand from "../styles/GhostOperand";
+import NumberInput from "../styles/NumberInput";
+import OperandContainer from "../styles/OperandContainer";
+import Operand from "./Operand";
+import Operator from "../styles/Operator";
 
 const initialInput = "";
 
-function getRandom(max) {
-  return Math.floor(Math.random() * max);
+function getRandom(maxValue) {
+  return Math.floor(Math.random() * maxValue);
 }
-export default function Subtraction({ max = 20 }) {
+export default function SubtractionEquation({ maxValue = 20, setScore }) {
   const [answer, setAnswer] = useState(initialInput);
   const [digits, setDigits] = useState([]);
   const [isCorrect, setIsCorrect] = useState();
@@ -20,32 +23,33 @@ export default function Subtraction({ max = 20 }) {
   const wrongAudio = useRef(null);
 
   useEffect(() => {
-    const n1 = getRandom(max);
-    const n2 = getRandom(max);
+    const n1 = getRandom(maxValue);
+    const n2 = getRandom(maxValue);
     const array = [n1, n2];
     setDigits(array.sort((a, b) => b - a));
     inputEl.current.focus();
-  }, [max]);
+  }, [maxValue]);
 
   function nextProblem() {
     setAnswer(initialInput);
-    const n1 = getRandom(max);
-    const n2 = getRandom(max);
+    const n1 = getRandom(maxValue);
+    const n2 = getRandom(maxValue);
     const array = [n1, n2];
     setDigits(array.sort((a, b) => b - a));
     setIsCorrect();
   }
 
-  function checkAnswer(e, answer, digit1, digit2) {
+  function checkAnswer(e, answer) {
     e.preventDefault();
     const correctAnswer = digits[0] - digits[1];
     if (parseInt(answer, 10) === correctAnswer) {
       correctAudio.current.play();
+      setScore(score => score + 1);
     } else {
       wrongAudio.current.play();
     }
     setIsCorrect(parseInt(answer, 10) === correctAnswer);
-    setTimeout(() => nextProblem(), 1500);
+    setTimeout(() => nextProblem(), 300);
   }
   return (
     <motion.div
@@ -55,15 +59,21 @@ export default function Subtraction({ max = 20 }) {
       exit="exit"
     >
       <Equation>
-        <p>
-          <span>{digits[0]}</span>
-
-          <span>-</span>
-          <span>{digits[1]}</span>
-          <span>=</span>
-        </p>
-        <form method="POST" onSubmit={e => checkAnswer(e, answer, digits)}>
-          <NumberInput
+        <OperandContainer>
+          <GhostOperand>{digits[0]}</GhostOperand>
+          <Operand digit={digits[0]} />
+        </OperandContainer>
+        <Operator>-</Operator>
+        <OperandContainer>
+          <GhostOperand>{digits[1]}</GhostOperand>
+          <Operand digit={digits[1]} />
+        </OperandContainer>
+        <p>=</p>
+        <NumberInput
+          method="POST"
+          onSubmit={e => checkAnswer(e, answer, digits)}
+        >
+          <input
             type="number"
             pattern="[0-9]*"
             ref={inputEl}
@@ -72,7 +82,7 @@ export default function Subtraction({ max = 20 }) {
             onChange={e => setAnswer(e.target.value, 10)}
           />
           <button type="submit" />
-        </form>
+        </NumberInput>
       </Equation>
       {isCorrect === true && (
         <div>

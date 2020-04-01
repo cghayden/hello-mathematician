@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-
+import Button from "../styles/Button";
+import MinusCircleSvg from "./MinusCircleSvg";
+import AddCircleSvg from "./AddCircleSvg";
 const variants = {
   enter: { opacity: 0 },
   center: { opacity: 1 },
   exit: { opacity: 0 }
 };
-// const variants = {
-//   enter: { x: 200 },
-//   center: { x: 0 },
-//   exit: { x: -200 }
-// };
 
 export default function Timer({
   toggleInProgress,
@@ -20,8 +17,8 @@ export default function Timer({
   toggleTimer
 }) {
   const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
-  const [starterStep, setStarterStep] = useState(1);
+  const [seconds, setSeconds] = useState(15);
+  const [starterStep, setStarterStep] = useState(0);
   const [isStarterActive, setIsStarterActive] = useState(false);
 
   function runStarter() {
@@ -38,7 +35,7 @@ export default function Timer({
     if (isStarterActive && starterStep < 4) {
       interval = setInterval(() => {
         setStarterStep(starterStep => starterStep + 1);
-      }, 1000);
+      }, 700);
     } else if (starterStep > 3) {
       toggleInProgress(true);
 
@@ -58,6 +55,9 @@ export default function Timer({
   }
 
   function subtractTime() {
+    if (seconds === 15 && minutes === 0) {
+      return;
+    }
     if (seconds === 0) {
       setSeconds(45);
       setMinutes(minutes => minutes - 1);
@@ -69,7 +69,6 @@ export default function Timer({
   function go() {
     runStarter();
     toggleTimer(false);
-    // toggleInProgress(true);
     const time = minutes * 60000 + seconds * 1000;
     setTimeout(function() {
       toggleScore(true);
@@ -89,30 +88,31 @@ export default function Timer({
             style={{ overflow: "hidden" }}
           >
             <TimerStyle>
-              <h3>Timer:</h3>
-              <p>
-                {minutes}:{seconds === 0 ? "00" : seconds}
-              </p>
-              <div>
-                <button type="button" onClick={() => addTime()}>
-                  +
-                </button>
-                <button
-                  disabled={minutes === 0 && seconds === 15}
-                  type="button"
-                  onClick={() => subtractTime()}
-                >
-                  -
-                </button>
-              </div>
-              <button
+              <Time>
+                <h3>Timer:</h3>
+                <p>
+                  {minutes}:{seconds === 0 ? "00" : seconds}
+                </p>
+                <TimeButtons>
+                  <AlterTimeButton onClick={() => addTime()}>
+                    <AddCircleSvg />
+                  </AlterTimeButton>
+                  <AlterTimeButton
+                    disabled={minutes === 0 && seconds === 15}
+                    onClick={() => subtractTime()}
+                  >
+                    <MinusCircleSvg />
+                  </AlterTimeButton>
+                </TimeButtons>
+              </Time>
+              <StartButton
                 onClick={() => {
                   go();
                   runStarter();
                 }}
               >
-                start
-              </button>
+                START
+              </StartButton>
             </TimerStyle>
           </motion.div>
         )}
@@ -121,11 +121,10 @@ export default function Timer({
         <AnimatePresence exitBeforeEnter>
           {starterStep === 1 && isStarterActive && (
             <StarterMessage
+              key={1}
               variants={variants}
-              transition={{ duration: 0.4 }}
               initial="enter"
               animate="center"
-              key={1}
               exit="exit"
             >
               Ready...
@@ -133,11 +132,10 @@ export default function Timer({
           )}
           {starterStep === 2 && (
             <StarterMessage
+              key={2}
               variants={variants}
-              transition={{ duration: 0.4 }}
               initial="enter"
               animate="center"
-              key={2}
               exit="exit"
             >
               Set...
@@ -145,11 +143,10 @@ export default function Timer({
           )}
           {starterStep === 3 && (
             <StarterMessage
+              key={3}
               variants={variants}
-              transition={{ duration: 0.4 }}
               initial="enter"
               animate="center"
-              key={3}
               exit="exit"
             >
               Go!...
@@ -161,18 +158,59 @@ export default function Timer({
   );
 }
 
-const TimerStyle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-`;
 const ReadySetStyle = styled.div`
   width: 100%;
   height: 30px;
   text-align: center;
 `;
-
 const StarterMessage = styled(motion.p)`
   font-size: 22px;
   display: inline-block;
+`;
+const TimerStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-size: 22px;
+`;
+
+const Time = styled.div`
+  width: 60%;
+  height: 80px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  place-items: center;
+`;
+const TimeButtons = styled.div`
+  display: grid;
+  grid-template-rows: 20px 20px;
+  grid-gap: 10px;
+  color: darkred;
+`;
+
+const StartButton = styled.button`
+  height: 40px;
+  width: 80px;
+  font-size: 22px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-top: 5px;
+  padding-bottom: 4px;
+  background-color: ${props => props.theme.green};
+  :focus {
+    border: 1px solid darkgreen;
+  }
+`;
+
+const AlterTimeButton = styled.button`
+  color: darkred;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  :focus {
+    color: blue;
+  }
 `;
