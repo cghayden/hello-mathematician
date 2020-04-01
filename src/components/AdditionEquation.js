@@ -10,11 +10,15 @@ import Operator from "../styles/Operator";
 
 const initialInput = "";
 
-function getRandom(max) {
-  return Math.floor(Math.random() * max);
+function getRandom(maxValue) {
+  return Math.floor(Math.random() * maxValue);
 }
 
-export default function Addition({ max = 200 }) {
+export default function AdditionEquation({
+  maxValue = 20,
+  setScore,
+  playMode
+}) {
   const [answer, setAnswer] = useState(initialInput);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
@@ -24,15 +28,15 @@ export default function Addition({ max = 200 }) {
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
   useEffect(() => {
-    setDigit1(getRandom(max));
-    setDigit2(getRandom(max));
+    setDigit1(getRandom(maxValue));
+    setDigit2(getRandom(maxValue));
     inputEl.current.focus();
-  }, [max]);
+  }, [maxValue]);
 
   function nextProblem() {
     setAnswer(initialInput);
-    setDigit1(getRandom(max));
-    setDigit2(getRandom(max));
+    setDigit1(getRandom(maxValue));
+    setDigit2(getRandom(maxValue));
     setIsCorrect();
   }
 
@@ -41,13 +45,16 @@ export default function Addition({ max = 200 }) {
     const correctAnswer = digit1 + digit2;
     if (parseInt(answer, 10) === correctAnswer) {
       correctAudio.current.play();
+      setScore(score => score + 1);
     } else {
       wrongAudio.current.play();
     }
     setIsCorrect(parseInt(answer, 10) === correctAnswer);
-    setTimeout(() => nextProblem(), 1500);
+    setTimeout(() => nextProblem(), 500);
   }
+  //if playMode=practice return equation
 
+  // if playMode = timed,
   return (
     <motion.div
       variants={pageVariants}
