@@ -2,29 +2,62 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import ChangeMaxForm from "./ChangeMaxForm";
+import ChevronUpSvg from "./ChevronUpSvg";
+import ChevronDownSvg from "./ChevronDownSvg";
 import Button from "../styles/Button";
+
 const MaxValueContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr;
+  font-size: 22px;
   justify-content: center;
   align-items: center;
   padding: 10px 10px;
+  margin: 0 auto;
+  width: 60%;
 `;
 
-const CurrentMaxStyle = styled.div`
-  font-size: 22px;
+const ChangeButtons = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
-  span {
-    margin: 0 5px;
-    font-size: 24px;
+  color: white;
+  justify-self: start;
+  padding-left: 8px;
+`;
+const AlterTimeButton = styled.button`
+  border-radius: 50%;
+  color: white;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+
+  &:focus,
+  &:active {
+    outline: none;
+    border: 1px solid white;
+    box-shadow: 0 0 1px 1px white;
   }
-  button {
-    margin-top: 5px;
-    align-self: center;
-    width: 50%;
-  }
+`;
+// const CurrentMaxStyle = styled.div`
+//   font-size: 22px;
+//   display: flex;
+//   flex-direction: column;
+//   padding: 5px 0;
+//   span {
+//     margin: 0 5px;
+//     font-size: 24px;
+//   }
+//   button {
+//     margin-top: 5px;
+//     align-self: center;
+//     width: 50%;
+//   }
+// `;
+
+const MaxDigit = styled.p`
+  font-size: 25px;
+  padding-left: 7px;
 `;
 
 export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
@@ -32,28 +65,57 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
 
   return (
     <MaxValueContainer>
-      <CurrentMaxStyle>
-        <p>
-          Max Value: <span>{maxValue}</span>
-        </p>
-        {!changeMax && !inProgress && (
-          <AnimatePresence>
-            <Button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              type="button"
-              onClick={() => {
-                toggleChangeMax(!changeMax);
-              }}
+      {/* <CurrentMaxStyle> */}
+      <p style={{ justifySelf: "end" }}>Max Value:</p>
+      {!changeMax ? (
+        <MaxDigit>{maxValue}</MaxDigit>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.5 }}
+          style={{ overflow: "hidden" }}
+        >
+          <ChangeMaxForm
+            maxValue={maxValue}
+            setMaxValue={setMaxValue}
+            toggleChangeMax={toggleChangeMax}
+          />
+        </motion.div>
+      )}
+
+      {!changeMax && !inProgress && (
+        <AnimatePresence>
+          <ChangeButtons>
+            <AlterTimeButton
+              onClick={() => setMaxValue(maxValue => maxValue + 1)}
             >
-              Change
-            </Button>
-          </AnimatePresence>
-        )}
-      </CurrentMaxStyle>
-      <AnimatePresence>
+              <ChevronUpSvg />
+            </AlterTimeButton>
+            <AlterTimeButton
+              // disabled={minutes === 0 && seconds === 15}
+              onClick={() => setMaxValue(maxValue => maxValue - 1)}
+            >
+              <ChevronDownSvg />
+            </AlterTimeButton>
+          </ChangeButtons>
+          {/* <Button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            type="button"
+            onClick={() => {
+              toggleChangeMax(!changeMax);
+            }}
+          >
+            Change
+          </Button> */}
+        </AnimatePresence>
+      )}
+      {/* </CurrentMaxStyle> */}
+      {/* <AnimatePresence>
         {changeMax && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -69,7 +131,7 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
             />
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </MaxValueContainer>
   );
 }

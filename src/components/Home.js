@@ -10,7 +10,7 @@ export default function Home() {
       animate="animate"
       exit="exit"
     >
-      Welcome to Flashcards
+      <p>Choose your operation...</p>
     </motion.div>
   );
 }

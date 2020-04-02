@@ -3,8 +3,9 @@ import { theme } from "./themeVariables";
 
 const GlobalStyles = createGlobalStyle`
   body {
-    background-color: ${theme.lightBlue};
-    color: ${theme.black};
+    ${"" /* background: rgb(34,124,195); */}
+     background: linear-gradient(336deg, rgba(34,124,195,1) 60%, rgba(35,58,196,1) 100%);
+    color: white;
     margin:0;
     ${"" /* font-family: 'IBM Plex Sans', sans-serif; */}
     font-family: 'Baloo Da 2', cursive;   
@@ -38,6 +39,8 @@ a {
   color: inherit;
 }
 
+
+
 .activeNav {
     /* border-bottom: ${props => `2px solid ${props.theme.green}`}; */
     font-size: 24px;
@@ -55,5 +58,6 @@ a {
       position: absolute;
       left: -5%;
     }
+  }
 `;
 export default GlobalStyles;

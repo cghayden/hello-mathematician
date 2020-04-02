@@ -5,8 +5,11 @@ const NumberInput = styled.form`
     width: 90%;
     background: transparent;
     border-radius: 0;
-    border-bottom: 2px solid ${props => props.theme.black};
-    caret-color: ${props => props.theme.black};
+    border-bottom: 2px solid white;
+    caret-color: white;
+    &:focus {
+      outline: white auto 5px;
+    }
   }
 `;
 

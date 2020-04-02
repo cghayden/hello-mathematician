@@ -1,8 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import PlusSvg from "./PlusSvg";
+import MinusSvg from "./MinusSvg";
 
 const Nav = styled.nav`
+  .newActive {
+    background: white;
+    color: rgba(34, 124, 195, 1);
+    padding: 12px;
+    border-radius: 50%;
+    display: grid;
+  }
   padding: 10px 0;
   color: grey;
   ul {
@@ -15,83 +24,38 @@ const Nav = styled.nav`
     li {
       padding: 0 10px;
     }
-  }
-`;
-
-const PlayModeUl = styled.ul`
-  display: flex;
-  align-items: center;
-
-  justify-content: space-around;
-`;
-const ChoiceButton = styled.p`
-  display: flex;
-  justify-content: space-around;
-  color: ${props => (props.active ? props.theme.green : "gray")};
-  font-size: ${props => (props.active ? "22px" : "18px")};
-  padding: 0;
-  position: relative;
-  /* border-bottom: ${props =>
-    props.active ? `2px solid ${props.theme.green}` : "none"}; */
-  &.underline {
-    &:after {
-      background: ${props => props.theme.green};;
-      content: "";
-      height: 2px;
-      width: 110%;
-      bottom: -3px;
-      position: absolute;
-      left: -5%;
+    a {
+      background: transparent;
+      color: white;
+      padding: 12px;
+      border-radius: 50%;
+      display: grid;
+      transition: background 0.5s;
+      :focus {
+        /* border: 2px dotted yellow; */
+        box-shadow: 0px 0px 2px 2px lightblue;
+      }
     }
   }
 `;
+
 export default function Navigation({ playMode, setPlayMode, toggleTimer }) {
   return (
     <div>
       <Nav>
         <ul>
-          {/* <li>
-            <NavLink exact activeClassName="activeNav" to="/">
-              Home
-            </NavLink>
-          </li> */}
           <li>
-            <NavLink exact activeClassName="activeNav" to="/addition">
-              Addition
+            <NavLink exact activeClassName="newActive" to="/addition">
+              <PlusSvg />
             </NavLink>
           </li>
           <li>
-            <NavLink exact activeClassName="activeNav" to="/subtraction">
-              Subtraction
+            <NavLink exact activeClassName="newActive" to="/subtraction">
+              <MinusSvg />
             </NavLink>
           </li>
         </ul>
       </Nav>
-      <PlayModeUl>
-        <li>
-          <ChoiceButton
-            className={playMode === "practice" ? "underline" : null}
-            role="button"
-            active={playMode === "practice"}
-            onClick={() => setPlayMode("practice")}
-          >
-            Practice
-          </ChoiceButton>
-        </li>
-        <li>
-          <ChoiceButton
-            className={playMode === "timed" ? "underline" : null}
-            role="button"
-            active={playMode === "timed"}
-            onClick={() => {
-              setPlayMode("timed");
-              toggleTimer(true);
-            }}
-          >
-            Timed
-          </ChoiceButton>
-        </li>
-      </PlayModeUl>
     </div>
   );
 }

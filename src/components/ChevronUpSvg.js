@@ -1,6 +1,6 @@
 import React from "react";
 
-function MinusCircleSvg() {
+function ChevronUpSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,15 +9,14 @@ function MinusCircleSvg() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="feather feather-minus-circle"
+      className="feather feather-chevron-up"
     >
-      <circle cx="12" cy="12" r="10"></circle>
-      <line x1="8" y1="12" x2="16" y2="12"></line>
+      <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   );
 }
 
-export default MinusCircleSvg;
+export default ChevronUpSvg;

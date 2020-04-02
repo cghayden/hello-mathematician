@@ -51,7 +51,7 @@ export default function ChangeMaxForm({
       }}
     >
       <InputDiv>
-        <label htmlFor="maxVal">Maximum Value:</label>
+        {/* <label htmlFor="maxVal">Maximum Value:</label> */}
         <input
           ref={maxInputRef}
           name="maxVal"
