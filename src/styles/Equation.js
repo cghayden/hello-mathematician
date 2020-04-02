@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Equation = styled.div`
+  color: ${props => (props.visible ? `white` : "transparent")};
   font-size: 2.75rem;
   padding: 10px 0;
   display: grid;

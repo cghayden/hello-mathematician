@@ -14,7 +14,7 @@ function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue);
 }
 
-export default function AdditionEquation({ maxValue = 20, setScore }) {
+export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
   const [answer, setAnswer] = useState(initialInput);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
@@ -56,7 +56,7 @@ export default function AdditionEquation({ maxValue = 20, setScore }) {
       animate="animate"
       exit="exit"
     >
-      <Equation>
+      <Equation visible={visible}>
         <OperandContainer>
           <GhostOperand>{digit1}</GhostOperand>
           <Operand digit={digit1} />
@@ -68,6 +68,7 @@ export default function AdditionEquation({ maxValue = 20, setScore }) {
         </OperandContainer>
         <p>=</p>
         <NumberInput
+          visible={visible}
           method="POST"
           onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
         >

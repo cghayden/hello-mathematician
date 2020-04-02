@@ -39,7 +39,7 @@ const Nav = styled.nav`
   }
 `;
 
-export default function Navigation({ playMode, setPlayMode, toggleTimer }) {
+export default function Navigation() {
   return (
     <div>
       <Nav>

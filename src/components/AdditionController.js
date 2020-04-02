@@ -6,28 +6,17 @@ export default function AdditionController({
   setScore,
   playMode,
   inProgress,
-  showTimer
+  showTimer,
+  visible
 }) {
-  if (playMode === "practice")
-    return (
+  return (
+    <div>
       <AdditionEquation
         playMode={playMode}
         maxValue={maxValue}
         setScore={setScore}
+        visible={visible}
       />
-    );
-  if (playMode === "timed") {
-    return (
-      <>
-        {/* {!inProgress && showTimer && <p>Press Start to Begin</p>} */}
-        {!showTimer && inProgress && (
-          <AdditionEquation
-            playMode={playMode}
-            maxValue={maxValue}
-            setScore={setScore}
-          />
-        )}
-      </>
-    );
-  }
+    </div>
+  );
 }

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import MinusCircleSvg from "./MinusCircleSvg";
 import AddCircleSvg from "./AddCircleSvg";
+import ClockSvg from "./ClockSvg";
+
 const variants = {
   enter: { opacity: 0 },
   center: { opacity: 1 },
@@ -13,7 +15,8 @@ export default function Timer({
   toggleInProgress,
   toggleScore,
   showTimer,
-  toggleTimer
+  toggleTimer,
+  inProgress
 }) {
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
@@ -37,7 +40,6 @@ export default function Timer({
       }, 700);
     } else if (starterStep > 3) {
       toggleInProgress(true);
-
       reset();
       clearInterval(interval);
     }
@@ -77,6 +79,19 @@ export default function Timer({
 
   return (
     <div>
+      {!inProgress && !showTimer && !isStarterActive && (
+        <TimerButton
+          // className={playMode === "timed" ? "underline" : null}
+          type="button"
+          // active={playMode === "timed"}
+          onClick={() => {
+            toggleTimer(true);
+          }}
+        >
+          <ClockSvg />
+          {inProgress ? "clock is running" : "Timer"}
+        </TimerButton>
+      )}
       <AnimatePresence>
         {showTimer && (
           <motion.div
@@ -107,7 +122,7 @@ export default function Timer({
               <StartButton
                 onClick={() => {
                   go();
-                  runStarter();
+                  // runStarter();
                 }}
               >
                 START
@@ -175,15 +190,15 @@ const TimerStyle = styled.div`
 `;
 
 const Time = styled.div`
-  width: 60%;
-  height: 80px;
   display: grid;
+  grid-gap: 15px;
+  font-size: 26px;
   grid-template-columns: 2fr 1fr 1fr;
   place-items: center;
 `;
 const TimeButtons = styled.div`
   display: grid;
-  grid-template-rows: 20px 20px;
+  grid-template-rows: 22px 22px;
   grid-gap: 10px;
   color: darkred;
 `;
@@ -197,14 +212,14 @@ const StartButton = styled.button`
   color: white;
   margin-top: 5px;
   padding-bottom: 4px;
-  background-color: ${props => props.theme.green};
+  background-color: transparent;
   :focus {
-    border: 1px solid darkgreen;
+    border: 1px solid blue;
   }
 `;
 
 const AlterTimeButton = styled.button`
-  color: darkred;
+  color: white;
   padding: 0;
   margin: 0;
   background: none;
@@ -213,3 +228,23 @@ const AlterTimeButton = styled.button`
     color: blue;
   }
 `;
+const TimerButton = styled.button`
+cursor: pointer;
+display: grid;
+grid-template-columns: 1fr 2fr;
+grid-gap: 10px;
+font-size: 22px;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  /* font-size: ${props => (props.active ? "22px" : "18px")}; */
+  padding: 0;
+  position: relative;
+  border-radius: 5px;
+  :focus {
+    outline: white auto 5px;
+    box-shadow: 0px 0px 2px 2px lightblue;
+  }`;

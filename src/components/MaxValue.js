@@ -85,35 +85,21 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
         </motion.div>
       )}
 
-      {!changeMax && !inProgress && (
-        <AnimatePresence>
-          <ChangeButtons>
-            <AlterTimeButton
-              onClick={() => setMaxValue(maxValue => maxValue + 1)}
-            >
-              <ChevronUpSvg />
-            </AlterTimeButton>
-            <AlterTimeButton
-              // disabled={minutes === 0 && seconds === 15}
-              onClick={() => setMaxValue(maxValue => maxValue - 1)}
-            >
-              <ChevronDownSvg />
-            </AlterTimeButton>
-          </ChangeButtons>
-          {/* <Button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            type="button"
-            onClick={() => {
-              toggleChangeMax(!changeMax);
-            }}
-          >
-            Change
-          </Button> */}
-        </AnimatePresence>
-      )}
+      <ChangeButtons>
+        <AlterTimeButton
+          disabled={inProgress}
+          onClick={() => setMaxValue(maxValue => maxValue + 1)}
+        >
+          <ChevronUpSvg />
+        </AlterTimeButton>
+        <AlterTimeButton
+          disabled={inProgress}
+          // disabled={minutes === 0 && seconds === 15}
+          onClick={() => setMaxValue(maxValue => maxValue - 1)}
+        >
+          <ChevronDownSvg />
+        </AlterTimeButton>
+      </ChangeButtons>
       {/* </CurrentMaxStyle> */}
       {/* <AnimatePresence>
         {changeMax && (

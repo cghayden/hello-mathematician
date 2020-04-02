@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation, Link } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./themeVariables";
 import Home from "./Home";
@@ -40,14 +40,10 @@ export default function App() {
         <Container>
           <Header>
             <h1>
-              <a href="'/">Hello Mathematician!</a>
+              <Link to="/">Hello Mathematician!</Link>
             </h1>
           </Header>
-          <Navigation
-            playMode={playMode}
-            setPlayMode={setPlayMode}
-            toggleTimer={toggleTimer}
-          />
+          <Navigation toggleTimer={toggleTimer} />
           <MaxValue
             maxValue={maxValue}
             setMaxValue={setMaxValue}
@@ -60,6 +56,7 @@ export default function App() {
               </Route>
               <Route exact path="/addition">
                 <AdditionController
+                  visible={!showTimer}
                   playMode={playMode}
                   maxValue={maxValue}
                   setScore={setScore}
@@ -79,41 +76,17 @@ export default function App() {
             </Switch>
           </AnimatePresence>
 
-          <PlayModeUl>
-            <li>
-              <ChoiceButton
-                className={playMode === "practice" ? "underline" : null}
-                role="button"
-                active={playMode === "practice"}
-                onClick={() => setPlayMode("practice")}
-              >
-                Practice
-              </ChoiceButton>
-            </li>
-            <li>
-              <ChoiceButton
-                className={playMode === "timed" ? "underline" : null}
-                role="button"
-                active={playMode === "timed"}
-                onClick={() => {
-                  setPlayMode("timed");
-                  toggleTimer(true);
-                }}
-              >
-                Timed
-              </ChoiceButton>
-            </li>
-          </PlayModeUl>
-          {playMode === "timed" && (
+          <TimerContainer>
             <Timer
               score={score}
               showTimer={showTimer}
               toggleTimer={toggleTimer}
               toggleInProgress={toggleInProgress}
               toggleScore={toggleScore}
+              inProgress={inProgress}
             />
-          )}
-          {showScore && playMode === "timed" && (
+          </TimerContainer>
+          {showScore && (
             <Score
               score={score}
               setScore={setScore}
@@ -127,27 +100,12 @@ export default function App() {
   );
 }
 
-const PlayModeUl = styled.ul`
-  color: white;
+const TimerContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 `;
-const ChoiceButton = styled.button`
-  padding: 5px 10px;
-  background: none;
-  border: none;
-  display: flex;
-  justify-content: space-around;
-  color: ${props => (props.active ? "white" : "darkgray")};
-  font-size: ${props => (props.active ? "22px" : "18px")};
-  padding: 0;
-  position: relative;
-  border-radius: 5px;
-  :focus {
-    box-shadow: 0px 0px 2px 2px lightblue;
-  }
-  &.underline {
+
+/* &.underline {
     &:after {
       background: white;
       content: "";
@@ -156,6 +114,5 @@ const ChoiceButton = styled.button`
       bottom: -3px;
       position: absolute;
       left: -5%;
-    }
-  }
-`;
+    } */
+/* } */
