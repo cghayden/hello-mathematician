@@ -34,8 +34,8 @@ export default function App() {
   const [showScore, toggleScore] = useState(false);
   const [inProgress, toggleInProgress] = useState(false);
   const [isStarterActive, setIsStarterActive] = useState(false);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(10);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(0);
   const location = useLocation();
   const [starterStep, setStarterStep] = useState(0);
 
