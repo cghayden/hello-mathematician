@@ -5,8 +5,8 @@ import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./themeVariables";
 import Home from "./Home";
 import Navigation from "./Navigation";
-import AdditionController from "./AdditionController";
-import SubtractionController from "./SubtractionController";
+import AdditionEquation from "./AdditionEquation";
+import SubtractionEquation from "./SubtractionEquation";
 import GlobalStyles from "./GlobalStyles";
 import MaxValue from "./MaxValue";
 import Timer from "./Timer";
@@ -30,7 +30,6 @@ export default function App() {
   const [showTimer, toggleTimer] = useState(false);
   const [showScore, toggleScore] = useState(false);
   const [inProgress, toggleInProgress] = useState(false);
-  const [playMode, setPlayMode] = useState("practice");
   const location = useLocation();
 
   return (
@@ -55,22 +54,17 @@ export default function App() {
                 <Home />
               </Route>
               <Route exact path="/addition">
-                <AdditionController
+                <AdditionEquation
                   visible={!showTimer}
-                  playMode={playMode}
                   maxValue={maxValue}
                   setScore={setScore}
-                  inProgress={inProgress}
-                  showTimer={showTimer}
                 />
               </Route>
               <Route exact path="/subtraction">
-                <SubtractionController
-                  playMode={playMode}
+                <SubtractionEquation
+                  visible={!showTimer}
                   maxValue={maxValue}
                   setScore={setScore}
-                  inProgress={inProgress}
-                  showTimer={showTimer}
                 />
               </Route>
             </Switch>
@@ -104,15 +98,3 @@ const TimerContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-/* &.underline {
-    &:after {
-      background: white;
-      content: "";
-      height: 2px;
-      width: 110%;
-      bottom: -3px;
-      position: absolute;
-      left: -5%;
-    } */
-/* } */

@@ -8,6 +8,8 @@ const Equation = styled.div`
   grid-template-columns:
     minmax(50px, max-content) 30px minmax(50px, min-content)
     34px 100px;
+  grid-template-rows: 1fr 70px;
+  grid-row-gap: 10px;
   place-items: center;
   justify-content: center;
   span {
@@ -22,16 +24,6 @@ const Equation = styled.div`
     width: 90px;
     margin: 0;
     height: 2ch;
-  }
-  button {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
   }
 `;
 export default Equation;

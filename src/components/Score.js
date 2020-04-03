@@ -1,11 +1,16 @@
 import React from "react";
-import Button from "../styles/Button";
+import LargePillButton from "./LargePillButton";
+import styled from "styled-components";
+
+const ScoreDiv = styled.div`
+  font-size: 22px;
+`;
 
 export default function Score({ score, setScore, toggleScore, toggleTimer }) {
   return (
-    <div>
+    <ScoreDiv>
       <p>Your Score: {score}</p>
-      <Button
+      <LargePillButton
         onClick={() => {
           setScore(0);
           toggleScore(false);
@@ -13,7 +18,7 @@ export default function Score({ score, setScore, toggleScore, toggleTimer }) {
         }}
       >
         Play again
-      </Button>
-    </div>
+      </LargePillButton>
+    </ScoreDiv>
   );
 }

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ChangeMaxForm from "./ChangeMaxForm";
 import ChevronUpSvg from "./ChevronUpSvg";
 import ChevronDownSvg from "./ChevronDownSvg";
-import Button from "../styles/Button";
 
 const MaxValueContainer = styled.div`
   display: grid;
@@ -39,21 +38,6 @@ const AlterTimeButton = styled.button`
     box-shadow: 0 0 1px 1px white;
   }
 `;
-// const CurrentMaxStyle = styled.div`
-//   font-size: 22px;
-//   display: flex;
-//   flex-direction: column;
-//   padding: 5px 0;
-//   span {
-//     margin: 0 5px;
-//     font-size: 24px;
-//   }
-//   button {
-//     margin-top: 5px;
-//     align-self: center;
-//     width: 50%;
-//   }
-// `;
 
 const MaxDigit = styled.p`
   font-size: 25px;
@@ -65,7 +49,6 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
 
   return (
     <MaxValueContainer>
-      {/* <CurrentMaxStyle> */}
       <p style={{ justifySelf: "end" }}>Max Value:</p>
       {!changeMax ? (
         <MaxDigit>{maxValue}</MaxDigit>
@@ -100,7 +83,6 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
           <ChevronDownSvg />
         </AlterTimeButton>
       </ChangeButtons>
-      {/* </CurrentMaxStyle> */}
       {/* <AnimatePresence>
         {changeMax && (
           <motion.div

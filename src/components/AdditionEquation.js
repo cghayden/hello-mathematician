@@ -6,6 +6,9 @@ import GhostOperand from "../styles/GhostOperand";
 import NumberInput from "../styles/NumberInput";
 import OperandContainer from "../styles/OperandContainer";
 import Operand from "./Operand";
+import Right from "./Right";
+import Wrong from "./Wrong";
+import SubmitPillButton from "./SubmitPillButton";
 import Operator from "../styles/Operator";
 
 const initialInput = "";
@@ -23,6 +26,7 @@ export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
   const inputEl = useRef(null);
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
+
   useEffect(() => {
     setDigit1(getRandom(maxValue));
     setDigit2(getRandom(maxValue));
@@ -68,6 +72,7 @@ export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
         </OperandContainer>
         <p>=</p>
         <NumberInput
+          id="numberInput"
           visible={visible}
           method="POST"
           onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
@@ -80,19 +85,13 @@ export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
             name="answer"
             onChange={e => setAnswer(e.target.value, 10)}
           />
-          <button type="submit" />
         </NumberInput>
+        <SubmitPillButton form="numberInput" type="submit">
+          Submit
+        </SubmitPillButton>
       </Equation>
-      {isCorrect === true && (
-        <div>
-          <p>YAY!!</p>
-        </div>
-      )}
-      {isCorrect === false && (
-        <div>
-          <p>Wrong</p>
-        </div>
-      )}
+      {isCorrect === true && <Right />}
+      {isCorrect === false && <Wrong />}
       <audio
         ref={correctAudio}
         preload="true"

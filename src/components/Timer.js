@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import MinusCircleSvg from "./MinusCircleSvg";
 import AddCircleSvg from "./AddCircleSvg";
 import ClockSvg from "./ClockSvg";
+import LargePillButton from "./LargePillButton";
+import SmallPillButton from "./SmallPillButton";
 
 const variants = {
   enter: { opacity: 0 },
@@ -79,22 +81,27 @@ export default function Timer({
 
   return (
     <div>
-      {!inProgress && !showTimer && !isStarterActive && (
-        <TimerButton
-          // className={playMode === "timed" ? "underline" : null}
-          type="button"
-          // active={playMode === "timed"}
-          onClick={() => {
-            toggleTimer(true);
-          }}
-        >
-          <ClockSvg />
-          {inProgress ? "clock is running" : "Timer"}
-        </TimerButton>
-      )}
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
+        {!inProgress && !showTimer && !isStarterActive && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <TimerButton
+              type="button"
+              onClick={() => {
+                toggleTimer(true);
+              }}
+            >
+              <ClockSvg />
+              {inProgress ? "clock is running" : "Timer"}
+            </TimerButton>
+          </motion.div>
+        )}
         {showTimer && (
           <motion.div
+            key={2}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -102,6 +109,13 @@ export default function Timer({
             style={{ overflow: "hidden" }}
           >
             <TimerStyle>
+              <LargePillButton
+                onClick={() => {
+                  go();
+                }}
+              >
+                START
+              </LargePillButton>
               <Time>
                 <h3>Timer:</h3>
                 <p>
@@ -119,14 +133,12 @@ export default function Timer({
                   </AlterTimeButton>
                 </TimeButtons>
               </Time>
-              <StartButton
-                onClick={() => {
-                  go();
-                  // runStarter();
-                }}
+              <SmallPillButton
+                style={{ color: "var(--blue)" }}
+                onClick={() => toggleTimer(false)}
               >
-                START
-              </StartButton>
+                Cancel
+              </SmallPillButton>
             </TimerStyle>
           </motion.div>
         )}
@@ -190,6 +202,7 @@ const TimerStyle = styled.div`
 `;
 
 const Time = styled.div`
+  padding: 15px 0;
   display: grid;
   grid-gap: 15px;
   font-size: 26px;
@@ -203,21 +216,6 @@ const TimeButtons = styled.div`
   color: darkred;
 `;
 
-const StartButton = styled.button`
-  height: 40px;
-  width: 80px;
-  font-size: 22px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  margin-top: 5px;
-  padding-bottom: 4px;
-  background-color: transparent;
-  :focus {
-    border: 1px solid blue;
-  }
-`;
-
 const AlterTimeButton = styled.button`
   color: white;
   padding: 0;
@@ -229,21 +227,22 @@ const AlterTimeButton = styled.button`
   }
 `;
 const TimerButton = styled.button`
-cursor: pointer;
-display: grid;
-grid-template-columns: 1fr 2fr;
-grid-gap: 10px;
-font-size: 22px;
+  cursor: pointer;
+  font-size: 22px;
   padding: 5px 10px;
   background: none;
   border: none;
   display: flex;
+  align-items: center;
   justify-content: space-around;
   color: white;
   /* font-size: ${props => (props.active ? "22px" : "18px")}; */
   padding: 0;
   position: relative;
   border-radius: 5px;
+  svg{
+    padding-right: 5px;
+  }
   :focus {
     outline: white auto 5px;
     box-shadow: 0px 0px 2px 2px lightblue;

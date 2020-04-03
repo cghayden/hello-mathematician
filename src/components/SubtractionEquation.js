@@ -7,13 +7,18 @@ import NumberInput from "../styles/NumberInput";
 import OperandContainer from "../styles/OperandContainer";
 import Operand from "./Operand";
 import Operator from "../styles/Operator";
+import SubmitPillButton from "./SubmitPillButton";
 
 const initialInput = "";
 
 function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue);
 }
-export default function SubtractionEquation({ maxValue = 20, setScore }) {
+export default function SubtractionEquation({
+  maxValue = 20,
+  setScore,
+  visible
+}) {
   const [answer, setAnswer] = useState(initialInput);
   const [digits, setDigits] = useState([]);
   const [isCorrect, setIsCorrect] = useState();
@@ -58,7 +63,7 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
       animate="animate"
       exit="exit"
     >
-      <Equation>
+      <Equation visible={visible}>
         <OperandContainer>
           <GhostOperand>{digits[0]}</GhostOperand>
           <Operand digit={digits[0]} />
@@ -70,6 +75,8 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
         </OperandContainer>
         <p>=</p>
         <NumberInput
+          id="numberInput"
+          visible={visible}
           method="POST"
           onSubmit={e => checkAnswer(e, answer, digits)}
         >
@@ -81,8 +88,10 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
             name="answer"
             onChange={e => setAnswer(e.target.value, 10)}
           />
-          <button type="submit" />
         </NumberInput>
+        <SubmitPillButton form="numberInput" type="submit">
+          Submit
+        </SubmitPillButton>
       </Equation>
       {isCorrect === true && (
         <div>

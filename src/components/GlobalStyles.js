@@ -2,6 +2,13 @@ import { createGlobalStyle } from "styled-components";
 import { theme } from "./themeVariables";
 
 const GlobalStyles = createGlobalStyle`
+
+:root {
+  
+  --blue: rgba(34,124,195,1);
+  
+}
+
   body {
     ${"" /* background: rgb(34,124,195); */}
      background: linear-gradient(336deg, rgba(34,124,195,1) 60%, rgba(35,58,196,1) 100%);
@@ -33,9 +40,9 @@ h1,h2, h3, h4, h5, p {
   line-height: 1.1;
 }
 
-a {
+a, button {
   text-decoration: none;
-  font: 'Baloo Da 2';
+  font-family: 'Baloo Da 2';
   color: inherit;
 }
 
