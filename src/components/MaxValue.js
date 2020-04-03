@@ -48,7 +48,7 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
   const [changeMax, toggleChangeMax] = useState(false);
 
   return (
-    <MaxValueContainer>
+    <MaxValueContainer className="maxValueContainer">
       <p style={{ justifySelf: "end" }}>Max Value:</p>
       {!changeMax ? (
         <MaxDigit>{maxValue}</MaxDigit>

@@ -86,9 +86,11 @@ export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
             onChange={e => setAnswer(e.target.value, 10)}
           />
         </NumberInput>
-        <SubmitPillButton form="numberInput" type="submit">
-          Submit
-        </SubmitPillButton>
+        {visible && (
+          <SubmitPillButton form="numberInput" type="submit">
+            Submit
+          </SubmitPillButton>
+        )}
       </Equation>
       {isCorrect === true && <Right />}
       {isCorrect === false && <Wrong />}

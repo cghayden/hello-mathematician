@@ -6,21 +6,25 @@ import GhostOperand from "../styles/GhostOperand";
 import NumberInput from "../styles/NumberInput";
 import OperandContainer from "../styles/OperandContainer";
 import Operand from "./Operand";
-import Operator from "../styles/Operator";
+import Right from "./Right";
+import Wrong from "./Wrong";
 import SubmitPillButton from "./SubmitPillButton";
+import Operator from "../styles/Operator";
 
 const initialInput = "";
 
 function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue);
 }
-export default function SubtractionEquation({
+
+export default function MultiplicationEquation({
   maxValue = 20,
   setScore,
   visible
 }) {
   const [answer, setAnswer] = useState(initialInput);
-  const [digits, setDigits] = useState([]);
+  const [digit1, setDigit1] = useState();
+  const [digit2, setDigit2] = useState();
   const [isCorrect, setIsCorrect] = useState();
 
   const inputEl = useRef(null);
@@ -28,25 +32,21 @@ export default function SubtractionEquation({
   const wrongAudio = useRef(null);
 
   useEffect(() => {
-    const n1 = getRandom(maxValue);
-    const n2 = getRandom(maxValue);
-    const array = [n1, n2];
-    setDigits(array.sort((a, b) => b - a));
+    setDigit1(getRandom(maxValue));
+    setDigit2(getRandom(maxValue));
     inputEl.current.focus();
   }, [maxValue]);
 
   function nextProblem() {
     setAnswer(initialInput);
-    const n1 = getRandom(maxValue);
-    const n2 = getRandom(maxValue);
-    const array = [n1, n2];
-    setDigits(array.sort((a, b) => b - a));
+    setDigit1(getRandom(maxValue));
+    setDigit2(getRandom(maxValue));
     setIsCorrect();
   }
 
-  function checkAnswer(e, answer) {
+  function checkAnswer(e, answer, digit1, digit2) {
     e.preventDefault();
-    const correctAnswer = digits[0] - digits[1];
+    const correctAnswer = digit1 * digit2;
     if (parseInt(answer, 10) === correctAnswer) {
       correctAudio.current.play();
       setScore(score => score + 1);
@@ -56,6 +56,7 @@ export default function SubtractionEquation({
     setIsCorrect(parseInt(answer, 10) === correctAnswer);
     setTimeout(() => nextProblem(), 300);
   }
+
   return (
     <motion.div
       variants={pageVariants}
@@ -65,20 +66,20 @@ export default function SubtractionEquation({
     >
       <Equation visible={visible}>
         <OperandContainer>
-          <GhostOperand>{digits[0]}</GhostOperand>
-          <Operand digit={digits[0]} />
+          <GhostOperand>{digit1}</GhostOperand>
+          <Operand digit={digit1} />
         </OperandContainer>
-        <Operator>-</Operator>
+        <Operator>x</Operator>
         <OperandContainer>
-          <GhostOperand>{digits[1]}</GhostOperand>
-          <Operand digit={digits[1]} />
+          <GhostOperand>{digit2}</GhostOperand>
+          <Operand digit={digit2} />
         </OperandContainer>
         <p>=</p>
         <NumberInput
           id="numberInput"
           visible={visible}
           method="POST"
-          onSubmit={e => checkAnswer(e, answer, digits)}
+          onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
         >
           <input
             type="number"
@@ -95,16 +96,8 @@ export default function SubtractionEquation({
           </SubmitPillButton>
         )}
       </Equation>
-      {isCorrect === true && (
-        <div>
-          <p>YAY!!</p>
-        </div>
-      )}
-      {isCorrect === false && (
-        <div>
-          <p>Wrong</p>
-        </div>
-      )}
+      {isCorrect === true && <Right />}
+      {isCorrect === false && <Wrong />}
       <audio
         ref={correctAudio}
         preload="true"

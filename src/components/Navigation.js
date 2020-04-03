@@ -2,9 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import PlusSvg from "./PlusSvg";
+import XSvg from "./XSvg";
 import MinusSvg from "./MinusSvg";
+import DivideSvg from "./DivideSvg";
 
 const Nav = styled.nav`
+  padding: 10px 0 20px;
   .newActive {
     background: white;
     color: rgba(34, 124, 195, 1);
@@ -12,7 +15,6 @@ const Nav = styled.nav`
     border-radius: 50%;
     display: grid;
   }
-  padding: 10px 0;
   color: grey;
   ul {
     display: flex;
@@ -52,6 +54,16 @@ export default function Navigation() {
           <li>
             <NavLink exact activeClassName="newActive" to="/subtraction">
               <MinusSvg />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact activeClassName="newActive" to="/multiplication">
+              <XSvg />
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact activeClassName="newActive" to="/division">
+              <DivideSvg />
             </NavLink>
           </li>
         </ul>

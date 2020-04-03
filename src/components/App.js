@@ -7,10 +7,13 @@ import Home from "./Home";
 import Navigation from "./Navigation";
 import AdditionEquation from "./AdditionEquation";
 import SubtractionEquation from "./SubtractionEquation";
+import MultiplicationEquation from "./MultiplicationEquation";
+import DivisionEquation from "./DivisionEquation";
 import GlobalStyles from "./GlobalStyles";
 import MaxValue from "./MaxValue";
 import Timer from "./Timer";
 import Score from "./Score";
+import LargePillButton from "./LargePillButton";
 
 const Container = styled.div`
   text-align: center;
@@ -30,8 +33,44 @@ export default function App() {
   const [showTimer, toggleTimer] = useState(false);
   const [showScore, toggleScore] = useState(false);
   const [inProgress, toggleInProgress] = useState(false);
+  const [isStarterActive, setIsStarterActive] = useState(false);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(0);
   const location = useLocation();
 
+  function addTime() {
+    if (seconds === 45) {
+      setMinutes(minutes => minutes + 1);
+      setSeconds(0);
+    } else {
+      setSeconds(seconds => seconds + 15);
+    }
+  }
+
+  function subtractTime() {
+    if (seconds === 15 && minutes === 0) {
+      return;
+    }
+    if (seconds === 0) {
+      setSeconds(45);
+      setMinutes(minutes => minutes - 1);
+    } else {
+      setSeconds(seconds => seconds - 15);
+    }
+  }
+
+  function runStarter() {
+    setIsStarterActive(true);
+  }
+  function go() {
+    const time = minutes * 60000 + seconds * 1000;
+    runStarter();
+    toggleTimer(false);
+    setTimeout(function() {
+      toggleScore(true);
+      toggleInProgress(false);
+    }, time);
+  }
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -43,11 +82,6 @@ export default function App() {
             </h1>
           </Header>
           <Navigation toggleTimer={toggleTimer} />
-          <MaxValue
-            maxValue={maxValue}
-            setMaxValue={setMaxValue}
-            inProgress={inProgress}
-          />
           <AnimatePresence exitBeforeEnter>
             <Switch location={location} key={location.pathname}>
               <Route exact path="/">
@@ -67,10 +101,30 @@ export default function App() {
                   setScore={setScore}
                 />
               </Route>
+              <Route exact path="/multiplication">
+                <MultiplicationEquation
+                  visible={!showTimer}
+                  maxValue={maxValue}
+                  setScore={setScore}
+                />
+              </Route>
+              <Route exact path="/division">
+                <DivisionEquation
+                  visible={!showTimer}
+                  maxValue={maxValue}
+                  setScore={setScore}
+                />
+              </Route>
             </Switch>
           </AnimatePresence>
-
-          <TimerContainer>
+          <OptionsContainer showTimer={showTimer} className="optionsContainer">
+            {!inProgress && !showScore && !isStarterActive && (
+              <MaxValue
+                maxValue={maxValue}
+                setMaxValue={setMaxValue}
+                inProgress={inProgress}
+              />
+            )}
             <Timer
               score={score}
               showTimer={showTimer}
@@ -78,8 +132,25 @@ export default function App() {
               toggleInProgress={toggleInProgress}
               toggleScore={toggleScore}
               inProgress={inProgress}
+              isStarterActive={isStarterActive}
+              setIsStarterActive={setIsStarterActive}
+              addTime={addTime}
+              subtractTime={subtractTime}
+              minutes={minutes}
+              setMinutes={setMinutes}
+              seconds={seconds}
+              setSeconds={setSeconds}
             />
-          </TimerContainer>
+            {showTimer && (
+              <StartPillButton
+                onClick={() => {
+                  go();
+                }}
+              >
+                START
+              </StartPillButton>
+            )}
+          </OptionsContainer>
           {showScore && (
             <Score
               score={score}
@@ -94,7 +165,15 @@ export default function App() {
   );
 }
 
-const TimerContainer = styled.div`
-  display: flex;
-  justify-content: center;
+const OptionsContainer = styled.div`
+  margin-top: ${props => (props.showTimer ? `-150px` : "0")};
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 80px;
+  place-items: center;
+`;
+const StartPillButton = styled(LargePillButton)`
+  grid-row: 2;
+  grid-column: 1/-1;
+  width: 200px;
 `;

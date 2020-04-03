@@ -46,7 +46,7 @@ export default function SubtractionEquation({
 
   function checkAnswer(e, answer) {
     e.preventDefault();
-    const correctAnswer = digits[0] - digits[1];
+    const correctAnswer = digits[0] / digits[1];
     if (parseInt(answer, 10) === correctAnswer) {
       correctAudio.current.play();
       setScore(score => score + 1);
@@ -68,7 +68,7 @@ export default function SubtractionEquation({
           <GhostOperand>{digits[0]}</GhostOperand>
           <Operand digit={digits[0]} />
         </OperandContainer>
-        <Operator>-</Operator>
+        <Operator>/</Operator>
         <OperandContainer>
           <GhostOperand>{digits[1]}</GhostOperand>
           <Operand digit={digits[1]} />

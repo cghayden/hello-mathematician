@@ -18,16 +18,15 @@ export default function Timer({
   toggleScore,
   showTimer,
   toggleTimer,
-  inProgress
+  inProgress,
+  isStarterActive,
+  setIsStarterActive,
+  addTime,
+  subtractTime,
+  minutes,
+  seconds
 }) {
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(0);
   const [starterStep, setStarterStep] = useState(0);
-  const [isStarterActive, setIsStarterActive] = useState(false);
-
-  function runStarter() {
-    setIsStarterActive(true);
-  }
 
   function reset() {
     setIsStarterActive(false);
@@ -48,37 +47,6 @@ export default function Timer({
     return () => clearInterval(interval);
   }, [isStarterActive, starterStep, toggleInProgress]);
 
-  function addTime() {
-    if (seconds === 45) {
-      setMinutes(minutes => minutes + 1);
-      setSeconds(0);
-    } else {
-      setSeconds(seconds => seconds + 15);
-    }
-  }
-
-  function subtractTime() {
-    if (seconds === 15 && minutes === 0) {
-      return;
-    }
-    if (seconds === 0) {
-      setSeconds(45);
-      setMinutes(minutes => minutes - 1);
-    } else {
-      setSeconds(seconds => seconds - 15);
-    }
-  }
-
-  function go() {
-    runStarter();
-    toggleTimer(false);
-    const time = minutes * 60000 + seconds * 1000;
-    setTimeout(function() {
-      toggleScore(true);
-      toggleInProgress(false);
-    }, time);
-  }
-
   return (
     <div>
       <AnimatePresence exitBeforeEnter>
@@ -88,7 +56,7 @@ export default function Timer({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <TimerButton
+            <ToggleTimerButton
               type="button"
               onClick={() => {
                 toggleTimer(true);
@@ -96,7 +64,7 @@ export default function Timer({
             >
               <ClockSvg />
               {inProgress ? "clock is running" : "Timer"}
-            </TimerButton>
+            </ToggleTimerButton>
           </motion.div>
         )}
         {showTimer && (
@@ -109,13 +77,6 @@ export default function Timer({
             style={{ overflow: "hidden" }}
           >
             <TimerStyle>
-              <LargePillButton
-                onClick={() => {
-                  go();
-                }}
-              >
-                START
-              </LargePillButton>
               <Time>
                 <h3>Timer:</h3>
                 <p>
@@ -143,6 +104,7 @@ export default function Timer({
           </motion.div>
         )}
       </AnimatePresence>
+
       <ReadySetStyle>
         <AnimatePresence exitBeforeEnter>
           {starterStep === 1 && isStarterActive && (
@@ -202,10 +164,8 @@ const TimerStyle = styled.div`
 `;
 
 const Time = styled.div`
-  padding: 15px 0;
   display: grid;
   grid-gap: 15px;
-  font-size: 26px;
   grid-template-columns: 2fr 1fr 1fr;
   place-items: center;
 `;
@@ -226,7 +186,7 @@ const AlterTimeButton = styled.button`
     color: blue;
   }
 `;
-const TimerButton = styled.button`
+const ToggleTimerButton = styled.button`
   cursor: pointer;
   font-size: 22px;
   padding: 5px 10px;
