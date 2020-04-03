@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import MinusCircleSvg from "./MinusCircleSvg";
@@ -22,15 +22,11 @@ export default function Timer({
   addTime,
   subtractTime,
   minutes,
-  seconds
+  seconds,
+  reset,
+  starterStep,
+  setStarterStep
 }) {
-  const [starterStep, setStarterStep] = useState(0);
-
-  function reset() {
-    setIsStarterActive(false);
-    setStarterStep(1);
-  }
-
   useEffect(() => {
     let interval = null;
     if (isStarterActive && starterStep < 4) {
@@ -43,7 +39,7 @@ export default function Timer({
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isStarterActive, starterStep, toggleInProgress]);
+  }, [isStarterActive, starterStep, setStarterStep, toggleInProgress, reset]);
 
   return (
     <>

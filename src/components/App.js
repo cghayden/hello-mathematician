@@ -37,6 +37,7 @@ export default function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(10);
   const location = useLocation();
+  const [starterStep, setStarterStep] = useState(0);
 
   function addTime() {
     if (seconds === 45) {
@@ -71,6 +72,11 @@ export default function App() {
       toggleInProgress(false);
     }, time);
   }
+  function reset() {
+    setIsStarterActive(false);
+    setStarterStep(1);
+  }
+
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
@@ -144,6 +150,9 @@ export default function App() {
                 setMinutes={setMinutes}
                 seconds={seconds}
                 setSeconds={setSeconds}
+                reset={reset}
+                starterStep={starterStep}
+                setStarterStep={setStarterStep}
               />
             )}
             {showTimer && (
