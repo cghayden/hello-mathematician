@@ -17,7 +17,14 @@ function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue);
 }
 
-export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
+export default function AdditionEquation({
+  maxValue = 20,
+  setScore,
+  visible,
+  isStarterActive,
+  showScore,
+  inProgress
+}) {
   const [answer, setAnswer] = useState(initialInput);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
@@ -30,8 +37,10 @@ export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
   useEffect(() => {
     setDigit1(getRandom(maxValue));
     setDigit2(getRandom(maxValue));
-    inputEl.current.focus();
-  }, [maxValue]);
+    if (inProgress) {
+      inputEl.current.focus();
+    }
+  }, [maxValue, inProgress]);
 
   function nextProblem() {
     setAnswer(initialInput);
@@ -60,38 +69,40 @@ export default function AdditionEquation({ maxValue = 20, setScore, visible }) {
       animate="animate"
       exit="exit"
     >
-      <Equation visible={visible}>
-        <OperandContainer>
-          <GhostOperand>{digit1}</GhostOperand>
-          <Operand digit={digit1} />
-        </OperandContainer>
-        <Operator>+</Operator>
-        <OperandContainer>
-          <GhostOperand>{digit2}</GhostOperand>
-          <Operand digit={digit2} />
-        </OperandContainer>
-        <p>=</p>
-        <NumberInput
-          id="numberInput"
-          visible={visible}
-          method="POST"
-          onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
-        >
-          <input
-            type="number"
-            pattern="[0-9]*"
-            ref={inputEl}
-            value={answer}
-            name="answer"
-            onChange={e => setAnswer(e.target.value, 10)}
-          />
-        </NumberInput>
-        {visible && (
-          <SubmitPillButton form="numberInput" type="submit">
-            Submit
-          </SubmitPillButton>
-        )}
-      </Equation>
+      {!isStarterActive && !showScore && (
+        <Equation visible={visible}>
+          <OperandContainer>
+            <GhostOperand>{digit1}</GhostOperand>
+            <Operand digit={digit1} />
+          </OperandContainer>
+          <Operator>+</Operator>
+          <OperandContainer>
+            <GhostOperand>{digit2}</GhostOperand>
+            <Operand digit={digit2} />
+          </OperandContainer>
+          <p>=</p>
+          <NumberInput
+            id="numberInput"
+            visible={visible}
+            method="POST"
+            onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
+          >
+            <input
+              type="number"
+              pattern="[0-9]*"
+              ref={inputEl}
+              value={answer}
+              name="answer"
+              onChange={e => setAnswer(e.target.value, 10)}
+            />
+          </NumberInput>
+          {visible && (
+            <SubmitPillButton form="numberInput" type="submit">
+              Submit
+            </SubmitPillButton>
+          )}
+        </Equation>
+      )}
       {isCorrect === true && <Right />}
       {isCorrect === false && <Wrong />}
       <audio

@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import MinusCircleSvg from "./MinusCircleSvg";
 import AddCircleSvg from "./AddCircleSvg";
 import ClockSvg from "./ClockSvg";
-import LargePillButton from "./LargePillButton";
 import SmallPillButton from "./SmallPillButton";
 
 const variants = {
@@ -15,7 +14,6 @@ const variants = {
 
 export default function Timer({
   toggleInProgress,
-  toggleScore,
   showTimer,
   toggleTimer,
   inProgress,
@@ -38,7 +36,7 @@ export default function Timer({
     if (isStarterActive && starterStep < 4) {
       interval = setInterval(() => {
         setStarterStep(starterStep => starterStep + 1);
-      }, 700);
+      }, 600);
     } else if (starterStep > 3) {
       toggleInProgress(true);
       reset();
@@ -48,7 +46,7 @@ export default function Timer({
   }, [isStarterActive, starterStep, toggleInProgress]);
 
   return (
-    <div>
+    <>
       <AnimatePresence exitBeforeEnter>
         {!inProgress && !showTimer && !isStarterActive && (
           <motion.div
@@ -105,44 +103,46 @@ export default function Timer({
         )}
       </AnimatePresence>
 
-      <ReadySetStyle>
-        <AnimatePresence exitBeforeEnter>
-          {starterStep === 1 && isStarterActive && (
-            <StarterMessage
-              key={1}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-            >
-              Ready...
-            </StarterMessage>
-          )}
-          {starterStep === 2 && (
-            <StarterMessage
-              key={2}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-            >
-              Set...
-            </StarterMessage>
-          )}
-          {starterStep === 3 && (
-            <StarterMessage
-              key={3}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-            >
-              Go!...
-            </StarterMessage>
-          )}
-        </AnimatePresence>
-      </ReadySetStyle>
-    </div>
+      {isStarterActive && (
+        <ReadySetStyle>
+          <AnimatePresence exitBeforeEnter>
+            {starterStep === 1 && (
+              <StarterMessage
+                key={1}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+              >
+                Ready...
+              </StarterMessage>
+            )}
+            {starterStep === 2 && (
+              <StarterMessage
+                key={2}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+              >
+                Set...
+              </StarterMessage>
+            )}
+            {starterStep === 3 && (
+              <StarterMessage
+                key={3}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+              >
+                Go!...
+              </StarterMessage>
+            )}
+          </AnimatePresence>
+        </ReadySetStyle>
+      )}
+    </>
   );
 }
 
@@ -150,6 +150,7 @@ const ReadySetStyle = styled.div`
   width: 100%;
   height: 30px;
   text-align: center;
+  grid-column: 1/-1;
 `;
 const StarterMessage = styled(motion.p)`
   font-size: 22px;

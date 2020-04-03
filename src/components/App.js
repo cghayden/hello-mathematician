@@ -34,8 +34,8 @@ export default function App() {
   const [showScore, toggleScore] = useState(false);
   const [inProgress, toggleInProgress] = useState(false);
   const [isStarterActive, setIsStarterActive] = useState(false);
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(10);
   const location = useLocation();
 
   function addTime() {
@@ -92,6 +92,9 @@ export default function App() {
                   visible={!showTimer}
                   maxValue={maxValue}
                   setScore={setScore}
+                  showScore={showScore}
+                  isStarterActive={isStarterActive}
+                  inProgress={inProgress}
                 />
               </Route>
               <Route exact path="/subtraction">
@@ -108,13 +111,13 @@ export default function App() {
                   setScore={setScore}
                 />
               </Route>
-              <Route exact path="/division">
+              {/* <Route exact path="/division">
                 <DivisionEquation
                   visible={!showTimer}
                   maxValue={maxValue}
                   setScore={setScore}
                 />
-              </Route>
+              </Route> */}
             </Switch>
           </AnimatePresence>
           <OptionsContainer showTimer={showTimer} className="optionsContainer">
@@ -125,22 +128,24 @@ export default function App() {
                 inProgress={inProgress}
               />
             )}
-            <Timer
-              score={score}
-              showTimer={showTimer}
-              toggleTimer={toggleTimer}
-              toggleInProgress={toggleInProgress}
-              toggleScore={toggleScore}
-              inProgress={inProgress}
-              isStarterActive={isStarterActive}
-              setIsStarterActive={setIsStarterActive}
-              addTime={addTime}
-              subtractTime={subtractTime}
-              minutes={minutes}
-              setMinutes={setMinutes}
-              seconds={seconds}
-              setSeconds={setSeconds}
-            />
+            {!showScore && (
+              <Timer
+                score={score}
+                showTimer={showTimer}
+                toggleTimer={toggleTimer}
+                toggleInProgress={toggleInProgress}
+                toggleScore={toggleScore}
+                inProgress={inProgress}
+                isStarterActive={isStarterActive}
+                setIsStarterActive={setIsStarterActive}
+                addTime={addTime}
+                subtractTime={subtractTime}
+                minutes={minutes}
+                setMinutes={setMinutes}
+                seconds={seconds}
+                setSeconds={setSeconds}
+              />
+            )}
             {showTimer && (
               <StartPillButton
                 onClick={() => {

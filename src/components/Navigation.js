@@ -61,11 +61,11 @@ export default function Navigation() {
               <XSvg />
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink exact activeClassName="newActive" to="/division">
               <DivideSvg />
             </NavLink>
-          </li>
+          </li> */}
         </ul>
       </Nav>
     </div>
