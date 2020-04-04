@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Equation = styled.div`
   .fullEquation {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     grid-column: 1/-1;
     padding-left: 30px;
   }
