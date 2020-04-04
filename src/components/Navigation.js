@@ -15,6 +15,9 @@ const Nav = styled.nav`
     border-radius: 50%;
     display: grid;
   }
+
+  padding: 5px 0 20px 0;
+
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -42,31 +45,29 @@ const Nav = styled.nav`
 
 export default function Navigation() {
   return (
-    <div>
-      <Nav>
-        <ul>
-          <li>
-            <NavLink exact activeClassName="active" to="/addition">
-              <PlusSvg />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact activeClassName="active" to="/subtraction">
-              <MinusSvg />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact activeClassName="active" to="/multiplication">
-              <XSvg />
-            </NavLink>
-          </li>
-          {/* <li>
+    <Nav>
+      <ul>
+        <li>
+          <NavLink exact activeClassName="active" to="/addition">
+            <PlusSvg />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact activeClassName="active" to="/subtraction">
+            <MinusSvg />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact activeClassName="active" to="/multiplication">
+            <XSvg />
+          </NavLink>
+        </li>
+        {/* <li>
             <NavLink exact activeClassName="newActive" to="/division">
               <DivideSvg />
             </NavLink>
           </li> */}
-        </ul>
-      </Nav>
-    </div>
+      </ul>
+    </Nav>
   );
 }

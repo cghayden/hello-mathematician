@@ -13,6 +13,7 @@ import MaxValue from "./MaxValue";
 import Timer from "./Timer";
 import Score from "./Score";
 import LargePillButton from "./LargePillButton";
+import Starter from "./Starter";
 
 const Container = styled.div`
   text-align: center;
@@ -153,19 +154,18 @@ export default function App() {
             START
           </StartPillButton>
         )}
-        {
+        {!inProgress && !showScore && !isStarterActive && (
           <OptionsContainer
             animate={{ height: "auto" }}
             showTimer={showTimer}
             className="optionsContainer"
           >
-            {!inProgress && !showScore && !isStarterActive && (
-              <MaxValue
-                maxValue={maxValue}
-                setMaxValue={setMaxValue}
-                inProgress={inProgress}
-              />
-            )}
+            <MaxValue
+              maxValue={maxValue}
+              setMaxValue={setMaxValue}
+              inProgress={inProgress}
+            />
+
             {!showScore && (
               <Timer
                 score={score}
@@ -188,13 +188,34 @@ export default function App() {
               />
             )}
           </OptionsContainer>
-        }
+        )}
         {showScore && (
           <Score
             score={score}
             setScore={setScore}
             toggleScore={toggleScore}
             toggleTimer={toggleTimer}
+          />
+        )}
+        {isStarterActive && (
+          <Starter
+            score={score}
+            showTimer={showTimer}
+            toggleTimer={toggleTimer}
+            toggleInProgress={toggleInProgress}
+            toggleScore={toggleScore}
+            inProgress={inProgress}
+            isStarterActive={isStarterActive}
+            setIsStarterActive={setIsStarterActive}
+            addTime={addTime}
+            subtractTime={subtractTime}
+            minutes={minutes}
+            setMinutes={setMinutes}
+            seconds={seconds}
+            setSeconds={setSeconds}
+            reset={reset}
+            starterStep={starterStep}
+            setStarterStep={setStarterStep}
           />
         )}
       </Container>
