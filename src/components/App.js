@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Switch, Route, useLocation, Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
-import Home from "./Home";
 import Navigation from "./Navigation";
 import AdditionEquation from "./AdditionEquation";
 import SubtractionEquation from "./SubtractionEquation";
@@ -102,14 +101,6 @@ export default function App() {
               <Switch location={location} key={location.pathname}>
                 <Route exact path="/">
                   <Redirect to="/addition" />
-                  {/* <AdditionEquation
-                    visible={!showTimer}
-                    maxValue={maxValue}
-                    setScore={setScore}
-                    showScore={showScore}
-                    isStarterActive={isStarterActive}
-                    inProgress={inProgress}
-                  /> */}
                 </Route>
                 <Route exact path="/addition">
                   <AdditionEquation

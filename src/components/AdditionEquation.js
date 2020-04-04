@@ -31,8 +31,10 @@ export default function AdditionEquation({
   useEffect(() => {
     setDigit1(getRandom(maxValue));
     setDigit2(getRandom(maxValue));
+  }, [maxValue]);
+  useEffect(() => {
     inputEl.current.focus();
-  }, [maxValue, digit1, digit2]);
+  });
 
   function nextProblem() {
     setAnswer(initialInput);
