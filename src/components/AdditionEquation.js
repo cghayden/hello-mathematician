@@ -6,8 +6,6 @@ import GhostOperand from "../styles/GhostOperand";
 import NumberInput from "../styles/NumberInput";
 import OperandContainer from "../styles/OperandContainer";
 import Operand from "./Operand";
-import Right from "./Right";
-import Wrong from "./Wrong";
 import Operator from "../styles/Operator";
 import SubmitPillButton from "./SubmitPillButton";
 

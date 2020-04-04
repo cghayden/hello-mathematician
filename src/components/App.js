@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Switch, Route, useLocation, Link } from "react-router-dom";
+import { Switch, Route, useLocation, Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./Home";
 import Navigation from "./Navigation";
@@ -92,7 +92,7 @@ export default function App() {
         </Header>
         <Navigation toggleTimer={toggleTimer} />
         <AnimatePresence exitBeforeEnter>
-          {!showTimer && !isStarterActive && (
+          {!showTimer && !isStarterActive && !showScore && (
             <motion.div
               exit={{ height: 0, overflow: "hidden", opacity: 0 }}
               // transition={{
@@ -101,14 +101,15 @@ export default function App() {
             >
               <Switch location={location} key={location.pathname}>
                 <Route exact path="/">
-                  <AdditionEquation
+                  <Redirect to="/addition" />
+                  {/* <AdditionEquation
                     visible={!showTimer}
                     maxValue={maxValue}
                     setScore={setScore}
                     showScore={showScore}
                     isStarterActive={isStarterActive}
                     inProgress={inProgress}
-                  />
+                  /> */}
                 </Route>
                 <Route exact path="/addition">
                   <AdditionEquation

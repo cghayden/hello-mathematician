@@ -8,8 +8,6 @@ import OperandContainer from "../styles/OperandContainer";
 import Operand from "./Operand";
 import Operator from "../styles/Operator";
 import SubmitPillButton from "./SubmitPillButton";
-import Right from "./Right";
-import Wrong from "./Wrong";
 
 const initialInput = "";
 
