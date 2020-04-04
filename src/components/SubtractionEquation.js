@@ -90,6 +90,7 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
               value={answer}
               name="answer"
               onChange={e => setAnswer(e.target.value, 10)}
+              autoFocus
             />
           </NumberInput>
         </div>
