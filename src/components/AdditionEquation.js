@@ -32,7 +32,7 @@ export default function AdditionEquation({
     setDigit1(getRandom(maxValue));
     setDigit2(getRandom(maxValue));
     inputEl.current.focus();
-  }, [maxValue]);
+  }, [maxValue, digit1, digit2]);
 
   function nextProblem() {
     setAnswer(initialInput);
