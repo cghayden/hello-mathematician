@@ -7,19 +7,14 @@ const NumberInput = styled.form`
     margin-top: 10px;
   }
   input {
-    width: 90%;
+    /* position: relative; */
     background: transparent;
     border-radius: 0;
-    border-bottom: ${props =>
-      props.visible ? `2px solid white` : "transparent"};
     caret-color: white;
     color: white;
     &:focus {
       outline: none;
-      border-bottom: ${props =>
-        props.visible ? `2px solid white` : "transparent"};
-      caret-color: ${props =>
-        props.visible ? `2px solid white` : "transparent"};
+      caret-color: 2px solid white;
     }
   }
 `;

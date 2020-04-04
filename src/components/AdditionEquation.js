@@ -8,8 +8,8 @@ import OperandContainer from "../styles/OperandContainer";
 import Operand from "./Operand";
 import Right from "./Right";
 import Wrong from "./Wrong";
-import SubmitPillButton from "./SubmitPillButton";
 import Operator from "../styles/Operator";
+import SubmitPillButton from "./SubmitPillButton";
 
 const initialInput = "";
 
@@ -20,16 +20,12 @@ function getRandom(maxValue) {
 export default function AdditionEquation({
   maxValue = 20,
   setScore,
-  visible,
-  isStarterActive,
-  showScore,
   inProgress
 }) {
   const [answer, setAnswer] = useState(initialInput);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
   const [isCorrect, setIsCorrect] = useState();
-
   const inputEl = useRef(null);
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
@@ -37,16 +33,15 @@ export default function AdditionEquation({
   useEffect(() => {
     setDigit1(getRandom(maxValue));
     setDigit2(getRandom(maxValue));
-    if (inProgress) {
-      inputEl.current.focus();
-    }
-  }, [maxValue, inProgress]);
+    inputEl.current.focus();
+  }, [maxValue]);
 
   function nextProblem() {
     setAnswer(initialInput);
     setDigit1(getRandom(maxValue));
     setDigit2(getRandom(maxValue));
     setIsCorrect();
+    inputEl.current.focus();
   }
 
   function checkAnswer(e, answer, digit1, digit2) {
@@ -69,8 +64,9 @@ export default function AdditionEquation({
       animate="animate"
       exit="exit"
     >
-      {!isStarterActive && !showScore && (
-        <Equation visible={visible}>
+      <Equation>
+        <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
+        <div className="fullEquation">
           <OperandContainer>
             <GhostOperand>{digit1}</GhostOperand>
             <Operand digit={digit1} />
@@ -80,10 +76,14 @@ export default function AdditionEquation({
             <GhostOperand>{digit2}</GhostOperand>
             <Operand digit={digit2} />
           </OperandContainer>
-          <p>=</p>
+          <p className="equals">
+            =
+            {isCorrect === false && (
+              <span className="revealCorrect">{digit1 + digit2}</span>
+            )}
+          </p>
           <NumberInput
             id="numberInput"
-            visible={visible}
             method="POST"
             onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
           >
@@ -96,15 +96,11 @@ export default function AdditionEquation({
               onChange={e => setAnswer(e.target.value, 10)}
             />
           </NumberInput>
-          {visible && (
-            <SubmitPillButton form="numberInput" type="submit">
-              <p>Submit</p>
-            </SubmitPillButton>
-          )}
-        </Equation>
-      )}
-      {isCorrect === true && <Right />}
-      {isCorrect === false && <Wrong />}
+        </div>
+        <SubmitPillButton form="numberInput" type="submit">
+          <p>Submit</p>
+        </SubmitPillButton>
+      </Equation>
       <audio
         ref={correctAudio}
         preload="true"

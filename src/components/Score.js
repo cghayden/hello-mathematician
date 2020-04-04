@@ -4,12 +4,14 @@ import styled from "styled-components";
 
 const ScoreDiv = styled.div`
   font-size: 22px;
-  width: 75%;
-  margin: -50px auto;
+  /* width: 75%; */
+  margin: 0px auto;
+  padding: 0 20px;
 `;
 
 const ScoreButton = styled(SmallPillButton)`
-  width: auto;
+  width: 50%;
+  max-width: 200px;
 `;
 
 const ScoreButtonsDiv = styled.div`
@@ -17,6 +19,7 @@ const ScoreButtonsDiv = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   padding-top: 20px;
+  justify-items: center;
 `;
 
 export default function Score({ score, setScore, toggleScore, toggleTimer }) {

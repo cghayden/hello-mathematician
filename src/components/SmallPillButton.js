@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-const LargePillButton = styled.button`
+const SmallPillButton = styled.button`
   height: 30px;
   width: 75px;
+  max-width: 200px;
   font-size: 16px;
   border: none;
   border-radius: 50px;
@@ -14,4 +15,4 @@ const LargePillButton = styled.button`
   }
 `;
 
-export default LargePillButton;
+export default SmallPillButton;

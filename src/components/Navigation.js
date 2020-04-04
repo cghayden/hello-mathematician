@@ -7,15 +7,14 @@ import MinusSvg from "./MinusSvg";
 import DivideSvg from "./DivideSvg";
 
 const Nav = styled.nav`
-  padding: 10px 0 20px;
-  .newActive {
-    background: white;
-    color: rgba(34, 124, 195, 1);
+  .active {
+    box-shadow: 0px 0px 2px 2px lightblue;
+    /* color: rgba(34, 124, 195, 1); */
+    /* background: hsla(213, 93%, 39%, 0.5); */
     padding: 12px;
     border-radius: 50%;
     display: grid;
   }
-  color: grey;
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -47,17 +46,17 @@ export default function Navigation() {
       <Nav>
         <ul>
           <li>
-            <NavLink exact activeClassName="newActive" to="/addition">
+            <NavLink exact activeClassName="active" to="/addition">
               <PlusSvg />
             </NavLink>
           </li>
           <li>
-            <NavLink exact activeClassName="newActive" to="/subtraction">
+            <NavLink exact activeClassName="active" to="/subtraction">
               <MinusSvg />
             </NavLink>
           </li>
           <li>
-            <NavLink exact activeClassName="newActive" to="/multiplication">
+            <NavLink exact activeClassName="active" to="/multiplication">
               <XSvg />
             </NavLink>
           </li>

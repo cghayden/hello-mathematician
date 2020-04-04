@@ -17,16 +17,11 @@ function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue);
 }
 
-export default function MultiplicationEquation({
-  maxValue = 20,
-  setScore,
-  visible
-}) {
+export default function MultiplicationEquation({ maxValue = 10, setScore }) {
   const [answer, setAnswer] = useState(initialInput);
   const [digit1, setDigit1] = useState();
   const [digit2, setDigit2] = useState();
   const [isCorrect, setIsCorrect] = useState();
-
   const inputEl = useRef(null);
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
@@ -42,6 +37,7 @@ export default function MultiplicationEquation({
     setDigit1(getRandom(maxValue));
     setDigit2(getRandom(maxValue));
     setIsCorrect();
+    inputEl.current.focus();
   }
 
   function checkAnswer(e, answer, digit1, digit2) {
@@ -64,40 +60,43 @@ export default function MultiplicationEquation({
       animate="animate"
       exit="exit"
     >
-      <Equation visible={visible}>
-        <OperandContainer>
-          <GhostOperand>{digit1}</GhostOperand>
-          <Operand digit={digit1} />
-        </OperandContainer>
-        <Operator>x</Operator>
-        <OperandContainer>
-          <GhostOperand>{digit2}</GhostOperand>
-          <Operand digit={digit2} />
-        </OperandContainer>
-        <p>=</p>
-        <NumberInput
-          id="numberInput"
-          visible={visible}
-          method="POST"
-          onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
-        >
-          <input
-            type="number"
-            pattern="[0-9]*"
-            ref={inputEl}
-            value={answer}
-            name="answer"
-            onChange={e => setAnswer(e.target.value, 10)}
-          />
-        </NumberInput>
-        {visible && (
-          <SubmitPillButton form="numberInput" type="submit">
-            Submit
-          </SubmitPillButton>
-        )}
+      <Equation>
+        <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>{" "}
+        <div className="fullEquation">
+          <OperandContainer>
+            <GhostOperand>{digit1}</GhostOperand>
+            <Operand digit={digit1} />
+          </OperandContainer>
+          <Operator>x</Operator>
+          <OperandContainer>
+            <GhostOperand>{digit2}</GhostOperand>
+            <Operand digit={digit2} />
+          </OperandContainer>
+          <p className="equals">
+            =
+            {isCorrect === false && (
+              <span className="revealCorrect">{digit1 * digit2}</span>
+            )}
+          </p>
+          <NumberInput
+            id="numberInput"
+            method="POST"
+            onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
+          >
+            <input
+              type="number"
+              pattern="[0-9]*"
+              ref={inputEl}
+              value={answer}
+              name="answer"
+              onChange={e => setAnswer(e.target.value, 10)}
+            />
+          </NumberInput>
+        </div>
+        <SubmitPillButton form="numberInput" type="submit">
+          Submit
+        </SubmitPillButton>
       </Equation>
-      {isCorrect === true && <Right />}
-      {isCorrect === false && <Wrong />}
       <audio
         ref={correctAudio}
         preload="true"

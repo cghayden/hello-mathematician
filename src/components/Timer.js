@@ -61,7 +61,7 @@ export default function Timer({
             </ToggleTimerButton>
           </motion.div>
         )}
-        {showTimer && (
+        {showTimer && !isStarterActive && (
           <motion.div
             key={2}
             initial={{ opacity: 0, height: 0 }}
@@ -147,6 +147,7 @@ const ReadySetStyle = styled.div`
   height: 30px;
   text-align: center;
   grid-column: 1/-1;
+  padding-top: 30px;
 `;
 const StarterMessage = styled(motion.p)`
   font-size: 22px;
