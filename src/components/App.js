@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Switch, Route, useLocation, Link } from "react-router-dom";
-import styled, { ThemeProvider } from "styled-components";
-import { theme } from "./themeVariables";
+import styled from "styled-components";
 import Home from "./Home";
 import Navigation from "./Navigation";
 import AdditionEquation from "./AdditionEquation";
 import SubtractionEquation from "./SubtractionEquation";
 import MultiplicationEquation from "./MultiplicationEquation";
-import DivisionEquation from "./DivisionEquation";
+// import DivisionEquation from "./DivisionEquation";
 import GlobalStyles from "./GlobalStyles";
 import MaxValue from "./MaxValue";
 import Timer from "./Timer";
@@ -24,7 +23,11 @@ const Container = styled.div`
   }
 `;
 const Header = styled.header`
-  padding-top: 20px;
+  padding: 30px 30px;
+  font-size: 20px;
+  @media screen and (max-width: 370px) {
+    font-size: 16px;
+  }
 `;
 
 export default function App() {
@@ -79,115 +82,120 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Container>
-          <Header>
-            <h1>
-              <Link to="/">Hello Mathematician!</Link>
-            </h1>
-          </Header>
-          <Navigation toggleTimer={toggleTimer} />
-          <AnimatePresence exitBeforeEnter>
-            <Switch location={location} key={location.pathname}>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/addition">
-                <AdditionEquation
-                  visible={!showTimer}
-                  maxValue={maxValue}
-                  setScore={setScore}
-                  showScore={showScore}
-                  isStarterActive={isStarterActive}
-                  inProgress={inProgress}
-                />
-              </Route>
-              <Route exact path="/subtraction">
-                <SubtractionEquation
-                  visible={!showTimer}
-                  maxValue={maxValue}
-                  setScore={setScore}
-                />
-              </Route>
-              <Route exact path="/multiplication">
-                <MultiplicationEquation
-                  visible={!showTimer}
-                  maxValue={maxValue}
-                  setScore={setScore}
-                />
-              </Route>
-              {/* <Route exact path="/division">
+      <GlobalStyles />
+      <Container>
+        <Header>
+          <h1>
+            <Link to="/">Hello Mathematician!</Link>
+          </h1>
+        </Header>
+        <Navigation toggleTimer={toggleTimer} />
+        <AnimatePresence exitBeforeEnter>
+          <Switch location={location} key={location.pathname}>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/addition">
+              <AdditionEquation
+                visible={!showTimer}
+                maxValue={maxValue}
+                setScore={setScore}
+                showScore={showScore}
+                isStarterActive={isStarterActive}
+                inProgress={inProgress}
+              />
+            </Route>
+            <Route exact path="/subtraction">
+              <SubtractionEquation
+                visible={!showTimer}
+                maxValue={maxValue}
+                setScore={setScore}
+              />
+            </Route>
+            <Route exact path="/multiplication">
+              <MultiplicationEquation
+                visible={!showTimer}
+                maxValue={maxValue}
+                setScore={setScore}
+              />
+            </Route>
+            {/* <Route exact path="/division">
                 <DivisionEquation
                   visible={!showTimer}
                   maxValue={maxValue}
                   setScore={setScore}
                 />
               </Route> */}
-            </Switch>
-          </AnimatePresence>
-          <OptionsContainer showTimer={showTimer} className="optionsContainer">
-            {!inProgress && !showScore && !isStarterActive && (
-              <MaxValue
-                maxValue={maxValue}
-                setMaxValue={setMaxValue}
-                inProgress={inProgress}
-              />
-            )}
-            {!showScore && (
-              <Timer
-                score={score}
-                showTimer={showTimer}
-                toggleTimer={toggleTimer}
-                toggleInProgress={toggleInProgress}
-                toggleScore={toggleScore}
-                inProgress={inProgress}
-                isStarterActive={isStarterActive}
-                setIsStarterActive={setIsStarterActive}
-                addTime={addTime}
-                subtractTime={subtractTime}
-                minutes={minutes}
-                setMinutes={setMinutes}
-                seconds={seconds}
-                setSeconds={setSeconds}
-                reset={reset}
-                starterStep={starterStep}
-                setStarterStep={setStarterStep}
-              />
-            )}
-            {showTimer && (
-              <StartPillButton
-                onClick={() => {
-                  go();
-                }}
-              >
-                START
-              </StartPillButton>
-            )}
-          </OptionsContainer>
-          {showScore && (
-            <Score
-              score={score}
-              setScore={setScore}
-              toggleScore={toggleScore}
-              toggleTimer={toggleTimer}
+          </Switch>
+        </AnimatePresence>
+        <OptionsContainer
+          animate={{ height: "auto" }}
+          showTimer={showTimer}
+          className="optionsContainer"
+        >
+          {!inProgress && !showScore && !isStarterActive && (
+            <MaxValue
+              maxValue={maxValue}
+              setMaxValue={setMaxValue}
+              inProgress={inProgress}
             />
           )}
-        </Container>
-      </ThemeProvider>
+          {!showScore && (
+            <Timer
+              score={score}
+              showTimer={showTimer}
+              toggleTimer={toggleTimer}
+              toggleInProgress={toggleInProgress}
+              toggleScore={toggleScore}
+              inProgress={inProgress}
+              isStarterActive={isStarterActive}
+              setIsStarterActive={setIsStarterActive}
+              addTime={addTime}
+              subtractTime={subtractTime}
+              minutes={minutes}
+              setMinutes={setMinutes}
+              seconds={seconds}
+              setSeconds={setSeconds}
+              reset={reset}
+              starterStep={starterStep}
+              setStarterStep={setStarterStep}
+            />
+          )}
+          {showTimer && (
+            <StartPillButton
+              onClick={() => {
+                go();
+              }}
+            >
+              START
+            </StartPillButton>
+          )}
+        </OptionsContainer>
+        {showScore && (
+          <Score
+            score={score}
+            setScore={setScore}
+            toggleScore={toggleScore}
+            toggleTimer={toggleTimer}
+          />
+        )}
+      </Container>
     </React.Fragment>
   );
 }
 
-const OptionsContainer = styled.div`
-  margin-top: ${props => (props.showTimer ? `-150px` : "0")};
+const OptionsContainer = styled(motion.div)`
+  margin-top: ${props => (props.showTimer ? `-130px` : "0")};
+  grid-column-gap: 50px;
+  place-content: center;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 80px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 230px));
+  grid-template-rows: auto auto;
   place-items: center;
 `;
 const StartPillButton = styled(LargePillButton)`
-  grid-row: 2;
+  grid-row: 1;
   grid-column: 1/-1;
   width: 200px;
+  margin-bottom: 20px;
 `;

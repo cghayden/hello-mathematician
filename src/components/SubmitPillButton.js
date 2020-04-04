@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 const SubmitPillButton = styled.button`
-  height: 40px;
-  width: 80px;
+  /* height: 40px; */
+  width: auto;
+  padding: 10px 30px;
   font-size: 18px;
   border: none;
   border-radius: 50px;

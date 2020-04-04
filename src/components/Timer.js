@@ -68,7 +68,7 @@ export default function Timer({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.5 }}
-            style={{ overflow: "hidden" }}
+            // style={{ overflow: "hidden" }}
           >
             <TimerStyle>
               <Time>
@@ -156,7 +156,6 @@ const TimerStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
   font-size: 22px;
 `;
 
@@ -168,7 +167,7 @@ const Time = styled.div`
 `;
 const TimeButtons = styled.div`
   display: grid;
-  grid-template-rows: 22px 22px;
+  grid-template-rows: auto auto;
   grid-gap: 10px;
   color: darkred;
 `;

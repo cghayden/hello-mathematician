@@ -98,7 +98,7 @@ export default function AdditionEquation({
           </NumberInput>
           {visible && (
             <SubmitPillButton form="numberInput" type="submit">
-              Submit
+              <p>Submit</p>
             </SubmitPillButton>
           )}
         </Equation>

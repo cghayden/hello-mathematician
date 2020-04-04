@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Equation = styled.div`
   color: ${props => (props.visible ? `white` : "transparent")};
   font-size: 2.75rem;
-  padding: 10px 0;
+  /* padding: 10px 0; */
   display: grid;
   grid-template-columns:
     minmax(50px, max-content) 30px minmax(50px, min-content)

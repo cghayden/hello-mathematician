@@ -6,22 +6,17 @@ import ChevronUpSvg from "./ChevronUpSvg";
 import ChevronDownSvg from "./ChevronDownSvg";
 
 const MaxValueContainer = styled.div`
-  display: grid;
-  grid-template-columns: 3fr 1fr 2fr;
+  display: flex;
   font-size: 22px;
-  justify-content: center;
   align-items: center;
   padding: 10px 10px;
-  margin: 0 auto;
-  width: 60%;
+  align-self: flex-start;
 `;
 
 const ChangeButtons = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
-  justify-self: start;
-  padding-left: 8px;
 `;
 const AlterTimeButton = styled.button`
   border-radius: 50%;
@@ -41,7 +36,7 @@ const AlterTimeButton = styled.button`
 
 const MaxDigit = styled.p`
   font-size: 25px;
-  padding-left: 7px;
+  margin: 0 20px;
 `;
 
 export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
@@ -49,7 +44,7 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
 
   return (
     <MaxValueContainer className="maxValueContainer">
-      <p style={{ justifySelf: "end" }}>Max Value:</p>
+      <p>Max Value:</p>
       {!changeMax ? (
         <MaxDigit>{maxValue}</MaxDigit>
       ) : (
@@ -103,43 +98,3 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
     </MaxValueContainer>
   );
 }
-
-// const TriangleUp = styled.div`
-//   width: 0;
-//   height: 0;
-//   border-left: 12px solid transparent;
-//   border-right: 12px solid transparent;
-//   border-bottom: 20px solid ${props => props.theme.green};
-//   margin-bottom: 5px;
-// `;
-// const TriangleDown = styled.div`
-//   width: 0;
-//   height: 0;
-//   border-left: 12px solid transparent;
-//   border-right: 12px solid transparent;
-//   border-top: 20px solid ${props => props.theme.green};
-// `;
-// const MaxControls = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   width: 20px;
-//   height: 40px;
-// `;
-
-// const ControlButton = styled.button`
-//   font-size: 12px;
-//   color: red;
-//   background: transparent;
-//   border: none;
-// `;
-
-// <MaxControls>
-//         <TriangleUp
-//           role="button"
-//           onClick={() => setMaxValue(maxValue => maxValue + 1)}
-//         />
-//         <TriangleDown
-//           role="button"
-//           onClick={() => setMaxValue(maxValue => maxValue - 1)}
-//         />
-//       </MaxControls>
