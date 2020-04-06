@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { pageVariants } from "../utils/pageTransitions";
-import Equation from "../styles/Equation";
+import Equation from "./Equation";
 import GhostOperand from "../styles/GhostOperand";
 import NumberInput from "../styles/NumberInput";
 import OperandContainer from "../styles/OperandContainer";

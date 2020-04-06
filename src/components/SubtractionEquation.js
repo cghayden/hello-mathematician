@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { pageVariants } from "../utils/pageTransitions";
-import Equation from "../styles/Equation";
+import Equation from "./Equation";
 import GhostOperand from "../styles/GhostOperand";
 import NumberInput from "../styles/NumberInput";
 import OperandContainer from "../styles/OperandContainer";
@@ -27,7 +27,11 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
     const n1 = getRandom(maxValue);
     const n2 = getRandom(maxValue);
     const array = [n1, n2];
-    setDigits(array.sort((a, b) => b - a));
+    if (view === "subtraction") {
+      setDigits(array.sort((a, b) => b - a));
+    } else {
+      setDigits(array);
+    }
     inputEl.current.focus();
   }, [maxValue]);
 
@@ -46,7 +50,7 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
     const correctAnswer = digits[0] - digits[1];
     if (parseInt(answer, 10) === correctAnswer) {
       correctAudio.current.play();
-      setScore(score => score + 1);
+      setScore((score) => score + 1);
     } else {
       wrongAudio.current.play();
     }
@@ -81,7 +85,7 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
           <NumberInput
             id="numberInput"
             method="POST"
-            onSubmit={e => checkAnswer(e, answer, digits)}
+            onSubmit={(e) => checkAnswer(e, answer, digits)}
           >
             <input
               type="number"
@@ -89,7 +93,7 @@ export default function SubtractionEquation({ maxValue = 20, setScore }) {
               ref={inputEl}
               value={answer}
               name="answer"
-              onChange={e => setAnswer(e.target.value, 10)}
+              onChange={(e) => setAnswer(e.target.value, 10)}
               autoFocus
             />
           </NumberInput>
