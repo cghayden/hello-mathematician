@@ -16,7 +16,7 @@ const Nav = styled.nav`
     display: grid;
   }
 
-  padding: 5px 0 20px 0;
+  /* padding: 5px 0 20px 0; */
 
   ul {
     display: flex;
@@ -26,7 +26,7 @@ const Nav = styled.nav`
     justify-content: space-around;
     font-size: 5vmin;
     li {
-      padding: 0 10px;
+      /* padding: 0 10px; */
     }
     a {
       background: transparent;
@@ -43,7 +43,7 @@ const Nav = styled.nav`
   }
 `;
 
-export default function Navigation() {
+export default function Navigation({ activeOperation, setActiveOperation }) {
   return (
     <Nav>
       <ul>

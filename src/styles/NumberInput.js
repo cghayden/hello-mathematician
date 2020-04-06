@@ -8,8 +8,14 @@ const NumberInput = styled.form`
   }
   input {
     /* position: relative; */
+    font-size: 2.75rem;
+    font: inherit;
+    border-radius: 5px;
+    border: none;
+    margin: 0 1rem;
+    width: 90px;
+    height: 1.3ch;
     background: transparent;
-    border-radius: 0;
     caret-color: white;
     color: white;
     &:focus {

@@ -19,16 +19,6 @@ const Equation = styled.div`
   span {
     padding-right: 5px;
   }
-  input {
-    font-size: 2.75rem;
-    font: inherit;
-    border-radius: 5px;
-    border: none;
-    margin: 0 1rem;
-    width: 90px;
-    margin: 0;
-    height: 2ch;
-  }
   .revealCorrect {
     color: red;
     position: absolute;

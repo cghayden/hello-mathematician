@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Switch, Route, useLocation, Link, Redirect } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  useLocation,
+  Link,
+  Redirect,
+  useHistory
+} from "react-router-dom";
 import styled from "styled-components";
 import Navigation from "./Navigation";
 import AdditionEquation from "./AdditionEquation";
@@ -13,8 +20,14 @@ import Timer from "./Timer";
 import Score from "./Score";
 import LargePillButton from "./LargePillButton";
 import Starter from "./Starter";
+import ClockSvg from "./ClockSvg";
 
 const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 130px 70px 184px 184px;
+  grid-template-areas: "header" "nav" "main" "options";
+  align-items: center;
   text-align: center;
   margin: 0;
   height: 100vh;
@@ -23,7 +36,7 @@ const Container = styled.div`
   }
 `;
 const Header = styled.header`
-  padding: 30px 30px 10px 30px;
+  /* padding: 30px 30px 10px 30px; */
   font-size: 20px;
   @media screen and (max-width: 370px) {
     font-size: 16px;
@@ -39,9 +52,10 @@ export default function App() {
   const [isStarterActive, setIsStarterActive] = useState(false);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
-  const location = useLocation();
   const [starterStep, setStarterStep] = useState(0);
-
+  const [activeOperation, setActiveOperation] = useState("/addition");
+  const location = useLocation();
+  let history = useHistory();
   function addTime() {
     if (seconds === 45) {
       setMinutes(minutes => minutes + 1);
@@ -80,6 +94,14 @@ export default function App() {
     setStarterStep(1);
   }
 
+  function toggleTimerPage() {
+    if (location.pathname === "/setTimer") {
+      history.goBack();
+    } else {
+      history.push("/setTimer");
+    }
+  }
+
   return (
     <React.Fragment>
       <GlobalStyles />
@@ -89,14 +111,15 @@ export default function App() {
             <Link to="/">Hello Mathematician!</Link>
           </h1>
         </Header>
-        <Navigation toggleTimer={toggleTimer} />
+        <Navigation
+          activeOperation={activeOperation}
+          setActiveOperation={setActiveOperation}
+        />
         <AnimatePresence exitBeforeEnter>
           {!showTimer && !isStarterActive && !showScore && (
             <motion.div
+              className="main"
               exit={{ height: 0, overflow: "hidden", opacity: 0 }}
-              // transition={{
-              //   opacity: { duration: 0 }
-              // }}
             >
               <Switch location={location} key={location.pathname}>
                 <Route exact path="/">
@@ -126,90 +149,93 @@ export default function App() {
                     setScore={setScore}
                   />
                 </Route>
-                {/* <Route exact path="/division">
-                <DivisionEquation
-                  visible={!showTimer}
-                  maxValue={maxValue}
-                  setScore={setScore}
-                />
-              </Route> */}
+                <Route exact path="/setTimer">
+                  <Timer
+                    score={score}
+                    showTimer={showTimer}
+                    toggleTimer={toggleTimer}
+                    toggleInProgress={toggleInProgress}
+                    toggleScore={toggleScore}
+                    inProgress={inProgress}
+                    isStarterActive={isStarterActive}
+                    setIsStarterActive={setIsStarterActive}
+                    addTime={addTime}
+                    subtractTime={subtractTime}
+                    minutes={minutes}
+                    setMinutes={setMinutes}
+                    seconds={seconds}
+                    setSeconds={setSeconds}
+                    reset={reset}
+                    starterStep={starterStep}
+                    setStarterStep={setStarterStep}
+                    go={go}
+                  />
+                </Route>
               </Switch>
             </motion.div>
           )}
         </AnimatePresence>
-        {showTimer && (
-          <StartPillButton
-            onClick={() => {
-              go();
-            }}
-          >
-            START
-          </StartPillButton>
-        )}
-        {!inProgress && !showScore && !isStarterActive && (
-          <OptionsContainer
-            animate={{ height: "auto" }}
-            showTimer={showTimer}
-            className="optionsContainer"
-          >
-            <MaxValue
-              maxValue={maxValue}
-              setMaxValue={setMaxValue}
-              inProgress={inProgress}
-            />
 
-            {!showScore && (
-              <Timer
-                score={score}
-                showTimer={showTimer}
-                toggleTimer={toggleTimer}
-                toggleInProgress={toggleInProgress}
-                toggleScore={toggleScore}
-                inProgress={inProgress}
-                isStarterActive={isStarterActive}
-                setIsStarterActive={setIsStarterActive}
-                addTime={addTime}
-                subtractTime={subtractTime}
-                minutes={minutes}
-                setMinutes={setMinutes}
-                seconds={seconds}
-                setSeconds={setSeconds}
-                reset={reset}
-                starterStep={starterStep}
-                setStarterStep={setStarterStep}
-              />
-            )}
-          </OptionsContainer>
-        )}
-        {showScore && (
-          <Score
-            score={score}
-            setScore={setScore}
-            toggleScore={toggleScore}
-            toggleTimer={toggleTimer}
-          />
-        )}
-        {isStarterActive && (
-          <Starter
-            score={score}
-            showTimer={showTimer}
-            toggleTimer={toggleTimer}
-            toggleInProgress={toggleInProgress}
-            toggleScore={toggleScore}
+        {/* if location = setTImer, show StartButton */}
+        {/* <StartPillButton
+          onClick={() => {
+            // route to previous (add/sub/etc)
+            // go();
+          }}
+        >
+          START
+        </StartPillButton> */}
+
+        <OptionsContainer
+          animate={{ height: "auto" }}
+          showTimer={showTimer}
+          className="optionsContainer"
+        >
+          {/* {!inProgress && !showScore && !isStarterActive && ( */}
+          <MaxValue
+            maxValue={maxValue}
+            setMaxValue={setMaxValue}
             inProgress={inProgress}
-            isStarterActive={isStarterActive}
-            setIsStarterActive={setIsStarterActive}
-            addTime={addTime}
-            subtractTime={subtractTime}
-            minutes={minutes}
-            setMinutes={setMinutes}
-            seconds={seconds}
-            setSeconds={setSeconds}
-            reset={reset}
-            starterStep={starterStep}
-            setStarterStep={setStarterStep}
           />
-        )}
+          <ToggleTimerButton
+            active={location.pathname === "/setTimer"}
+            type="button"
+            onClick={() => toggleTimerPage()}
+          >
+            <ClockSvg />
+            Timer
+          </ToggleTimerButton>
+          {/* )} */}
+          {showScore && (
+            <Score
+              score={score}
+              setScore={setScore}
+              toggleScore={toggleScore}
+              toggleTimer={toggleTimer}
+            />
+          )}
+          {isStarterActive && (
+            <Starter
+              score={score}
+              showTimer={showTimer}
+              toggleTimer={toggleTimer}
+              toggleInProgress={toggleInProgress}
+              toggleScore={toggleScore}
+              inProgress={inProgress}
+              isStarterActive={isStarterActive}
+              setIsStarterActive={setIsStarterActive}
+              addTime={addTime}
+              subtractTime={subtractTime}
+              minutes={minutes}
+              setMinutes={setMinutes}
+              seconds={seconds}
+              setSeconds={setSeconds}
+              reset={reset}
+              starterStep={starterStep}
+              setStarterStep={setStarterStep}
+            />
+          )}
+        </OptionsContainer>
       </Container>
     </React.Fragment>
   );
@@ -222,6 +248,7 @@ const OptionsContainer = styled(motion.div)`
   grid-template-columns: repeat(auto-fit, minmax(200px, 230px));
   grid-template-rows: auto auto;
   place-items: center;
+  align-self: start;
 `;
 const StartPillButton = styled(LargePillButton)`
   grid-row: 1;
@@ -230,3 +257,53 @@ const StartPillButton = styled(LargePillButton)`
   margin-bottom: 20px;
   margin-top: 30px;
 `;
+
+const ToggleTimerButton = styled.button`
+  cursor: pointer;
+  font-size: 22px;
+  padding: 5px 10px;
+  background: ${props => (props.active ? "white" : `none`)};
+  color: ${props => (props.active ? "var(--blue)" : `none`)};
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  border-radius: 50px;
+  /* outline: ${props => (props.active ? "white auto 5px" : `none`)}; */
+  box-shadow: ${props => (props.active ? "0px 0px 2px 2px lightblue" : "none")};
+  svg {
+    padding-right: 5px;
+  }
+  :focus {
+    outline: none;
+    box-shadow: 0px 0px 2px 2px lightblue;
+  }
+`;
+
+// {location.pathname === "/setTimer" ? (
+//   <ToggleTimerButton
+//     active={location.pathname === "/setTimer"}
+//     type="button"
+//     onClick={() => history.goBack()}
+//   >
+//     <ClockSvg />
+//     Timer
+//   </ToggleTimerButton>
+// ) : (
+//   <ToggleTimerButton
+//     active={location.pathname === "/setTimer"}
+//     type="button"
+//     onClick={() => {
+//       console.log("location:", location);
+//       if (location.pathname === "/setTimer") {
+//         console.log(location);
+//         history.goBack();
+//       }
+//       history.push("/setTimer");
+//     }}
+//   >
+//     <ClockSvg />
+//     Timer
+//   </ToggleTimerButton>
+// )}
