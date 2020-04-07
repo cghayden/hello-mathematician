@@ -129,15 +129,10 @@ export default function Equation({ view, maxValue = 10, setScore }) {
 }
 
 const EquationStyles = styled(motion.div)`
-  .fullEquation {
-    display: flex;
-    align-items: center;
-    grid-column: 1/-1;
-    padding-left: 30px;
-    padding-bottom: 15px;
-  }
+  align-self: start;
+
   color: white;
-  font-size: 2.75rem;
+  font-size: 4rem;
   padding: 0px 0px 20px 0px;
   display: grid;
   grid-template-columns:
@@ -148,6 +143,14 @@ const EquationStyles = styled(motion.div)`
   span {
     padding-right: 5px;
   }
+  .fullEquation {
+    display: flex;
+    align-items: baseline;
+    grid-column: 1/-1;
+    padding-left: 30px;
+    padding-bottom: 30px;
+  }
+
   .revealCorrect {
     color: red;
     position: absolute;

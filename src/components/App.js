@@ -6,7 +6,6 @@ import GlobalStyles from "./GlobalStyles";
 import MaxValue from "./MaxValue";
 import Timer from "./Timer";
 import Score from "./Score";
-import LargePillButton from "./LargePillButton";
 import ClockSvg from "./ClockSvg";
 import Equation from "./Equation";
 
@@ -121,7 +120,7 @@ const AppContainer = styled.div`
   max-width: 600px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 130px 70px 184px 150px;
+  grid-template-rows: 100px 60px 240px 150px;
   /* grid-template-areas: "header" "nav" "main" "options"; */
   align-items: center;
   text-align: center;
@@ -147,13 +146,6 @@ const OptionsContainer = styled(motion.div)`
   place-items: center;
   align-self: start;
 `;
-const StartPillButton = styled(LargePillButton)`
-  grid-row: 1;
-  grid-column: 1/-1;
-  width: 200px;
-  margin-bottom: 20px;
-  margin-top: 30px;
-`;
 
 const ToggleTimerButton = styled.button`
   cursor: pointer;
@@ -167,7 +159,6 @@ const ToggleTimerButton = styled.button`
   justify-content: space-around;
   position: relative;
   border-radius: 50px;
-  /* outline: ${(props) => (props.active ? "white auto 5px" : `none`)}; */
   box-shadow: ${(props) =>
     props.active ? "0px 0px 2px 2px lightblue" : "none"};
   svg {
@@ -178,30 +169,3 @@ const ToggleTimerButton = styled.button`
     box-shadow: 0px 0px 2px 2px lightblue;
   }
 `;
-
-// {location.pathname === "/setTimer" ? (
-//   <ToggleTimerButton
-//     active={location.pathname === "/setTimer"}
-//     type="button"
-//     onClick={() => history.goBack()}
-//   >
-//     <ClockSvg />
-//     Timer
-//   </ToggleTimerButton>
-// ) : (
-//   <ToggleTimerButton
-//     active={location.pathname === "/setTimer"}
-//     type="button"
-//     onClick={() => {
-//       console.log("location:", location);
-//       if (location.pathname === "/setTimer") {
-//         console.log(location);
-//         history.goBack();
-//       }
-//       history.push("/setTimer");
-//     }}
-//   >
-//     <ClockSvg />
-//     Timer
-//   </ToggleTimerButton>
-// )}
