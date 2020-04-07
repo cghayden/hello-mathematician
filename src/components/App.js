@@ -49,11 +49,10 @@ export default function App() {
         <Header>
           <h1>Hello Mathematician!</h1>
         </Header>
-        <Navigation view={view} setView={setView} />
-
+        <Navigation inProgress={inProgress} view={view} setView={setView} />
         <AnimatePresence>
           {/* {!showTimer && !isStarterActive && !showScore && ( */}
-          {!showTimer && (
+          {!showTimer && !showScore && (
             <Equation
               view={view}
               maxValue={maxValue}
@@ -65,13 +64,10 @@ export default function App() {
 
           {showTimer && (
             <Timer
-              view={view}
               score={score}
-              showTimer={showTimer}
               toggleTimer={toggleTimer}
               toggleInProgress={toggleInProgress}
               toggleScore={toggleScore}
-              inProgress={inProgress}
               isStarterActive={isStarterActive}
               setIsStarterActive={setIsStarterActive}
               addTime={addTime}
@@ -84,37 +80,6 @@ export default function App() {
               setStarterStep={setStarterStep}
             />
           )}
-        </AnimatePresence>
-
-        {/* if location = setTImer, show StartButton */}
-        {/* <StartPillButton
-          onClick={() => {
-            // route to previous (add/sub/etc)
-            // go();
-          }}
-        >
-          START
-        </StartPillButton> */}
-
-        <OptionsContainer
-          animate={{ height: "auto" }}
-          showTimer={showTimer}
-          className="optionsContainer"
-        >
-          {/* {!inProgress && !showScore && !isStarterActive && ( */}
-          <MaxValue
-            maxValue={maxValue}
-            setMaxValue={setMaxValue}
-            inProgress={inProgress}
-          />
-          <ToggleTimerButton
-            active={showTimer === true}
-            type="button"
-            onClick={() => toggleTimer(!showTimer)}
-          >
-            <ClockSvg />
-            Timer
-          </ToggleTimerButton>
           {showScore && (
             <Score
               score={score}
@@ -123,7 +88,30 @@ export default function App() {
               toggleTimer={toggleTimer}
             />
           )}
-        </OptionsContainer>
+        </AnimatePresence>
+
+        {!inProgress && !showScore && (
+          <OptionsContainer
+            animate={{ height: "auto" }}
+            showTimer={showTimer}
+            className="optionsContainer"
+          >
+            {/* {!inProgress && !showScore && !isStarterActive && ( */}
+            <MaxValue
+              maxValue={maxValue}
+              setMaxValue={setMaxValue}
+              inProgress={inProgress}
+            />
+            <ToggleTimerButton
+              active={showTimer === true}
+              type="button"
+              onClick={() => toggleTimer(!showTimer)}
+            >
+              <ClockSvg />
+              Timer
+            </ToggleTimerButton>
+          </OptionsContainer>
+        )}
       </GridContainer>
     </React.Fragment>
   );
@@ -132,7 +120,7 @@ export default function App() {
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 130px 70px 184px 184px;
+  grid-template-rows: 130px 70px 184px 150px;
   grid-template-areas: "header" "nav" "main" "options";
   align-items: center;
   text-align: center;

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const SmallPillButton = styled.button`
   height: 30px;
-  width: 75px;
   max-width: 200px;
   font-size: 16px;
   border: none;
@@ -10,6 +9,7 @@ const SmallPillButton = styled.button`
   margin-top: 5px;
   color: rgba(34, 124, 195, 1);
   background-color: white;
+  padding: 0 15px;
   :focus {
     border: 1px solid blue;
   }

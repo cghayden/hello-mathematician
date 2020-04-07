@@ -9,8 +9,6 @@ const MaxValueContainer = styled.div`
   display: flex;
   font-size: 22px;
   align-items: center;
-  padding: 10px 10px;
-  align-self: flex-start;
 `;
 
 const ChangeButtons = styled.div`
@@ -66,14 +64,14 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
       <ChangeButtons>
         <AlterTimeButton
           disabled={inProgress}
-          onClick={() => setMaxValue(maxValue => maxValue + 1)}
+          onClick={() => setMaxValue((maxValue) => maxValue + 1)}
         >
           <ChevronUpSvg />
         </AlterTimeButton>
         <AlterTimeButton
           disabled={inProgress}
           // disabled={minutes === 0 && seconds === 15}
-          onClick={() => setMaxValue(maxValue => maxValue - 1)}
+          onClick={() => setMaxValue((maxValue) => maxValue - 1)}
         >
           <ChevronDownSvg />
         </AlterTimeButton>

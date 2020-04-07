@@ -41,22 +41,34 @@ const NavButton = styled.button`
   border: none;
 `;
 
-export default function Navigation({ view, setView }) {
+export default function Navigation({ view, setView, inProgress }) {
   return (
     <Nav>
       <ul>
         <li>
-          <NavButton active={view === "+"} onClick={() => setView("+")}>
+          <NavButton
+            disabled={inProgress}
+            active={view === "+"}
+            onClick={() => setView("+")}
+          >
             <PlusSvg />
           </NavButton>
         </li>
         <li>
-          <NavButton active={view === "-"} onClick={() => setView("-")}>
+          <NavButton
+            disabled={inProgress}
+            active={view === "-"}
+            onClick={() => setView("-")}
+          >
             <MinusSvg />
           </NavButton>
         </li>
         <li>
-          <NavButton active={view === "x"} onClick={() => setView("x")}>
+          <NavButton
+            disabled={inProgress}
+            active={view === "x"}
+            onClick={() => setView("x")}
+          >
             <XSvg />
           </NavButton>
         </li>

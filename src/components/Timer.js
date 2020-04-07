@@ -9,11 +9,8 @@ import AddCircleSvg from "./AddCircleSvg";
 import LargePillButton from "./LargePillButton";
 
 export default function Timer({
-  view,
   toggleInProgress,
-  showTimer,
   toggleTimer,
-  inProgress,
   isStarterActive,
   setIsStarterActive,
   addTime,
@@ -45,7 +42,7 @@ export default function Timer({
     <>
       {!isStarterActive && (
         <TimerStyle
-          key={view}
+          key={"time"}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

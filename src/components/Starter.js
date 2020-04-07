@@ -20,7 +20,7 @@ export default function Starter({
     if (isStarterActive && starterStep < 4) {
       interval = setInterval(() => {
         setStarterStep((starterStep) => starterStep + 1);
-      }, 600);
+      }, 500);
     } else if (starterStep > 3) {
       clearInterval(interval);
       toggleTimer(false);
@@ -80,11 +80,9 @@ export default function Starter({
 }
 
 const ReadySetStyle = styled.div`
-  width: 100%;
+  /* width: 100%; */
   height: 30px;
-  text-align: center;
-  grid-column: 1/-1;
-  padding-top: 30px;
+  /* text-align: center; */
 `;
 const StarterMessage = styled(motion.p)`
   font-size: 22px;
