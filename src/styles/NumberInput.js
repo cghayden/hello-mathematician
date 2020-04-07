@@ -7,6 +7,7 @@ const NumberInput = styled.form`
   height: 50px;
   input {
     height: 100%;
+    align-items: baseline;
     font: inherit;
     background: transparent;
     /* font-size: 2.75rem; */
