@@ -13,20 +13,6 @@ const Nav = styled.nav`
     font-size: 20px;
     justify-content: space-around;
     font-size: 5vmin;
-    li {
-      /* padding: 0 10px; */
-    }
-    a {
-      background: transparent;
-      color: white;
-      padding: 12px;
-      border-radius: 50%;
-      display: grid;
-      transition: background 0.5s;
-      :focus {
-        box-shadow: 0px 0px 2px 2px lightblue;
-      }
-    }
   }
 `;
 
@@ -39,6 +25,9 @@ const NavButton = styled.button`
   border-radius: 50%;
   display: grid;
   border: none;
+  :focus {
+    box-shadow: 0px 0px 2px 2px lightblue;
+  }
 `;
 
 export default function Navigation({ view, setView, inProgress }) {

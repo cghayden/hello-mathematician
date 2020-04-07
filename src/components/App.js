@@ -45,7 +45,7 @@ export default function App() {
   return (
     <React.Fragment>
       <GlobalStyles />
-      <GridContainer>
+      <AppContainer>
         <Header>
           <h1>Hello Mathematician!</h1>
         </Header>
@@ -112,33 +112,33 @@ export default function App() {
             </ToggleTimerButton>
           </OptionsContainer>
         )}
-      </GridContainer>
+      </AppContainer>
     </React.Fragment>
   );
 }
 
-const GridContainer = styled.div`
+const AppContainer = styled.div`
+  max-width: 600px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 130px 70px 184px 150px;
-  grid-template-areas: "header" "nav" "main" "options";
+  /* grid-template-areas: "header" "nav" "main" "options"; */
   align-items: center;
   text-align: center;
-  margin: 0;
+  margin: 0 auto;
   height: 100vh;
   h1 {
     padding: 10px 0;
   }
 `;
 const Header = styled.header`
-  /* padding: 30px 30px 10px 30px; */
-  font-size: 20px;
   @media screen and (max-width: 370px) {
     font-size: 16px;
   }
 `;
 
 const OptionsContainer = styled(motion.div)`
+  padding-top: 10px;
   grid-column-gap: 50px;
   place-content: center;
   display: grid;
