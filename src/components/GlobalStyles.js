@@ -11,11 +11,14 @@ const GlobalStyles = createGlobalStyle`
 }
 
   body {
-    ${"" /* background: rgb(34,124,195); */}
+    font-family: 'Baloo Da 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
      background: linear-gradient(336deg, rgba(34,124,195,1) 60%, rgba(35,58,196,1) 100%);
     color: white;
     margin:0;
-    font-family: 'Baloo Da 2', cursive;   
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

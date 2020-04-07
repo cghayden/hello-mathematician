@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { pageVariants } from "../utils/pageTransitions";
 
 export default function Home() {
   return (

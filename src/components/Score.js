@@ -1,16 +1,14 @@
 import React from "react";
+import { motion } from "framer-motion";
 import SmallPillButton from "./SmallPillButton";
 import styled from "styled-components";
 
-const ScoreDiv = styled.div`
+const ScoreDiv = styled(motion.div)`
   font-size: 22px;
-  /* width: 75%; */
   margin: 0px auto;
-  padding: 0 20px;
 `;
 
 const ScoreButton = styled(SmallPillButton)`
-  width: 50%;
   max-width: 200px;
 `;
 
@@ -24,7 +22,12 @@ const ScoreButtonsDiv = styled.div`
 
 export default function Score({ score, setScore, toggleScore, toggleTimer }) {
   return (
-    <ScoreDiv>
+    <ScoreDiv
+      key={"score"}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <p>Your Score: {score}</p>
       <ScoreButtonsDiv>
         <ScoreButton
@@ -40,7 +43,6 @@ export default function Score({ score, setScore, toggleScore, toggleTimer }) {
           onClick={() => {
             setScore(0);
             toggleScore(false);
-            toggleTimer(false);
           }}
         >
           Practice
