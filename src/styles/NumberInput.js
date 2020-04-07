@@ -3,19 +3,19 @@ import styled from "styled-components";
 const NumberInput = styled.form`
   display: flex;
   flex-direction: column;
-  button {
-    margin-top: 10px;
-  }
+  /* set height to height of operands */
+  height: 50px;
   input {
-    /* position: relative; */
-    font-size: 2.75rem;
+    height: 100%;
     font: inherit;
+    background: transparent;
+    /* font-size: 2.75rem; */
+    /* font: inherit; */
     border-radius: 5px;
     border: none;
-    margin: 0 1rem;
+    margin: 0 0;
     width: 90px;
-    height: 1.3ch;
-    background: transparent;
+    /* background: transparent; */
     caret-color: white;
     color: white;
     &:focus {

@@ -131,9 +131,10 @@ export default function Equation({ view, maxValue = 10, setScore }) {
 const EquationStyles = styled(motion.div)`
   .fullEquation {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     grid-column: 1/-1;
     padding-left: 30px;
+    padding-bottom: 15px;
   }
   color: white;
   font-size: 2.75rem;
