@@ -4,34 +4,39 @@ import { motion, AnimatePresence } from "framer-motion";
 const starterVariants = {
   enter: { opacity: 0 },
   center: { opacity: 1 },
-  exit: { opacity: 0 }
+  exit: { opacity: 0 },
 };
 
 export default function Starter({
-  showTimer,
-  toggleTimer,
   toggleInProgress,
+  setIsStarterActive,
   isStarterActive,
-  toggleScore,
-  inProgress,
-
-  reset,
   starterStep,
-  setStarterStep
+  setStarterStep,
+  toggleTimer,
 }) {
   useEffect(() => {
     let interval = null;
     if (isStarterActive && starterStep < 4) {
       interval = setInterval(() => {
-        setStarterStep(starterStep => starterStep + 1);
+        setStarterStep((starterStep) => starterStep + 1);
       }, 600);
     } else if (starterStep > 3) {
-      toggleInProgress(true);
-      reset();
       clearInterval(interval);
+      toggleTimer(false);
+      setStarterStep(1);
+      setIsStarterActive(false);
+      toggleInProgress(true);
     }
     return () => clearInterval(interval);
-  }, [isStarterActive, starterStep, setStarterStep, toggleInProgress, reset]);
+  }, [
+    isStarterActive,
+    setIsStarterActive,
+    starterStep,
+    setStarterStep,
+    toggleInProgress,
+    toggleTimer,
+  ]);
 
   return (
     <ReadySetStyle>
@@ -85,11 +90,3 @@ const StarterMessage = styled(motion.p)`
   font-size: 22px;
   display: inline-block;
 `;
-
-// setIsStarterActive,
-//   addTime,
-//   subtractTime,
-//   minutes,
-//   setMinutes,
-//   seconds,
-//   setSeconds,

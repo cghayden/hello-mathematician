@@ -7,7 +7,6 @@ import MaxValue from "./MaxValue";
 import Timer from "./Timer";
 import Score from "./Score";
 import LargePillButton from "./LargePillButton";
-import Starter from "./Starter";
 import ClockSvg from "./ClockSvg";
 import Equation from "./Equation";
 
@@ -18,7 +17,7 @@ export default function App() {
   const [showScore, toggleScore] = useState(false);
   const [inProgress, toggleInProgress] = useState(false);
   const [isStarterActive, setIsStarterActive] = useState(false);
-  const [minutes, setMinutes] = useState();
+  const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(15);
   const [starterStep, setStarterStep] = useState(0);
   const [view, setView] = useState("+");
@@ -41,23 +40,6 @@ export default function App() {
     } else {
       setSeconds((seconds) => seconds - 15);
     }
-  }
-
-  function runStarter() {
-    setIsStarterActive(true);
-  }
-  function go() {
-    const time = minutes * 60000 + seconds * 1000;
-    runStarter();
-    toggleTimer(false);
-    setTimeout(function () {
-      toggleScore(true);
-      toggleInProgress(false);
-    }, time);
-  }
-  function reset() {
-    setIsStarterActive(false);
-    setStarterStep(1);
   }
 
   return (
@@ -98,29 +80,6 @@ export default function App() {
               setMinutes={setMinutes}
               seconds={seconds}
               setSeconds={setSeconds}
-              reset={reset}
-              starterStep={starterStep}
-              setStarterStep={setStarterStep}
-              go={go}
-            />
-          )}
-          {isStarterActive && (
-            <Starter
-              score={score}
-              showTimer={showTimer}
-              toggleTimer={toggleTimer}
-              toggleInProgress={toggleInProgress}
-              toggleScore={toggleScore}
-              inProgress={inProgress}
-              isStarterActive={isStarterActive}
-              setIsStarterActive={setIsStarterActive}
-              addTime={addTime}
-              subtractTime={subtractTime}
-              minutes={minutes}
-              setMinutes={setMinutes}
-              seconds={seconds}
-              setSeconds={setSeconds}
-              reset={reset}
               starterStep={starterStep}
               setStarterStep={setStarterStep}
             />

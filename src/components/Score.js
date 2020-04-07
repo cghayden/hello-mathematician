@@ -40,7 +40,6 @@ export default function Score({ score, setScore, toggleScore, toggleTimer }) {
           onClick={() => {
             setScore(0);
             toggleScore(false);
-            toggleTimer(false);
           }}
         >
           Practice

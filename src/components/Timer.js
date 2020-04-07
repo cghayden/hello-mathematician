@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import Starter from "./Starter";
 
 import MinusCircleSvg from "./MinusCircleSvg";
 import AddCircleSvg from "./AddCircleSvg";
-import SmallPillButton from "./SmallPillButton";
+// import SmallPillButton from "./SmallPillButton";
 import LargePillButton from "./LargePillButton";
-import { pageVariants } from "../utils/pageTransitions";
 
 export default function Timer({
   view,
@@ -20,57 +20,74 @@ export default function Timer({
   subtractTime,
   minutes,
   seconds,
-  reset,
   starterStep,
   setStarterStep,
-  go,
+  toggleScore,
 }) {
-  useEffect(() => {
-    let interval = null;
-    if (isStarterActive && starterStep < 4) {
-      interval = setInterval(() => {
-        setStarterStep((starterStep) => starterStep + 1);
-      }, 600);
-    } else if (starterStep > 3) {
-      toggleInProgress(true);
-      reset();
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isStarterActive, starterStep, setStarterStep, toggleInProgress, reset]);
+  // function runStarter() {}
+
+  // function reset() {
+  //   setIsStarterActive(false);
+  //   setStarterStep(1);
+  // }
+
+  function go() {
+    setIsStarterActive(true);
+    const time = minutes * 60000 + seconds * 1000;
+    setTimeout(function () {
+      console.log("time up");
+      toggleScore(true);
+      toggleInProgress(false);
+    }, time);
+  }
 
   return (
-    <TimerStyle
-      key={view}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <Time>
-        <h3>Timer:</h3>
-        <p>
-          {minutes}:{seconds === 0 ? "00" : seconds}
-        </p>
-        <TimeButtons>
-          <AlterTimeButton onClick={() => addTime()}>
-            <AddCircleSvg />
-          </AlterTimeButton>
-          <AlterTimeButton
-            disabled={minutes === 0 && seconds === 15}
-            onClick={() => subtractTime()}
+    <>
+      {!isStarterActive && (
+        <TimerStyle
+          key={view}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <Time>
+            <h3>Timer:</h3>
+            <p>
+              {minutes}:{seconds === 0 ? "00" : seconds}
+            </p>
+            <TimeButtons>
+              <AlterTimeButton onClick={() => addTime()}>
+                <AddCircleSvg />
+              </AlterTimeButton>
+              <AlterTimeButton
+                disabled={minutes === 0 && seconds === 15}
+                onClick={() => subtractTime()}
+              >
+                <MinusCircleSvg />
+              </AlterTimeButton>
+            </TimeButtons>
+          </Time>
+          <StartPillButton
+            onClick={() => {
+              go();
+            }}
           >
-            <MinusCircleSvg />
-          </AlterTimeButton>
-        </TimeButtons>
-      </Time>
-      <StartPillButton
-        onClick={() => {
-          // go();
-        }}
-      >
-        START
-      </StartPillButton>
-    </TimerStyle>
+            START
+          </StartPillButton>
+        </TimerStyle>
+      )}
+      {isStarterActive && (
+        <Starter
+          key={"starter"}
+          toggleInProgress={toggleInProgress}
+          isStarterActive={isStarterActive}
+          setIsStarterActive={setIsStarterActive}
+          starterStep={starterStep}
+          setStarterStep={setStarterStep}
+          toggleTimer={toggleTimer}
+        />
+      )}
+    </>
   );
 }
 
@@ -112,3 +129,18 @@ const StartPillButton = styled(LargePillButton)`
   margin-bottom: 20px;
   margin-top: 30px;
 `;
+
+// useEffect(() => {
+//   let interval = null;
+//   if (isStarterActive && starterStep < 4) {
+//     interval = setInterval(() => {
+//       setStarterStep((starterStep) => starterStep + 1);
+//     }, 600);
+//   } else if (starterStep > 3) {
+//     clearInterval(interval);
+//     setIsStarterActive(false);
+//     setStarterStep(1);
+//     toggleInProgress(true);
+//   }
+//   return () => clearInterval(interval);
+// }, [isStarterActive, starterStep, setStarterStep, toggleInProgress]);

@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { pageVariants } from "../utils/pageTransitions";
 import Equation from "../styles/Equation";
 import GhostOperand from "../styles/GhostOperand";
 import NumberInput from "../styles/NumberInput";
@@ -17,7 +16,7 @@ function getRandom(maxValue) {
 export default function SubtractionEquation({
   maxValue = 20,
   setScore,
-  visible
+  visible,
 }) {
   const [answer, setAnswer] = useState(initialInput);
   const [digits, setDigits] = useState([]);
@@ -49,7 +48,7 @@ export default function SubtractionEquation({
     const correctAnswer = digits[0] / digits[1];
     if (parseInt(answer, 10) === correctAnswer) {
       correctAudio.current.play();
-      setScore(score => score + 1);
+      setScore((score) => score + 1);
     } else {
       wrongAudio.current.play();
     }
@@ -78,7 +77,7 @@ export default function SubtractionEquation({
           id="numberInput"
           visible={visible}
           method="POST"
-          onSubmit={e => checkAnswer(e, answer, digits)}
+          onSubmit={(e) => checkAnswer(e, answer, digits)}
         >
           <input
             type="number"
@@ -86,7 +85,7 @@ export default function SubtractionEquation({
             ref={inputEl}
             value={answer}
             name="answer"
-            onChange={e => setAnswer(e.target.value, 10)}
+            onChange={(e) => setAnswer(e.target.value, 10)}
           />
         </NumberInput>
         {visible && (

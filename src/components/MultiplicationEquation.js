@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { pageVariants } from "../utils/pageTransitions";
 import Equation from "./Equation";
 import GhostOperand from "../styles/GhostOperand";
 import NumberInput from "../styles/NumberInput";
@@ -43,7 +42,7 @@ export default function MultiplicationEquation({ maxValue = 10, setScore }) {
     const correctAnswer = digit1 * digit2;
     if (parseInt(answer, 10) === correctAnswer) {
       correctAudio.current.play();
-      setScore(score => score + 1);
+      setScore((score) => score + 1);
     } else {
       wrongAudio.current.play();
     }
@@ -79,7 +78,7 @@ export default function MultiplicationEquation({ maxValue = 10, setScore }) {
           <NumberInput
             id="numberInput"
             method="POST"
-            onSubmit={e => checkAnswer(e, answer, digit1, digit2)}
+            onSubmit={(e) => checkAnswer(e, answer, digit1, digit2)}
           >
             <input
               type="number"
@@ -87,7 +86,7 @@ export default function MultiplicationEquation({ maxValue = 10, setScore }) {
               ref={inputEl}
               value={answer}
               name="answer"
-              onChange={e => setAnswer(e.target.value, 10)}
+              onChange={(e) => setAnswer(e.target.value, 10)}
             />
           </NumberInput>
         </div>
