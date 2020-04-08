@@ -1,11 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import GhostOperand from "../styles/GhostOperand";
-import NumberInput from "../styles/NumberInput";
-import OperandContainer from "../styles/OperandContainer";
 import Operand from "./Operand";
-import Operator from "../styles/Operator";
 import SubmitPillButton from "./SubmitPillButton";
 
 const initialInput = "";
@@ -73,35 +69,41 @@ export default function Equation({ view, maxValue = 10, setScore }) {
     setAnswer(e.target.value, 10);
   }
   return (
-    <EquationStyles
+    <EquationMainWrapper
       key={view}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
-      <div className="fullEquation">
-        <OperandContainer>
-          <GhostOperand>{digits[0]}</GhostOperand>
-          <Operand digit={digits[0]} />
-        </OperandContainer>
-        <Operator>{view}</Operator>
-        <OperandContainer>
-          <GhostOperand>{digits[1]}</GhostOperand>
-          <Operand digit={digits[1]} />
-        </OperandContainer>
-        <p className="equals">
-          =
-          {isCorrect === false && (
-            <span className="revealCorrect">{solution}</span>
-          )}
-        </p>
-        <NumberInput
-          id="numberInput"
-          method="POST"
-          onSubmit={(e) => checkAnswer(e)}
-        >
+      <FullEquation
+        className="fullEquation"
+        id="inputForm"
+        action="POST"
+        onSubmit={(e) => checkAnswer(e)}
+      >
+        <label htmlFor="answer">
+          {/* {digits[0]}
+          {view}
+          {digits[1]}= */}
+          <OperandContainer className="operandContainer">
+            <GhostOperand>{digits[0]}</GhostOperand>
+            <Operand digit={digits[0]} />
+          </OperandContainer>
+          <p>{view}</p>
+          <OperandContainer>
+            <GhostOperand>{digits[1]}</GhostOperand>
+            <Operand digit={digits[1]} />
+          </OperandContainer>
+          <p className="equals">=</p>
+        </label>
+        {isCorrect === false && (
+          <span className="revealCorrect">{solution}</span>
+        )}
+
+        {
           <input
+            id="answer"
             type="number"
             pattern="[0-9]*"
             ref={inputEl}
@@ -109,10 +111,10 @@ export default function Equation({ view, maxValue = 10, setScore }) {
             name="answer"
             onChange={(e) => handleInputChange(e)}
           />
-        </NumberInput>
-      </div>
-      <SubmitPillButton form="numberInput" type="submit">
-        <p>Submit</p>
+        }
+      </FullEquation>
+      <SubmitPillButton type="submit" form="inputForm">
+        Submit
       </SubmitPillButton>
 
       <audio
@@ -124,43 +126,50 @@ export default function Equation({ view, maxValue = 10, setScore }) {
         ref={wrongAudio}
         src="https://res.cloudinary.com/coreytesting/video/upload/v1584721830/sounds/wrongSoft.mp3"
       />
-    </EquationStyles>
+    </EquationMainWrapper>
   );
 }
 
-const EquationStyles = styled(motion.div)`
-  align-self: start;
-
-  color: white;
-  font-size: 4rem;
-  padding: 0px 0px 20px 0px;
-  display: grid;
-  grid-template-columns:
-    minmax(50px, max-content) 30px minmax(50px, min-content)
-    34px 100px;
-  place-items: center;
-  justify-content: center;
-  span {
-    padding-right: 5px;
-  }
-  .fullEquation {
+const FullEquation = styled.form`
+  position: relative;
+  background: transparent;
+  display: flex;
+  /* grid-template-columns: 2ch 1ch 2ch 1ch 2ch; */
+  align-items: center;
+  label {
     display: flex;
-    align-items: baseline;
-    grid-column: 1/-1;
-    padding-left: 30px;
-    padding-bottom: 30px;
+    padding-right: 15px;
   }
-
+  input {
+    height: 100%;
+    font: inherit;
+    background: transparent;
+    border: none;
+    margin: 0 0;
+    width: 90px;
+    color: white;
+    caret-color: white;
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid whitesmoke;
+    }
+  }
   .revealCorrect {
     color: red;
     position: absolute;
-    right: -44px;
-    top: -35px;
+    right: 50px;
+    top: -50px;
   }
-  .equals {
-    position: relative;
-    padding: 0 10px 0 5px;
-  }
+`;
+
+const EquationMainWrapper = styled(motion.div)`
+  /* align-self: start; */
+  color: white;
+  font-size: 4rem;
+  /* padding: 0px 0px 20px 0px; */
+  display: grid;
+  place-items: center;
+
   .right-wrong {
     height: 20px;
     font-size: 20px;
@@ -170,7 +179,19 @@ const EquationStyles = styled(motion.div)`
     color: var(--green);
   }
 `;
-export { EquationStyles };
+
+const OperandContainer = styled.div`
+  position: relative;
+  padding: 0 5px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const GhostOperand = styled.p`
+  color: transparent;
+`;
+
 // useEffect(() => {
 //     inputEl.current.focus();
 //   });

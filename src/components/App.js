@@ -112,6 +112,14 @@ export default function App() {
           </OptionsContainer>
         )}
       </AppContainer>
+      <div
+        style={{
+          height: "200px",
+          background: "aqua",
+        }}
+      >
+        <input style={{ fontSize: "40px" }} type="text"></input>
+      </div>
     </React.Fragment>
   );
 }
