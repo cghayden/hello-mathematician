@@ -40,7 +40,6 @@ input[type=number] {
 
 h1,h2, h3, h4, h5, p {
   margin: 0;
-  line-height: 1.1;
 }
 
 a, button {
