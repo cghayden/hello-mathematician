@@ -131,6 +131,7 @@ export default function Equation({ view, maxValue = 10, setScore }) {
 }
 
 const FullEquation = styled.form`
+  font-family: "Fira Sans";
   position: relative;
   background: transparent;
   display: flex;
@@ -151,7 +152,6 @@ const FullEquation = styled.form`
     caret-color: white;
     &:focus {
       outline: none;
-      border-bottom: 1px solid whitesmoke;
     }
   }
   .revealCorrect {
