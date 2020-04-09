@@ -29,9 +29,9 @@ export default function Equation({ view, maxValue = 10, setScore }) {
     }
   }, [view, digits]);
 
-  useEffect(() => {
-    inputEl.current.focus();
-  }, [digits]);
+  // useEffect(() => {
+  //   inputEl.current.focus();
+  // }, [digits]);
 
   const [answer, setAnswer] = useState(initialInput);
   const [isCorrect, setIsCorrect] = useState();
@@ -54,6 +54,7 @@ export default function Equation({ view, maxValue = 10, setScore }) {
     setAnswer(initialInput);
     setIsCorrect();
     setup();
+    // inputEl.current.focus();
   }
 
   function checkAnswer(e) {
@@ -107,6 +108,7 @@ export default function Equation({ view, maxValue = 10, setScore }) {
 
         {
           <input
+            autoFocus
             id="answer"
             type="number"
             pattern="[0-9]*"
