@@ -108,7 +108,7 @@ export default function Equation({ view, maxValue = 10, setScore }) {
 
         {
           <input
-            autoFocus
+            autofocus="true"
             id="answer"
             type="number"
             pattern="[0-9]*"
