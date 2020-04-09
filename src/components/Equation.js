@@ -29,9 +29,9 @@ export default function Equation({ view, maxValue = 10, setScore }) {
     }
   }, [view, digits]);
 
-  // useEffect(() => {
-  //   inputEl.current.focus();
-  // }, [digits]);
+  useEffect(() => {
+    inputEl.current.focus();
+  });
 
   const [answer, setAnswer] = useState(initialInput);
   const [isCorrect, setIsCorrect] = useState();
@@ -105,10 +105,9 @@ export default function Equation({ view, maxValue = 10, setScore }) {
         {isCorrect === false && (
           <span className="revealCorrect">{solution}</span>
         )}
-
         {
           <input
-            autofocus="true"
+            // autofocus="true"
             id="answer"
             type="number"
             pattern="[0-9]*"
