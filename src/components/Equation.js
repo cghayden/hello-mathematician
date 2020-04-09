@@ -13,9 +13,11 @@ function getRandom(maxValue) {
 export default function Equation({ view, maxValue = 10, setScore }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
-  const inputEl = useRef(null);
-
   useEffect(setup, [view, maxValue]);
+
+  useEffect(() => {
+    inputEl.current.focus();
+  });
 
   useEffect(() => {
     if (view === "+") {
@@ -29,10 +31,7 @@ export default function Equation({ view, maxValue = 10, setScore }) {
     }
   }, [view, digits]);
 
-  useEffect(() => {
-    inputEl.current.focus();
-  });
-
+  const inputEl = useRef(null);
   const [answer, setAnswer] = useState(initialInput);
   const [isCorrect, setIsCorrect] = useState();
   const correctAudio = useRef(null);
