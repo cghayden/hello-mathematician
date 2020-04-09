@@ -142,6 +142,7 @@ const FullEquation = styled.form`
     padding-right: 15px;
   }
   input {
+    padding: 0;
     height: 100%;
     font: inherit;
     background: transparent;
