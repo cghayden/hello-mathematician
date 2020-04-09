@@ -13,6 +13,7 @@ function getRandom(maxValue) {
 export default function Equation({ view, maxValue = 10, setScore }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
+  const inputEl = useRef(null);
 
   useEffect(setup, [view, maxValue]);
 
@@ -28,9 +29,12 @@ export default function Equation({ view, maxValue = 10, setScore }) {
     }
   }, [view, digits]);
 
+  useEffect(() => {
+    inputEl.current.focus();
+  }, [digits]);
+
   const [answer, setAnswer] = useState(initialInput);
   const [isCorrect, setIsCorrect] = useState();
-  const inputEl = useRef(null);
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
 
@@ -62,7 +66,7 @@ export default function Equation({ view, maxValue = 10, setScore }) {
       setIsCorrect(false);
       wrongAudio.current.play();
     }
-    setTimeout(() => nextProblem(), 300);
+    setTimeout(() => nextProblem(), 400);
   }
 
   function handleInputChange(e) {
@@ -139,7 +143,7 @@ const FullEquation = styled.form`
   align-items: center;
   label {
     display: flex;
-    padding-right: 15px;
+    padding-right: 10px;
   }
   input {
     padding: 0;

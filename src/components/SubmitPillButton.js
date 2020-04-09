@@ -6,7 +6,7 @@ const SubmitPillButton = styled.button`
   font-size: 24px;
   border: none;
   border-radius: 50px;
-  /* margin-top: 30px; */
+  margin-top: 20px;
   color: rgba(34, 124, 195, 1);
   background-color: white;
   grid-column: 1/-1;
