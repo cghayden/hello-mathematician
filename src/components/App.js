@@ -49,35 +49,14 @@ export default function App() {
           <h1>Hello Mathematician!</h1>
         </Header>
         <Navigation inProgress={inProgress} view={view} setView={setView} />
-        {!inProgress && !showScore && (
-          <OptionsContainer
-            animate={{ height: "auto" }}
-            showTimer={showTimer}
-            className="optionsContainer"
-          >
-            {/* {!inProgress && !showScore && !isStarterActive && ( */}
-            <MaxValue
-              maxValue={maxValue}
-              setMaxValue={setMaxValue}
-              inProgress={inProgress}
-            />
-            <ToggleTimerButton
-              active={showTimer === true}
-              type="button"
-              onClick={() => toggleTimer(!showTimer)}
-            >
-              <ClockSvg />
-              Timer
-            </ToggleTimerButton>
-          </OptionsContainer>
-        )}
+
         {!showTimer && !showScore && (
           <AnimatePresence exitBeforeEnter>
             <motion.div
               key={view}
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -300, opacity: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               style={{ alignSelf: "start" }}
             >
               <EquationDiv
@@ -124,15 +103,13 @@ const AppContainer = styled.div`
   max-width: 600px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 90px 60px 70px 1fr;
+  grid-template-rows: 60px 60px 50px 1fr;
   /* grid-template-areas: "header" "nav" "main" "options"; */
   align-items: center;
   text-align: center;
+  padding-top: 10px;
   margin: 0 auto;
   height: 100vh;
-  h1 {
-    padding: 10px 0;
-  }
 `;
 const Header = styled.header`
   @media screen and (max-width: 370px) {
@@ -150,21 +127,43 @@ const ToggleTimerButton = styled.button`
   cursor: pointer;
   font-size: 20px;
   padding: 5px 10px;
-  background: ${(props) => (props.active ? "white" : `none`)};
-  color: ${(props) => (props.active ? "var(--blue)" : `none`)};
+  background: ${(props) => (props.active ? "var(--white)" : `none`)};
+  color: ${(props) => (props.active ? "var(--dark)" : `var(--orange)`)};
   border: none;
   display: flex;
   align-items: center;
   justify-content: space-around;
   position: relative;
   border-radius: 50px;
+  width: 48px;
+  height: 48px;
   box-shadow: ${(props) =>
     props.active ? "0px 0px 2px 2px lightblue" : "none"};
-  svg {
-    padding-right: 5px;
-  }
   :focus {
     outline: none;
     box-shadow: 0px 0px 2px 2px lightblue;
   }
 `;
+
+// {!inProgress && !showScore && (
+//   <OptionsContainer
+//     animate={{ height: "auto" }}
+//     showTimer={showTimer}
+//     className="optionsContainer"
+//   >
+//     {/* {!inProgress && !showScore && !isStarterActive && ( */}
+//     <MaxValue
+//       maxValue={maxValue}
+//       setMaxValue={setMaxValue}
+//       inProgress={inProgress}
+//     />
+//     <ToggleTimerButton
+//       title="Set Timer"
+//       active={showTimer === true}
+//       type="button"
+//       onClick={() => toggleTimer(!showTimer)}
+//     >
+//       <ClockSvg />
+//     </ToggleTimerButton>
+//   </OptionsContainer>
+// )}

@@ -89,6 +89,8 @@ export default function Timer({
 }
 
 const TimerStyle = styled.div`
+  align-self: start;
+  padding-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;

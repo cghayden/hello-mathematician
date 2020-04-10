@@ -9,10 +9,10 @@ export default function DivideSvg() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="haydenSvg-divide"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="haydenSvg-divide"
       height="24"
     >
       <line x2="12" x1="12" y1="4" y2="5"></line>

@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 const SubmitPillButton = styled.button`
   width: auto;
-  padding: 10px 30px;
+  padding: 8px 26px;
   font-size: 24px;
   border: none;
   border-radius: 50px;
-  margin-top: 20px;
-  color: rgba(34, 124, 195, 1);
-  background-color: white;
+  margin-bottom: 20px;
+  color: var(--dark);
+  background-color: var(--light);
   grid-column: 1/-1;
   :focus {
     border: 1px solid blue;

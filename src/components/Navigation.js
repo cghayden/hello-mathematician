@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PlusSvg from "./PlusSvg";
 import XSvg from "./XSvg";
 import MinusSvg from "./MinusSvg";
-// import DivideSvg from "./DivideSvg";
+import DivideSvg from "./DivideSvg";
 
 const Nav = styled.nav`
   ul {
@@ -61,11 +61,15 @@ export default function Navigation({ view, setView, inProgress }) {
             <XSvg />
           </NavButton>
         </li>
-        {/* <li>
-            <button  active={newActive} onClick={()=>setView('addition')}>
-              <DivideSvg />
-            </button>
-          </li> */}
+        <li>
+          <NavButton
+            disabled={inProgress}
+            active={view === "/"}
+            onClick={() => setView("/")}
+          >
+            <DivideSvg />
+          </NavButton>
+        </li>
       </ul>
     </Nav>
   );

@@ -4,9 +4,13 @@ import styled from "styled-components";
 // import Operand from "./Operand";
 import Equation from "./Equation";
 import SubmitPillButton from "./SubmitPillButton";
+import DivideSvg from "./DivideSvg";
+import XSvg from "./XSvg";
 
 function getRandom(maxValue) {
-  return Math.floor(Math.random() * maxValue);
+  const lower = 1;
+  const upper = maxValue - 1;
+  return Math.floor(Math.random() * maxValue) + 1;
 }
 
 export default function EquationDiv({ view, maxValue = 10, setScore }) {
@@ -30,6 +34,9 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
     if (view === "x") {
       setSolution(digits[0] * digits[1]);
     }
+    if (view === "/") {
+      setSolution(digits[0] / digits[1]);
+    }
   }, [view, digits]);
 
   const [answer, setAnswer] = useState("");
@@ -47,6 +54,10 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
     const array = [n1, n2];
     if (view === "-") {
       setDigits(array.sort((a, b) => b - a));
+    }
+    if (view === "/") {
+      const dividend = n1 * n2;
+      setDigits([dividend, n1]);
     } else {
       setDigits(array);
     }
@@ -73,61 +84,79 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
     setTimeout(() => nextProblem(), 400);
   }
 
-  const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   function handleCalcButton(e) {
     const number = e.target.innerHTML;
     console.log("number pressed:", e.target.innerHTML);
     setAnswer((answer) => answer + number);
   }
   return (
-    <EquationMainWrapper>
-      <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
-      <FullEquation
-        className="fullEquation"
-        id="inputForm"
-        action="POST"
-        onSubmit={(e) => checkAnswer(e)}
-      >
-        <label htmlFor="answer">
-          <OperandContainer className="operandContainer">
-            {/* <GhostOperand>{digits[0]}</GhostOperand> */}
-            <p>{digits[0]}</p>
-          </OperandContainer>
-          <p>{view}</p>
-          <OperandContainer>
-            {/* <GhostOperand>{digits[1]}</GhostOperand> */}
-            <p>{digits[1]}</p>
-          </OperandContainer>
-          <p className="equals">=</p>
-          {isCorrect === false && (
-            <span className="revealCorrect">{solution}</span>
-          )}
-          <input
-            autoFocus
-            id="answer"
-            type="number"
-            pattern="[0-9]*"
-            ref={inputEl}
-            value={answer}
-            name="answer"
-            onChange={(e) => handleInputChange(e)}
-          />
-        </label>
-      </FullEquation>
+    <>
+      <EquationMainWrapper>
+        <FullEquation
+          className="fullEquation"
+          id="inputForm"
+          action="POST"
+          onSubmit={(e) => checkAnswer(e)}
+        >
+          <label htmlFor="answer">
+            <OperandContainer className="operandContainer">
+              {/* <GhostOperand>{digits[0]}</GhostOperand> */}
+              <p>{digits[0]}</p>
+            </OperandContainer>
+            {view === "/" && (
+              <p>
+                <DivideSvg />
+              </p>
+            )}
+            {view === "x" && (
+              <p>
+                <XSvg />
+              </p>
+            )}
+            {view === "+" && <p>+</p>}
+            {view === "-" && <p>-</p>}
+            <OperandContainer>
+              {/* <GhostOperand>{digits[1]}</GhostOperand> */}
+              <p>{digits[1]}</p>
+            </OperandContainer>
+            <p className="equals">=</p>
 
-      <SubmitPillButton type="submit" form="inputForm">
-        Submit
-      </SubmitPillButton>
+            <div style={{ position: "relative" }}>
+              {isCorrect === false && (
+                <span className="revealCorrect">{solution}</span>
+              )}
+              <Input
+                hide={isCorrect === false}
+                id="answer"
+                type="number"
+                pattern="[0-9]*"
+                ref={inputEl}
+                value={answer}
+                name="answer"
+                onChange={(e) => handleInputChange(e)}
+              />
+            </div>
+          </label>
+        </FullEquation>
+        {/* <div className="right-wrong">{isCorrect && <p>Right!</p>}</div> */}
+        {/* <div className="right-wrong">
+          <p>Right!</p>
+        </div> */}
+
+        <SubmitPillButton type="submit" form="inputForm">
+          Submit
+        </SubmitPillButton>
+      </EquationMainWrapper>
       <Calculator>
         {buttons.map((number) => (
-          <CalcButton
-            type="button"
-            key={number}
-            onClick={(e) => handleCalcButton(e)}
-          >
+          <CalcButton key={number} onClick={(e) => handleCalcButton(e)}>
             {number}
           </CalcButton>
         ))}
+        <CalcButton className="lastButton" onClick={(e) => handleCalcButton(e)}>
+          0
+        </CalcButton>
       </Calculator>
       <audio
         ref={correctAudio}
@@ -138,83 +167,55 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
         ref={wrongAudio}
         src="https://res.cloudinary.com/coreytesting/video/upload/v1584721830/sounds/wrongSoft.mp3"
       />
-    </EquationMainWrapper>
+    </>
   );
 }
-
-const Calculator = styled.div`
-  width: 250px;
-  display: grid;
-  grid-template-columns: 60px 60px 60px;
-  grid-template-rows: auto;
-  grid-gap: 10px;
-  padding: 20px 10px;
-  margin-top: 15px;
-  justify-content: center;
-  border-radius: 20px;
-  /* @media screen and (min-width: 600px) {
-    display: none;
-  } */
-`;
-
-const CalcButton = styled.button`
-  width: 52px;
-  height: 52px;
-  padding: 0;
-  border-radius: 50%;
-  border: none;
-  font-size: 32px;
-  background: white;
-  color: var(--green);
-  display: grid;
-  place-items: center;
-`;
 
 const FullEquation = styled.form`
   font-family: "Fira Sans";
   position: relative;
   background: transparent;
   display: flex;
-  /* grid-template-columns: 2ch 1ch 2ch 1ch 2ch; */
   align-items: center;
+  color: var(--white);
   label {
+    padding: 20px 0;
     display: flex;
-    padding-right: 10px;
+    /* padding-right: 10px; */
   }
-  input {
-    padding: 0;
-    height: 100%;
-    font: inherit;
-    background: transparent;
-    border: none;
-    margin: 0 0;
-    width: 90px;
-    color: white;
-    caret-color: white;
-    &:focus {
-      outline: none;
-    }
-  }
+
   .revealCorrect {
     color: red;
     position: absolute;
-    right: 50px;
-    top: -50px;
+    top: 0px;
+  }
+`;
+
+const Input = styled.input`
+  padding: 0;
+  height: 100%;
+  font: inherit;
+  background: transparent;
+  border: none;
+  width: 3ch;
+  color: ${(props) => (props.hide ? `transparent` : "white")};
+  caret-color: white;
+  margin-left: 16px;
+  &:focus {
+    outline: none;
   }
 `;
 
 const EquationMainWrapper = styled.div`
-  /* align-self: start; */
-  color: white;
+  /* color: white; */
   font-size: 4rem;
-  /* padding: 0px 0px 20px 0px; */
   display: grid;
   place-items: center;
 
   .right-wrong {
-    height: 20px;
+    height: 28px;
     font-size: 20px;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
     /* padding-top: 20px; */
     grid-column: 1/-1;
     color: var(--green);
@@ -229,18 +230,34 @@ const OperandContainer = styled.div`
   justify-content: center;
 `;
 
-// useEffect(() => {
-//     inputEl.current.focus();
-//   });
+const Calculator = styled.div`
+  margin: 0 auto;
+  width: 250px;
+  display: grid;
+  grid-template-columns: 60px 60px 60px;
+  grid-template-rows: auto;
+  grid-gap: 10px;
+  padding: 20px 10px;
+  margin-top: 15px;
+  justify-content: center;
+  border-radius: 20px;
+  .lastButton {
+    grid-column: 2;
+  }
+  /* @media screen and (min-width: 600px) {
+    display: none;
+  } */
+`;
 
-//   useEffect(() => {
-//     const n1 = getRandom(maxValue);
-//     const n2 = getRandom(maxValue);
-//     const array = [n1, n2];
-//     if(view === '-'){
-//       setDigits(array.sort((a, b) => b - a));
-//     }
-//     else{
-//       setDigits(array)
-//     }
-//   }, [maxValue, view]);
+const CalcButton = styled.button`
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  font-size: 32px;
+  background: white;
+  color: var(--dark);
+  display: grid;
+  place-items: center;
+`;

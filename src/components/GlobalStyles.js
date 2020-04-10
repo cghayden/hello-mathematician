@@ -3,6 +3,8 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 
   :root {
+    --dark: #004466;
+    --light: #33ffb4;
   --blue: #227cc3;
   --green: #5dc66a;
   --orange: #dfc841;
@@ -16,8 +18,11 @@ const GlobalStyles = createGlobalStyle`
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-     background: linear-gradient(336deg, rgba(34,124,195,1) 60%, rgba(35,58,196,1) 100%);
-    color: white;
+     background: var(--dark);
+     color: var(--light);
+     ${
+       "" /* background: linear-gradient(336deg, rgba(34,124,195,1) 60%, rgba(35,58,196,1) 100%); */
+     }
     margin:0;
 }
 /* Chrome, Safari, Edge, Opera */
