@@ -7,7 +7,7 @@ import ChevronDownSvg from "./ChevronDownSvg";
 
 const MaxValueContainer = styled.div`
   display: flex;
-  /* font-size: 22px; */
+  font-size: 20px;
   align-items: center;
 `;
 
@@ -33,7 +33,7 @@ const AlterTimeButton = styled.button`
 `;
 
 const MaxDigit = styled.p`
-  /* font-size: 25px; */
+  font-size: 20px;
   margin: 0 8px;
 `;
 

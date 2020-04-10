@@ -160,6 +160,7 @@ const Calculator = styled.div`
 const CalcButton = styled.button`
   width: 52px;
   height: 52px;
+  padding: 0;
   border-radius: 50%;
   border: none;
   font-size: 32px;

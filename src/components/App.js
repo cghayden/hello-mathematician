@@ -124,7 +124,7 @@ const AppContainer = styled.div`
   max-width: 600px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 60px 60px 1fr;
+  grid-template-rows: 90px 60px 70px 1fr;
   /* grid-template-areas: "header" "nav" "main" "options"; */
   align-items: center;
   text-align: center;
@@ -141,19 +141,14 @@ const Header = styled.header`
 `;
 
 const OptionsContainer = styled(motion.div)`
-  /* padding-top: 10px; */
-  /* grid-column-gap: 50px; */
   place-content: center;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 230px));
-  grid-template-rows: auto auto;
-  place-items: center;
-  /* align-self: start; */
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 const ToggleTimerButton = styled.button`
   cursor: pointer;
-  /* font-size: 22px; */
+  font-size: 20px;
   padding: 5px 10px;
   background: ${(props) => (props.active ? "white" : `none`)};
   color: ${(props) => (props.active ? "var(--blue)" : `none`)};
