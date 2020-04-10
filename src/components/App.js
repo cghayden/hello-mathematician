@@ -51,7 +51,20 @@ export default function App() {
         <Navigation inProgress={inProgress} view={view} setView={setView} />
 
         {!showTimer && !showScore && (
-          <EquationDiv view={view} maxValue={maxValue} setScore={setScore} />
+          <AnimatePresence exitBeforeEnter>
+            <motion.div
+              key={view}
+              initial={{ x: 300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -300, opacity: 0 }}
+            >
+              <EquationDiv
+                view={view}
+                maxValue={maxValue}
+                setScore={setScore}
+              />
+            </motion.div>
+          </AnimatePresence>
         )}
 
         {showTimer && (
