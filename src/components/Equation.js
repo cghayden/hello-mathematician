@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 
 import Operand from "./Operand";
@@ -18,9 +18,9 @@ export default function Input({
       inputElement.focus();
     }
   }, []);
-  useEffect(() => {
-    inputEl.current.focus();
-  });
+  // useEffect(() => {
+  //   inputEl.current.focus();
+  // });
 
   function handleInputChange(e) {
     setAnswer(e.target.value, 10);
