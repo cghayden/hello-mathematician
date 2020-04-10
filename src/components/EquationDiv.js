@@ -73,6 +73,12 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
     setTimeout(() => nextProblem(), 400);
   }
 
+  const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  function handleCalcButton(e) {
+    const number = e.target.innerHTML;
+    console.log("number pressed:", e.target.innerHTML);
+    setAnswer((answer) => answer + number);
+  }
   return (
     <EquationMainWrapper>
       <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
@@ -112,6 +118,17 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
       <SubmitPillButton type="submit" form="inputForm">
         Submit
       </SubmitPillButton>
+      <Calculator>
+        {buttons.map((number) => (
+          <CalcButton
+            type="button"
+            key={number}
+            onClick={(e) => handleCalcButton(e)}
+          >
+            {number}
+          </CalcButton>
+        ))}
+      </Calculator>
       <audio
         ref={correctAudio}
         preload="true"
@@ -124,6 +141,33 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
     </EquationMainWrapper>
   );
 }
+
+const Calculator = styled.div`
+  width: 250px;
+  display: grid;
+  grid-template-columns: 60px 60px 60px;
+  grid-template-rows: auto;
+  grid-gap: 10px;
+  padding: 20px 10px;
+  margin-top: 15px;
+  justify-content: center;
+  border-radius: 20px;
+  /* @media screen and (min-width: 600px) {
+    display: none;
+  } */
+`;
+
+const CalcButton = styled.button`
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  font-size: 32px;
+  background: white;
+  color: var(--green);
+  display: grid;
+  place-items: center;
+`;
 
 const FullEquation = styled.form`
   font-family: "Fira Sans";
