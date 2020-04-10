@@ -12,7 +12,7 @@ function getRandom(maxValue) {
 export default function EquationDiv({ view, maxValue = 10, setScore }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
-  useEffect(setup, [view, maxValue]);
+  useEffect(setup, [view, maxValue, digits]);
 
   useEffect(() => {
     if (view === "+") {
