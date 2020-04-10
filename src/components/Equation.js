@@ -16,6 +16,7 @@ export default function Input({
 
   useEffect(() => {
     inputEl.current.focus();
+    inputEl.current.click();
   }, [digits]);
 
   function handleInputChange(e) {
