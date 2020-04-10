@@ -16,7 +16,7 @@ export default function Input({
 
   useEffect(() => {
     inputEl.current.focus();
-  });
+  }, [digits]);
 
   function handleInputChange(e) {
     setAnswer(e.target.value, 10);
