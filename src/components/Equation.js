@@ -1,136 +1,60 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+
 import Operand from "./Operand";
-import SubmitPillButton from "./SubmitPillButton";
 
-const initialInput = "";
-
-function getRandom(maxValue) {
-  return Math.floor(Math.random() * maxValue);
-}
-
-export default function Equation({ view, maxValue = 10, setScore }) {
-  const [digits, setDigits] = useState([]);
-  const [solution, setSolution] = useState();
-  useEffect(setup, [view, maxValue]);
+export default function Input({
+  digits,
+  answer,
+  setAnswer,
+  checkAnswer,
+  view,
+  isCorrect,
+  solution,
+}) {
+  const inputEl = useRef(null);
 
   useEffect(() => {
     inputEl.current.focus();
   });
 
-  useEffect(() => {
-    if (view === "+") {
-      setSolution(digits[0] + digits[1]);
-    }
-    if (view === "-") {
-      setSolution(digits[0] - digits[1]);
-    }
-    if (view === "x") {
-      setSolution(digits[0] * digits[1]);
-    }
-  }, [view, digits]);
-
-  const inputEl = useRef(null);
-  const [answer, setAnswer] = useState(initialInput);
-  const [isCorrect, setIsCorrect] = useState();
-  const correctAudio = useRef(null);
-  const wrongAudio = useRef(null);
-
-  function setup() {
-    const n1 = getRandom(maxValue);
-    const n2 = getRandom(maxValue);
-    const array = [n1, n2];
-    if (view === "-") {
-      setDigits(array.sort((a, b) => b - a));
-    } else {
-      setDigits(array);
-    }
-    inputEl.current.focus();
-  }
-
-  function nextProblem() {
-    setAnswer(initialInput);
-    setIsCorrect();
-    setup();
-    // inputEl.current.focus();
-  }
-
-  function checkAnswer(e) {
-    e.preventDefault();
-    if (parseInt(answer, 10) === solution) {
-      setIsCorrect(true);
-      correctAudio.current.play();
-      setScore((score) => score + 1);
-    } else {
-      setIsCorrect(false);
-      wrongAudio.current.play();
-    }
-    setTimeout(() => nextProblem(), 400);
-  }
-
   function handleInputChange(e) {
     setAnswer(e.target.value, 10);
   }
   return (
-    <EquationMainWrapper
-      key={view}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <FullEquation
+      className="fullEquation"
+      id="inputForm"
+      action="POST"
+      onSubmit={(e) => checkAnswer(e)}
     >
-      <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
-      <FullEquation
-        className="fullEquation"
-        id="inputForm"
-        action="POST"
-        onSubmit={(e) => checkAnswer(e)}
-      >
-        <label htmlFor="answer">
-          {/* {digits[0]}
+      <label htmlFor="answer">
+        {/* {digits[0]}
           {view}
           {digits[1]}= */}
-          <OperandContainer className="operandContainer">
-            <GhostOperand>{digits[0]}</GhostOperand>
-            <Operand digit={digits[0]} />
-          </OperandContainer>
-          <p>{view}</p>
-          <OperandContainer>
-            <GhostOperand>{digits[1]}</GhostOperand>
-            <Operand digit={digits[1]} />
-          </OperandContainer>
-          <p className="equals">=</p>
-        </label>
-        {isCorrect === false && (
-          <span className="revealCorrect">{solution}</span>
-        )}
-        {
-          <input
-            // autofocus="true"
-            id="answer"
-            type="number"
-            pattern="[0-9]*"
-            ref={inputEl}
-            value={answer}
-            name="answer"
-            onChange={(e) => handleInputChange(e)}
-          />
-        }
-      </FullEquation>
-      <SubmitPillButton type="submit" form="inputForm">
-        Submit
-      </SubmitPillButton>
-
-      <audio
-        ref={correctAudio}
-        preload="true"
-        src="https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav"
+        <OperandContainer className="operandContainer">
+          <GhostOperand>{digits[0]}</GhostOperand>
+          <Operand digit={digits[0]} />
+        </OperandContainer>
+        <p>{view}</p>
+        <OperandContainer>
+          <GhostOperand>{digits[1]}</GhostOperand>
+          <Operand digit={digits[1]} />
+        </OperandContainer>
+        <p className="equals">=</p>
+      </label>
+      {isCorrect === false && <span className="revealCorrect">{solution}</span>}
+      <input
+        // autofocus="true"
+        id="answer"
+        type="number"
+        pattern="[0-9]*"
+        ref={inputEl}
+        value={answer}
+        name="answer"
+        onChange={(e) => handleInputChange(e)}
       />
-      <audio
-        ref={wrongAudio}
-        src="https://res.cloudinary.com/coreytesting/video/upload/v1584721830/sounds/wrongSoft.mp3"
-      />
-    </EquationMainWrapper>
+    </FullEquation>
   );
 }
 
@@ -167,24 +91,6 @@ const FullEquation = styled.form`
   }
 `;
 
-const EquationMainWrapper = styled(motion.div)`
-  /* align-self: start; */
-  color: white;
-  font-size: 4rem;
-  /* padding: 0px 0px 20px 0px; */
-  display: grid;
-  place-items: center;
-
-  .right-wrong {
-    height: 20px;
-    font-size: 20px;
-    padding-bottom: 10px;
-    /* padding-top: 20px; */
-    grid-column: 1/-1;
-    color: var(--green);
-  }
-`;
-
 const OperandContainer = styled.div`
   position: relative;
   padding: 0 5px;
@@ -196,19 +102,3 @@ const OperandContainer = styled.div`
 const GhostOperand = styled.p`
   color: transparent;
 `;
-
-// useEffect(() => {
-//     inputEl.current.focus();
-//   });
-
-//   useEffect(() => {
-//     const n1 = getRandom(maxValue);
-//     const n2 = getRandom(maxValue);
-//     const array = [n1, n2];
-//     if(view === '-'){
-//       setDigits(array.sort((a, b) => b - a));
-//     }
-//     else{
-//       setDigits(array)
-//     }
-//   }, [maxValue, view]);

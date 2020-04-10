@@ -7,7 +7,7 @@ import MaxValue from "./MaxValue";
 import Timer from "./Timer";
 import Score from "./Score";
 import ClockSvg from "./ClockSvg";
-import Equation from "./Equation";
+import EquationDiv from "./EquationDiv";
 
 export default function App() {
   const [maxValue, setMaxValue] = useState(10);
@@ -52,7 +52,7 @@ export default function App() {
         <AnimatePresence>
           {/* {!showTimer && !isStarterActive && !showScore && ( */}
           {!showTimer && !showScore && (
-            <Equation
+            <EquationDiv
               view={view}
               maxValue={maxValue}
               setScore={setScore}
