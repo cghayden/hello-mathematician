@@ -14,11 +14,9 @@ export default function Input({
 }) {
   const inputEl = useRef(null);
 
-  // useEffect(() => {
-  //   console.log("inputEl:", inputEl.current);
-  //   inputEl.current.focus();
-  //   inputEl.current.click();
-  // }, [digits]);
+  useEffect(() => {
+    inputEl.current.focus();
+  });
 
   function handleInputChange(e) {
     setAnswer(e.target.value, 10);
@@ -44,18 +42,20 @@ export default function Input({
           <Operand digit={digits[1]} />
         </OperandContainer>
         <p className="equals">=</p>
+        {isCorrect === false && (
+          <span className="revealCorrect">{solution}</span>
+        )}
+        <input
+          autoFocus
+          id="answer"
+          type="number"
+          pattern="[0-9]*"
+          ref={inputEl}
+          value={answer}
+          name="answer"
+          onChange={(e) => handleInputChange(e)}
+        />
       </label>
-      {isCorrect === false && <span className="revealCorrect">{solution}</span>}
-      <input
-        autoFocus
-        id="answer"
-        type="number"
-        pattern="[0-9]*"
-        ref={inputEl}
-        value={answer}
-        name="answer"
-        onChange={(e) => handleInputChange(e)}
-      />
     </FullEquation>
   );
 }
