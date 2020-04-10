@@ -12,8 +12,12 @@ export default function Input({
   isCorrect,
   solution,
 }) {
-  const inputEl = useRef(null);
-
+  // const inputEl = useRef(null);
+  const callbackRef = useCallback((inputElement) => {
+    if (inputElement) {
+      inputElement.focus();
+    }
+  }, []);
   useEffect(() => {
     inputEl.current.focus();
   });
@@ -50,7 +54,7 @@ export default function Input({
           id="answer"
           type="number"
           pattern="[0-9]*"
-          ref={inputEl}
+          ref={callbackRef}
           value={answer}
           name="answer"
           onChange={(e) => handleInputChange(e)}
