@@ -14,10 +14,11 @@ export default function Input({
 }) {
   const inputEl = useRef(null);
 
-  useEffect(() => {
-    inputEl.current.focus();
-    inputEl.current.click();
-  }, [digits]);
+  // useEffect(() => {
+  //   console.log("inputEl:", inputEl.current);
+  //   inputEl.current.focus();
+  //   inputEl.current.click();
+  // }, [digits]);
 
   function handleInputChange(e) {
     setAnswer(e.target.value, 10);
@@ -46,7 +47,7 @@ export default function Input({
       </label>
       {isCorrect === false && <span className="revealCorrect">{solution}</span>}
       <input
-        // autofocus="true"
+        autoFocus
         id="answer"
         type="number"
         pattern="[0-9]*"
