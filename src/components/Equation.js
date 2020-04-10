@@ -22,7 +22,7 @@ export default function Input({
   useEffect(() => {
     inputEl.current.focus();
     // labelRef.current.click();
-  }, [digits]);
+  });
 
   function handleInputChange(e) {
     setAnswer(e.target.value, 10);

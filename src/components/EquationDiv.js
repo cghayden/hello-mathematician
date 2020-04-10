@@ -12,7 +12,13 @@ function getRandom(maxValue) {
 export default function EquationDiv({ view, maxValue = 10, setScore }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
+  const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
+
+  useEffect(() => {
+    inputEl.current.focus();
+    // labelRef.current.click();
+  });
 
   useEffect(() => {
     if (view === "+") {
@@ -31,6 +37,10 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
 
+  function handleInputChange(e) {
+    setAnswer(e.target.value, 10);
+  }
+
   function setup() {
     const n1 = getRandom(maxValue);
     const n2 = getRandom(maxValue);
@@ -40,7 +50,7 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
     } else {
       setDigits(array);
     }
-    // inputEl.current.focus();
+    inputEl.current.focus();
   }
 
   function nextProblem() {
@@ -66,15 +76,39 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
   return (
     <EquationMainWrapper>
       <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
-      <Equation
-        digits={digits}
-        isCorrect={isCorrect}
-        solution={solution}
-        answer={answer}
-        setAnswer={setAnswer}
-        checkAnswer={checkAnswer}
-        view={view}
-      />
+      <FullEquation
+        className="fullEquation"
+        id="inputForm"
+        action="POST"
+        onSubmit={(e) => checkAnswer(e)}
+      >
+        <label htmlFor="answer">
+          <OperandContainer className="operandContainer">
+            {/* <GhostOperand>{digits[0]}</GhostOperand> */}
+            <p>{digits[0]}</p>
+          </OperandContainer>
+          <p>{view}</p>
+          <OperandContainer>
+            {/* <GhostOperand>{digits[1]}</GhostOperand> */}
+            <p>{digits[1]}</p>
+          </OperandContainer>
+          <p className="equals">=</p>
+          {isCorrect === false && (
+            <span className="revealCorrect">{solution}</span>
+          )}
+          <input
+            autoFocus
+            id="answer"
+            type="number"
+            pattern="[0-9]*"
+            ref={inputEl}
+            value={answer}
+            name="answer"
+            onChange={(e) => handleInputChange(e)}
+          />
+        </label>
+      </FullEquation>
+
       <SubmitPillButton type="submit" form="inputForm">
         Submit
       </SubmitPillButton>
@@ -140,6 +174,14 @@ const EquationMainWrapper = styled.div`
     grid-column: 1/-1;
     color: var(--green);
   }
+`;
+
+const OperandContainer = styled.div`
+  position: relative;
+  padding: 0 5px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 // useEffect(() => {
