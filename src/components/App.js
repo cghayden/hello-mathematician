@@ -49,44 +49,37 @@ export default function App() {
           <h1>Hello Mathematician!</h1>
         </Header>
         <Navigation inProgress={inProgress} view={view} setView={setView} />
-        <AnimatePresence>
-          {!showTimer && !showScore && (
-            <EquationDiv
-              view={view}
-              maxValue={maxValue}
-              setScore={setScore}
-              // isStarterActive={isStarterActive}
-              //         inProgress={inProgress}
-            />
-          )}
 
-          {showTimer && (
-            <Timer
-              score={score}
-              toggleTimer={toggleTimer}
-              toggleInProgress={toggleInProgress}
-              toggleScore={toggleScore}
-              isStarterActive={isStarterActive}
-              setIsStarterActive={setIsStarterActive}
-              addTime={addTime}
-              subtractTime={subtractTime}
-              minutes={minutes}
-              setMinutes={setMinutes}
-              seconds={seconds}
-              setSeconds={setSeconds}
-              starterStep={starterStep}
-              setStarterStep={setStarterStep}
-            />
-          )}
-          {showScore && (
-            <Score
-              score={score}
-              setScore={setScore}
-              toggleScore={toggleScore}
-              toggleTimer={toggleTimer}
-            />
-          )}
-        </AnimatePresence>
+        {!showTimer && !showScore && (
+          <EquationDiv view={view} maxValue={maxValue} setScore={setScore} />
+        )}
+
+        {showTimer && (
+          <Timer
+            score={score}
+            toggleTimer={toggleTimer}
+            toggleInProgress={toggleInProgress}
+            toggleScore={toggleScore}
+            isStarterActive={isStarterActive}
+            setIsStarterActive={setIsStarterActive}
+            addTime={addTime}
+            subtractTime={subtractTime}
+            minutes={minutes}
+            setMinutes={setMinutes}
+            seconds={seconds}
+            setSeconds={setSeconds}
+            starterStep={starterStep}
+            setStarterStep={setStarterStep}
+          />
+        )}
+        {showScore && (
+          <Score
+            score={score}
+            setScore={setScore}
+            toggleScore={toggleScore}
+            toggleTimer={toggleTimer}
+          />
+        )}
 
         {!inProgress && !showScore && (
           <OptionsContainer

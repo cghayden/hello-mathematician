@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import Starter from "./Starter";
 
 import MinusCircleSvg from "./MinusCircleSvg";
@@ -42,10 +42,10 @@ export default function Timer({
     <>
       {!isStarterActive && (
         <TimerStyle
-          key={"time"}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        // key={"time"}
+        // initial={{ opacity: 0 }}
+        // animate={{ opacity: 1 }}
+        // exit={{ opacity: 0 }}
         >
           <Time>
             <h3>Timer:</h3>
@@ -88,7 +88,7 @@ export default function Timer({
   );
 }
 
-const TimerStyle = styled(motion.div)`
+const TimerStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

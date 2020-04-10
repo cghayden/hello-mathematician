@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 
-import Operand from "./Operand";
+// import Operand from "./Operand";
 
 export default function Input({
   digits,
@@ -13,7 +13,7 @@ export default function Input({
   solution,
 }) {
   const inputEl = useRef(null);
-  const labelRef = useRef(null);
+  // const labelRef = useRef(null);
   // const callbackRef = useCallback((inputElement) => {
   //   if (inputElement) {
   //     inputElement.focus();
@@ -21,7 +21,7 @@ export default function Input({
   // }, []);
   useEffect(() => {
     inputEl.current.focus();
-    labelRef.current.click();
+    // labelRef.current.click();
   });
 
   function handleInputChange(e) {
@@ -34,15 +34,15 @@ export default function Input({
       action="POST"
       onSubmit={(e) => checkAnswer(e)}
     >
-      <label ref={labelRef} htmlFor="answer">
+      <label htmlFor="answer">
         <OperandContainer className="operandContainer">
-          <GhostOperand>{digits[0]}</GhostOperand>
-          <Operand digit={digits[0]} />
+          {/* <GhostOperand>{digits[0]}</GhostOperand> */}
+          <p>{digits[0]}</p>
         </OperandContainer>
         <p>{view}</p>
         <OperandContainer>
-          <GhostOperand>{digits[1]}</GhostOperand>
-          <Operand digit={digits[1]} />
+          {/* <GhostOperand>{digits[1]}</GhostOperand> */}
+          <p>{digits[1]}</p>
         </OperandContainer>
         <p className="equals">=</p>
         {isCorrect === false && (

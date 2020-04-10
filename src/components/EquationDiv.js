@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 // import Operand from "./Operand";
 import Equation from "./Equation";
 import SubmitPillButton from "./SubmitPillButton";
@@ -12,7 +12,7 @@ function getRandom(maxValue) {
 export default function EquationDiv({ view, maxValue = 10, setScore }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
-  useEffect(setup, [view, maxValue, digits]);
+  useEffect(setup, [view, maxValue]);
 
   useEffect(() => {
     if (view === "+") {
@@ -64,12 +64,7 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
   }
 
   return (
-    <EquationMainWrapper
-      key={view}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <EquationMainWrapper>
       <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
       <Equation
         digits={digits}
@@ -129,7 +124,7 @@ const FullEquation = styled.form`
   }
 `;
 
-const EquationMainWrapper = styled(motion.div)`
+const EquationMainWrapper = styled.div`
   /* align-self: start; */
   color: white;
   font-size: 4rem;
