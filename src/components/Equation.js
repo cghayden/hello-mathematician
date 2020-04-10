@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 
 import Operand from "./Operand";
@@ -12,15 +12,17 @@ export default function Input({
   isCorrect,
   solution,
 }) {
-  // const inputEl = useRef(null);
-  const callbackRef = useCallback((inputElement) => {
-    if (inputElement) {
-      inputElement.focus();
-    }
-  }, []);
-  // useEffect(() => {
-  //   inputEl.current.focus();
-  // });
+  const inputEl = useRef(null);
+  const labelRef = useRef(null);
+  // const callbackRef = useCallback((inputElement) => {
+  //   if (inputElement) {
+  //     inputElement.focus();
+  //   }
+  // }, []);
+  useEffect(() => {
+    inputEl.current.focus();
+    labelRef.current.click();
+  });
 
   function handleInputChange(e) {
     setAnswer(e.target.value, 10);
@@ -32,10 +34,7 @@ export default function Input({
       action="POST"
       onSubmit={(e) => checkAnswer(e)}
     >
-      <label htmlFor="answer">
-        {/* {digits[0]}
-          {view}
-          {digits[1]}= */}
+      <label ref={labelRef} htmlFor="answer">
         <OperandContainer className="operandContainer">
           <GhostOperand>{digits[0]}</GhostOperand>
           <Operand digit={digits[0]} />
@@ -54,7 +53,7 @@ export default function Input({
           id="answer"
           type="number"
           pattern="[0-9]*"
-          ref={callbackRef}
+          ref={inputEl}
           value={answer}
           name="answer"
           onChange={(e) => handleInputChange(e)}

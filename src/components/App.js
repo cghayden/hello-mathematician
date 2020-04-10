@@ -50,7 +50,6 @@ export default function App() {
         </Header>
         <Navigation inProgress={inProgress} view={view} setView={setView} />
         <AnimatePresence>
-          {/* {!showTimer && !isStarterActive && !showScore && ( */}
           {!showTimer && !showScore && (
             <EquationDiv
               view={view}
