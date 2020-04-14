@@ -28,6 +28,7 @@ export default function App() {
   const [seconds, setSeconds] = useState(15);
   const [starterStep, setStarterStep] = useState(1);
   const [view, setView] = useState("+");
+  const [wrongOnes, setWrongOnes] = useState([]);
 
   function addTime() {
     if (seconds === 45) {
@@ -75,6 +76,8 @@ export default function App() {
               options={options}
               maxValue={maxValue}
               setScore={setScore}
+              wrongOnes={wrongOnes}
+              setWrongOnes={setWrongOnes}
             />
           </motion.div>
         </AnimatePresence>
@@ -106,6 +109,8 @@ export default function App() {
             inProgress={inProgress}
             optionsView={optionsView}
             setOptionsView={setOptionsView}
+            wrongOnes={wrongOnes}
+            setWrongOnes={setWrongOnes}
           />
         </OptionsContainer>
       </AppContainer>
@@ -155,7 +160,6 @@ const OptionsContainer = styled(motion.div)`
   border-radius: 10px;
   width: 90vw;
   top: 150px;
-  padding-top: 20px;
   color: var(--dark);
   background: var(--light);
   display: flex;

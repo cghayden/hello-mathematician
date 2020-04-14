@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 // import { motion } from "framer-motion";
 // import Operand from "./Operand";
-// import Equation from "./Equation";
+
 import SubmitPillButton from "./SubmitPillButton";
 import DivideSvg from "./DivideSvg";
 import XSvg from "./XSvg";
@@ -18,6 +18,8 @@ export default function EquationDiv({
   maxValue = 10,
   setScore,
   options,
+  wrongOnes,
+  setWrongOnes,
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
@@ -83,8 +85,9 @@ export default function EquationDiv({
       setScore((score) => score + 1);
     } else {
       setIsCorrect(false);
-
       wrongAudio.current.play();
+      const equation = `${digits[0]} ${view} ${digits[1]} = ${solution}`;
+      setWrongOnes([...wrongOnes, equation]);
     }
     setTimeout(() => nextProblem(), 400);
   }

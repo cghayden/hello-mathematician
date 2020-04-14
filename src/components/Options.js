@@ -12,17 +12,16 @@ export default function Options({
   addTime,
   subtractTime,
   minutes,
-  setMinutes,
   seconds,
-  setSeconds,
   starterStep,
   setStarterStep,
   toggleOptions,
   maxValue,
   setMaxValue,
-  inProgress,
   optionsView,
   setOptionsView,
+  wrongOnes,
+  setWrongOnes,
 }) {
   if (optionsView === "timer")
     return (
@@ -60,6 +59,8 @@ export default function Options({
         setScore={setScore}
         setOptionsView={setOptionsView}
         toggleOptions={toggleOptions}
+        wrongOnes={wrongOnes}
+        setWrongOnes={setWrongOnes}
       />
     );
 }
