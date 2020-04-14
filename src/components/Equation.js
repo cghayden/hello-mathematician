@@ -91,8 +91,8 @@ const Calculator = styled.div`
 `;
 
 const CalcButton = styled.button`
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 25%;
   background: white;
   color: blue;

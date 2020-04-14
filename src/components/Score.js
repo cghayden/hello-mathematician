@@ -20,7 +20,12 @@ const ScoreButtonsDiv = styled.div`
   justify-items: center;
 `;
 
-export default function Score({ score, setScore, toggleScore, toggleTimer }) {
+export default function Score({
+  score,
+  setScore,
+  setOptionsView,
+  toggleOptions,
+}) {
   return (
     <ScoreDiv
       key={"score"}
@@ -33,8 +38,7 @@ export default function Score({ score, setScore, toggleScore, toggleTimer }) {
         <ScoreButton
           onClick={() => {
             setScore(0);
-            toggleScore(false);
-            toggleTimer(true);
+            setOptionsView("timer");
           }}
         >
           Play again
@@ -42,7 +46,8 @@ export default function Score({ score, setScore, toggleScore, toggleTimer }) {
         <ScoreButton
           onClick={() => {
             setScore(0);
-            toggleScore(false);
+            toggleOptions(false);
+            setTimeout(() => setOptionsView("timer"), 1000);
           }}
         >
           Practice

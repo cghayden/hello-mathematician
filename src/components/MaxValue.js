@@ -13,9 +13,9 @@ const ChangeButtons = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const AlterTimeButton = styled.button`
+const AlterMaxButton = styled.button`
   border-radius: 50%;
-  color: var(--orange);
+  /* color: var(--orange); */
   padding: 0;
   margin: 0;
   background: none;
@@ -40,18 +40,18 @@ export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
       <p>Max Value:</p>
       <MaxDigit>{maxValue}</MaxDigit>
       <ChangeButtons>
-        <AlterTimeButton
+        <AlterMaxButton
           disabled={inProgress}
           onClick={() => setMaxValue((maxValue) => maxValue + 1)}
         >
           <ChevronUpSvg />
-        </AlterTimeButton>
-        <AlterTimeButton
+        </AlterMaxButton>
+        <AlterMaxButton
           disabled={inProgress}
           onClick={() => setMaxValue((maxValue) => maxValue - 1)}
         >
           <ChevronDownSvg />
-        </AlterTimeButton>
+        </AlterMaxButton>
       </ChangeButtons>
     </MaxValueContainer>
   );

@@ -1,95 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-// import { motion } from "framer-motion";
 import Starter from "./Starter";
-
 import MinusCircleSvg from "./MinusCircleSvg";
 import AddCircleSvg from "./AddCircleSvg";
-// import SmallPillButton from "./SmallPillButton";
 import LargePillButton from "./LargePillButton";
 
 export default function Timer({
   toggleInProgress,
-  toggleTimer,
-  isStarterActive,
-  setIsStarterActive,
   addTime,
   subtractTime,
   minutes,
   seconds,
-  starterStep,
-  setStarterStep,
-  toggleScore,
+  toggleOptions,
+  setOptionsView,
 }) {
-  // function runStarter() {}
-
-  // function reset() {
-  //   setIsStarterActive(false);
-  //   setStarterStep(1);
-  // }
-
   function go() {
-    setIsStarterActive(true);
+    setOptionsView("starter");
+    toggleOptions(false);
     const time = minutes * 60000 + seconds * 1000;
     setTimeout(function () {
-      console.log("time up");
-      toggleScore(true);
+      toggleOptions(true);
       toggleInProgress(false);
     }, time);
   }
 
   return (
-    <>
-      {!isStarterActive && (
-        <TimerStyle
-        // key={"time"}
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1 }}
-        // exit={{ opacity: 0 }}
-        >
-          <Time>
-            <h3>Timer:</h3>
-            <p>
-              {minutes}:{seconds === 0 ? "00" : seconds}
-            </p>
-            <TimeButtons>
-              <AlterTimeButton onClick={() => addTime()}>
-                <AddCircleSvg />
-              </AlterTimeButton>
-              <AlterTimeButton
-                disabled={minutes === 0 && seconds === 15}
-                onClick={() => subtractTime()}
-              >
-                <MinusCircleSvg />
-              </AlterTimeButton>
-            </TimeButtons>
-          </Time>
-          <StartPillButton
-            onClick={() => {
-              go();
-            }}
+    <TimerStyle>
+      <Time>
+        <h3>Timer:</h3>
+        <p>
+          {minutes}:{seconds === 0 ? "00" : seconds}
+        </p>
+        <TimeButtons>
+          <AlterTimeButton onClick={() => addTime()}>
+            <AddCircleSvg />
+          </AlterTimeButton>
+          <AlterTimeButton
+            disabled={minutes === 0 && seconds === 15}
+            onClick={() => subtractTime()}
           >
-            START
-          </StartPillButton>
-        </TimerStyle>
-      )}
-      {isStarterActive && (
-        <Starter
-          key={"starter"}
-          toggleInProgress={toggleInProgress}
-          isStarterActive={isStarterActive}
-          setIsStarterActive={setIsStarterActive}
-          starterStep={starterStep}
-          setStarterStep={setStarterStep}
-          toggleTimer={toggleTimer}
-        />
-      )}
-    </>
+            <MinusCircleSvg />
+          </AlterTimeButton>
+        </TimeButtons>
+      </Time>
+      <StartPillButton
+        onClick={() => {
+          go();
+        }}
+      >
+        START
+      </StartPillButton>
+    </TimerStyle>
   );
 }
 
 const TimerStyle = styled.div`
-  align-self: start;
   padding-top: 30px;
   display: flex;
   flex-direction: column;
@@ -107,11 +72,10 @@ const TimeButtons = styled.div`
   display: grid;
   grid-template-rows: auto auto;
   grid-gap: 10px;
-  color: darkred;
 `;
 
 const AlterTimeButton = styled.button`
-  color: white;
+  color: var(--dark);
   padding: 0;
   margin: 0;
   background: none;
@@ -127,6 +91,7 @@ const StartPillButton = styled(LargePillButton)`
   width: 200px;
   margin-bottom: 20px;
   margin-top: 30px;
+  background: var(--white);
 `;
 
 // useEffect(() => {

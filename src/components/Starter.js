@@ -10,32 +10,29 @@ const starterVariants = {
 export default function Starter({
   toggleInProgress,
   setIsStarterActive,
-  isStarterActive,
   starterStep,
   setStarterStep,
-  toggleTimer,
+  setOptionsView,
 }) {
   useEffect(() => {
     let interval = null;
-    if (isStarterActive && starterStep < 4) {
+    if (starterStep < 4) {
       interval = setInterval(() => {
         setStarterStep((starterStep) => starterStep + 1);
-      }, 500);
+      }, 700);
     } else if (starterStep > 3) {
       clearInterval(interval);
-      toggleTimer(false);
       setStarterStep(1);
-      setIsStarterActive(false);
       toggleInProgress(true);
+      setOptionsView("score");
     }
     return () => clearInterval(interval);
   }, [
-    isStarterActive,
     setIsStarterActive,
     starterStep,
     setStarterStep,
     toggleInProgress,
-    toggleTimer,
+    setOptionsView,
   ]);
 
   return (
@@ -80,11 +77,10 @@ export default function Starter({
 }
 
 const ReadySetStyle = styled.div`
-  /* width: 100%; */
-  height: 30px;
-  /* text-align: center; */
+  background: aqua;
 `;
+
 const StarterMessage = styled(motion.p)`
-  font-size: 22px;
+  font-size: 44px;
   display: inline-block;
 `;
