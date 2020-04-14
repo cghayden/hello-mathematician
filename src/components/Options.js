@@ -7,7 +7,6 @@ export default function Options({
   score,
   setScore,
   toggleInProgress,
-  toggleScore,
   isStarterActive,
   setIsStarterActive,
   addTime,
@@ -29,27 +28,15 @@ export default function Options({
     return (
       <>
         <Timer
-          score={score}
           toggleInProgress={toggleInProgress}
-          toggleScore={toggleScore}
-          isStarterActive={isStarterActive}
-          setIsStarterActive={setIsStarterActive}
           addTime={addTime}
           subtractTime={subtractTime}
           minutes={minutes}
-          setMinutes={setMinutes}
           seconds={seconds}
-          setSeconds={setSeconds}
-          starterStep={starterStep}
-          setStarterStep={setStarterStep}
           toggleOptions={toggleOptions}
           setOptionsView={setOptionsView}
         />
-        <MaxValue
-          maxValue={maxValue}
-          setMaxValue={setMaxValue}
-          inProgress={inProgress}
-        />
+        <MaxValue maxValue={maxValue} setMaxValue={setMaxValue} />
       </>
     );
 

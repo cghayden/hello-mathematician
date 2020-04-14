@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 // import { motion } from "framer-motion";
 // import Operand from "./Operand";
-import Equation from "./Equation";
+// import Equation from "./Equation";
 import SubmitPillButton from "./SubmitPillButton";
 import DivideSvg from "./DivideSvg";
 import XSvg from "./XSvg";
@@ -13,7 +13,12 @@ function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue) + 1;
 }
 
-export default function EquationDiv({ view, maxValue = 10, setScore }) {
+export default function EquationDiv({
+  view,
+  maxValue = 10,
+  setScore,
+  options,
+}) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
   const inputEl = useRef(null);
@@ -21,7 +26,6 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
 
   useEffect(() => {
     inputEl.current.focus();
-    // labelRef.current.click();
   });
 
   useEffect(() => {
@@ -79,6 +83,7 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
       setScore((score) => score + 1);
     } else {
       setIsCorrect(false);
+
       wrongAudio.current.play();
     }
     setTimeout(() => nextProblem(), 400);
@@ -127,6 +132,7 @@ export default function EquationDiv({ view, maxValue = 10, setScore }) {
                 <span className="revealCorrect">{solution}</span>
               )}
               <Input
+                disabled={options === true}
                 hide={isCorrect === false}
                 id="answer"
                 type="number"

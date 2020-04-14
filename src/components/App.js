@@ -1,39 +1,11 @@
-import React, { useState, useRef } from "react";
-import { motion, AnimatePresence, useCycle } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import Navigation from "./Navigation";
 import GlobalStyles from "./GlobalStyles";
-import MaxValue from "./MaxValue";
-import Timer from "./Timer";
-import Score from "./Score";
-import ClockSvg from "./ClockSvg";
 import EquationDiv from "./EquationDiv";
 import HamburgerSvg from "./HamburgerSvg";
-import Starter from "./Starter";
 import Options from "./Options";
-
-import { MenuToggle } from "./MenuToggle";
-// import { useDimensions } from "./useDimensions";
-
-// const sidebar = {
-//   open: (height = 1000) => ({
-//     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
-//     transition: {
-//       type: "spring",
-//       stiffness: 20,
-//       restDelta: 2,
-//     },
-//   }),
-//   closed: {
-//     clipPath: "circle(30px at 40px 40px)",
-//     transition: {
-//       delay: 0.2,
-//       type: "spring",
-//       stiffness: 400,
-//       damping: 40,
-//     },
-//   },
-// };
 
 const equationVariants = {
   active: { opacity: 1 },
@@ -50,17 +22,12 @@ export default function App() {
   const [optionsView, setOptionsView] = useState("timer");
   const [maxValue, setMaxValue] = useState(10);
   const [score, setScore] = useState(0);
-  const [showScore, toggleScore] = useState(false);
   const [inProgress, toggleInProgress] = useState(false);
   const [isStarterActive, setIsStarterActive] = useState(false);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(15);
-  const [starterStep, setStarterStep] = useState(0);
+  const [starterStep, setStarterStep] = useState(1);
   const [view, setView] = useState("+");
-
-  // const [isOpen, toggleOpen] = useCycle(false, true);
-  // const containerRef = useRef(null);
-  // const { height } = useDimensions(containerRef);
 
   function addTime() {
     if (seconds === 45) {
@@ -86,16 +53,6 @@ export default function App() {
   return (
     <React.Fragment>
       <GlobalStyles />
-      {/* <motion.div
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        custom={height}
-        ref={containerRef}
-      >
-        <motion.div className="background" variants={sidebar} />
-
-        <MenuToggle toggle={() => toggleOpen()} />
-      </motion.div>  */}
       <AppContainer>
         <Header>
           <h1>Hello Mathematician!</h1>
@@ -104,7 +61,6 @@ export default function App() {
           </button>
         </Header>
         <Navigation inProgress={inProgress} view={view} setView={setView} />
-        {/* {!showTimer && !showScore && ( */}
         <AnimatePresence exitBeforeEnter>
           <motion.div
             variants={equationVariants}
@@ -114,7 +70,12 @@ export default function App() {
             exit={"hidden"}
             style={{ alignSelf: "start" }}
           >
-            <EquationDiv view={view} maxValue={maxValue} setScore={setScore} />
+            <EquationDiv
+              view={view}
+              options={options}
+              maxValue={maxValue}
+              setScore={setScore}
+            />
           </motion.div>
         </AnimatePresence>
 
@@ -123,13 +84,12 @@ export default function App() {
           initial="closed"
           animate={options ? "open" : "closed"}
           exit={"close"}
-          transition={{ duration: optionsView === "starter" ? 3.5 : 0.5 }}
+          transition={{ duration: optionsView === "starter" ? 3 : 0.5 }}
         >
           <Options
             score={score}
             setScore={setScore}
             toggleInProgress={toggleInProgress}
-            toggleScore={toggleScore}
             isStarterActive={isStarterActive}
             setIsStarterActive={setIsStarterActive}
             addTime={addTime}
@@ -165,7 +125,6 @@ const AppContainer = styled.div`
   height: 100vh;
 `;
 const Header = styled.header`
-  position: relative;
   display: flex;
   align-items: center;
   padding: 0 15px;
@@ -176,8 +135,8 @@ const Header = styled.header`
     border: none;
     padding: 10px;
     margin-left: auto;
-    color: var(--dark);
-    background: var(--white);
+    color: var(--light);
+    background: transparent;
     border-radius: 50px;
     display: grid;
     place-items: center;
@@ -196,6 +155,7 @@ const OptionsContainer = styled(motion.div)`
   border-radius: 10px;
   width: 90vw;
   top: 150px;
+  padding-top: 20px;
   color: var(--dark);
   background: var(--light);
   display: flex;
@@ -203,48 +163,3 @@ const OptionsContainer = styled(motion.div)`
   align-items: center;
   z-index: 100;
 `;
-
-// const ToggleTimerButton = styled.button`
-//   cursor: pointer;
-//   font-size: 20px;
-//   padding: 5px 10px;
-//   background: ${(props) => (props.active ? "var(--white)" : `none`)};
-//   color: ${(props) => (props.active ? "var(--dark)" : `var(--orange)`)};
-//   border: none;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-around;
-//   position: relative;
-//   border-radius: 50px;
-//   width: 48px;
-//   height: 48px;
-//   box-shadow: ${(props) =>
-//     props.active ? "0px 0px 2px 2px lightblue" : "none"};
-//   :focus {
-//     outline: none;
-//     box-shadow: 0px 0px 2px 2px lightblue;
-//   }
-// `;
-
-// {!inProgress && !showScore && (
-//   <OptionsContainer
-//     animate={{ height: "auto" }}
-//     showTimer={showTimer}
-//     className="optionsContainer"
-//   >
-//     {/* {!inProgress && !showScore && !isStarterActive && ( */}
-//     <MaxValue
-//       maxValue={maxValue}
-//       setMaxValue={setMaxValue}
-//       inProgress={inProgress}
-//     />
-//     <ToggleTimerButton
-//       title="Set Timer"
-//       active={showTimer === true}
-//       type="button"
-//       onClick={() => toggleTimer(!showTimer)}
-//     >
-//       <ClockSvg />
-//     </ToggleTimerButton>
-//   </OptionsContainer>
-// )}

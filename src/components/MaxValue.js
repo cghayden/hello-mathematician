@@ -15,7 +15,6 @@ const ChangeButtons = styled.div`
 `;
 const AlterMaxButton = styled.button`
   border-radius: 50%;
-  /* color: var(--orange); */
   padding: 0;
   margin: 0;
   background: none;
@@ -34,22 +33,16 @@ const MaxDigit = styled.p`
   margin: 0 8px;
 `;
 
-export default function MaxValue({ maxValue, setMaxValue, inProgress }) {
+export default function MaxValue({ maxValue, setMaxValue }) {
   return (
     <MaxValueContainer className="maxValueContainer">
       <p>Max Value:</p>
       <MaxDigit>{maxValue}</MaxDigit>
       <ChangeButtons>
-        <AlterMaxButton
-          disabled={inProgress}
-          onClick={() => setMaxValue((maxValue) => maxValue + 1)}
-        >
+        <AlterMaxButton onClick={() => setMaxValue((maxValue) => maxValue + 1)}>
           <ChevronUpSvg />
         </AlterMaxButton>
-        <AlterMaxButton
-          disabled={inProgress}
-          onClick={() => setMaxValue((maxValue) => maxValue - 1)}
-        >
+        <AlterMaxButton onClick={() => setMaxValue((maxValue) => maxValue - 1)}>
           <ChevronDownSvg />
         </AlterMaxButton>
       </ChangeButtons>

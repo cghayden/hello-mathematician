@@ -19,7 +19,7 @@ export default function Starter({
     if (starterStep < 4) {
       interval = setInterval(() => {
         setStarterStep((starterStep) => starterStep + 1);
-      }, 700);
+      }, 600);
     } else if (starterStep > 3) {
       clearInterval(interval);
       setStarterStep(1);
@@ -27,16 +27,10 @@ export default function Starter({
       setOptionsView("score");
     }
     return () => clearInterval(interval);
-  }, [
-    setIsStarterActive,
-    starterStep,
-    setStarterStep,
-    toggleInProgress,
-    setOptionsView,
-  ]);
+  }, [starterStep, setStarterStep, toggleInProgress, setOptionsView]);
 
   return (
-    <ReadySetStyle>
+    <div>
       <AnimatePresence exitBeforeEnter>
         {starterStep === 1 && (
           <StarterMessage
@@ -72,13 +66,9 @@ export default function Starter({
           </StarterMessage>
         )}
       </AnimatePresence>
-    </ReadySetStyle>
+    </div>
   );
 }
-
-const ReadySetStyle = styled.div`
-  background: aqua;
-`;
 
 const StarterMessage = styled(motion.p)`
   font-size: 44px;
