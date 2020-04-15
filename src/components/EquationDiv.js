@@ -8,8 +8,7 @@ import DivideSvg from "./DivideSvg";
 import XSvg from "./XSvg";
 
 function getRandom(maxValue) {
-  const lower = 1;
-  const upper = maxValue - 1;
+  //get random from 1-max
   return Math.floor(Math.random() * maxValue) + 1;
 }
 
@@ -190,7 +189,6 @@ const FullEquation = styled.form`
   label {
     padding: 20px 0;
     display: flex;
-    /* padding-right: 10px; */
   }
 
   .revealCorrect {
@@ -216,7 +214,6 @@ const Input = styled.input`
 `;
 
 const EquationMainWrapper = styled.div`
-  /* color: white; */
   font-size: 4rem;
   display: grid;
   place-items: center;
@@ -224,8 +221,6 @@ const EquationMainWrapper = styled.div`
   .right-wrong {
     height: 28px;
     font-size: 20px;
-    /* padding-bottom: 10px; */
-    /* padding-top: 20px; */
     grid-column: 1/-1;
     color: var(--green);
   }
@@ -253,9 +248,9 @@ const Calculator = styled.div`
   .lastButton {
     grid-column: 2;
   }
-  /* @media screen and (min-width: 600px) {
+  @media screen and (min-width: 600px) {
     display: none;
-  } */
+  }
 `;
 
 const CalcButton = styled.button`

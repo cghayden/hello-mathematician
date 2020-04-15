@@ -6,7 +6,7 @@ import GlobalStyles from "./GlobalStyles";
 import EquationDiv from "./EquationDiv";
 import HamburgerSvg from "./HamburgerSvg";
 import Options from "./Options";
-
+import ActiveOperationHeading from "./ActiveOperationHeading";
 const equationVariants = {
   active: { opacity: 1 },
   hidden: { opacity: 0 },
@@ -57,11 +57,19 @@ export default function App() {
       <AppContainer>
         <Header>
           <h1>Hello Mathematician!</h1>
-          <button onClick={() => toggleOptions((options) => !options)}>
+          {/* <button onClick={() => toggleOptions((options) => !options)}>
             <HamburgerSvg />
-          </button>
+          </button> */}
         </Header>
-        <Navigation inProgress={inProgress} view={view} setView={setView} />
+        <Navigation
+          inProgress={inProgress}
+          view={view}
+          setView={setView}
+          toggleOptions={toggleOptions}
+          options={options}
+        />
+        <ActiveOperationHeading view={view} maxValue={maxValue} />
+
         <AnimatePresence exitBeforeEnter>
           <motion.div
             variants={equationVariants}
@@ -122,30 +130,17 @@ const AppContainer = styled.div`
   max-width: 600px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 70px 60px 1fr;
+  grid-template-rows: 70px auto 60px 1fr;
   align-items: center;
   text-align: center;
-  padding-top: 10px;
   margin: 0 auto;
   height: 100vh;
 `;
 const Header = styled.header`
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
   h1 {
     font-size: 30px;
   }
-  button {
-    border: none;
-    padding: 10px;
-    margin-left: auto;
-    color: var(--light);
-    background: transparent;
-    border-radius: 50px;
-    display: grid;
-    place-items: center;
-  }
+
   @media screen and (max-width: 370px) {
     font-size: 16px;
   }

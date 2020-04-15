@@ -4,9 +4,11 @@ import PlusSvg from "./PlusSvg";
 import XSvg from "./XSvg";
 import MinusSvg from "./MinusSvg";
 import DivideSvg from "./DivideSvg";
+import HamburgerSvg from "./HamburgerSvg";
 
 const Nav = styled.nav`
   ul {
+    padding-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -30,7 +32,24 @@ const NavButton = styled.button`
   }
 `;
 
-export default function Navigation({ view, setView, inProgress }) {
+const MenuButton = styled.button`
+  border: none;
+  padding: 10px;
+  margin-left: auto;
+  color: var(--white);
+  background: transparent;
+  border-radius: 50px;
+  display: grid;
+  place-items: center;
+`;
+
+export default function Navigation({
+  view,
+  setView,
+  inProgress,
+  toggleOptions,
+  options,
+}) {
   return (
     <Nav>
       <ul>
@@ -69,6 +88,11 @@ export default function Navigation({ view, setView, inProgress }) {
           >
             <DivideSvg />
           </NavButton>
+        </li>
+        <li>
+          <MenuButton onClick={() => toggleOptions((options) => !options)}>
+            <HamburgerSvg />
+          </MenuButton>
         </li>
       </ul>
     </Nav>
