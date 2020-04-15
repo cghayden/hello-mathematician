@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-// import { motion } from "framer-motion";
-import Operand from "./Operand";
-
 import SubmitPillButton from "./SubmitPillButton";
-import DivideSvg from "./DivideSvg";
-import XSvg from "./XSvg";
+// import { motion } from "framer-motion";
+import Equation from "./Equation";
+import HundredsEquation from "./HundredsEquation";
 
 function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue) + 1;
@@ -21,12 +19,12 @@ export default function EquationDiv({
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
-  const inputEl = useRef(null);
+  // const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
 
-  useEffect(() => {
-    inputEl.current.focus();
-  });
+  // useEffect(() => {
+  //   inputEl.current.focus();
+  // });
 
   useEffect(() => {
     if (view === "+") {
@@ -65,7 +63,7 @@ export default function EquationDiv({
     } else {
       setDigits(array);
     }
-    inputEl.current.focus();
+    // inputEl.current.focus();
   }
 
   function nextProblem() {
@@ -99,57 +97,38 @@ export default function EquationDiv({
   // )
   return (
     <>
-      <EquationMainWrapper>
-        <FullEquation
-          className="fullEquation"
-          id="inputForm"
-          action="POST"
-          onSubmit={(e) => checkAnswer(e)}
-        >
-          <label htmlFor="answer">
-            <OperandContainer className="operandContainer">
-              <GhostOperand>{digits[0]}</GhostOperand>
-              <Operand digit={digits[0]} />
-            </OperandContainer>
-            <OperationContainer>
-              {view === "/" && <DivideSvg />}
-              {view === "x" && <XSvg />}
-              {view === "+" && <p>+</p>}
-              {view === "-" && <p>-</p>}
-            </OperationContainer>
-            <OperandContainer>
-              <GhostOperand>{digits[1]}</GhostOperand>
-              <Operand digit={digits[1]} />
-            </OperandContainer>
-            <p className="equals">=</p>
+      <Form
+        id="inputForm"
+        action="POST"
+        onSubmit={(e) => checkAnswer(e)}
+        className="fullEquation"
+      >
+        <fieldset disabled={options}>
+          {maxValue > 99 ? (
+            <HundredsEquation
+              digits={digits}
+              view={view}
+              isCorrect={isCorrect}
+              solution={solution}
+              answer={answer}
+              handleInputChange={handleInputChange}
+            />
+          ) : (
+            <Equation
+              digits={digits}
+              view={view}
+              isCorrect={isCorrect}
+              solution={solution}
+              answer={answer}
+              handleInputChange={handleInputChange}
+            />
+          )}
+        </fieldset>
+      </Form>
 
-            <div style={{ position: "relative" }}>
-              {isCorrect === false && (
-                <span className="revealCorrect">{solution}</span>
-              )}
-              <Input
-                disabled={options === true}
-                hide={isCorrect === false}
-                id="answer"
-                type="number"
-                pattern="[0-9]*"
-                ref={inputEl}
-                value={answer}
-                name="answer"
-                onChange={(e) => handleInputChange(e)}
-              />
-            </div>
-          </label>
-        </FullEquation>
-        {/* <div className="right-wrong">{isCorrect && <p>Right!</p>}</div> */}
-        {/* <div className="right-wrong">
-          <p>Right!</p>
-        </div> */}
-
-        <SubmitPillButton type="submit" form="inputForm">
-          Submit
-        </SubmitPillButton>
-      </EquationMainWrapper>
+      <SubmitPillButton type="submit" form="inputForm">
+        Submit
+      </SubmitPillButton>
       <Calculator>
         {buttons.map((number) => (
           <CalcButton key={number} onClick={(e) => handleCalcButton(e)}>
@@ -173,56 +152,18 @@ export default function EquationDiv({
   );
 }
 
-const FullEquation = styled.form`
+const Form = styled.form`
+  font-size: 4rem;
   font-family: "Fira Sans";
   position: relative;
   background: transparent;
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
   color: var(--white);
-  label {
-    padding: 20px 0;
-    display: flex;
+  fieldset {
+    border: none;
   }
-
-  .revealCorrect {
-    color: red;
-    position: absolute;
-    top: 0px;
-    left: 10px;
-  }
-`;
-
-const OperationContainer = styled.div`
-  display: grid;
-  place-items: center;
-  padding-bottom: 5px;
-`;
-
-const GhostOperand = styled.p`
-  color: transparent;
-`;
-
-const Input = styled.input`
-  padding: 0;
-  height: 100%;
-  font: inherit;
-  background: transparent;
-  border: none;
-  width: 3ch;
-  color: ${(props) => (props.hide ? `transparent` : "white")};
-  caret-color: white;
-  margin-left: 16px;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const EquationMainWrapper = styled.div`
-  font-size: 4rem;
-  display: grid;
-  place-items: center;
-
   .right-wrong {
     height: 28px;
     font-size: 20px;
@@ -230,16 +171,6 @@ const EquationMainWrapper = styled.div`
     color: var(--green);
   }
 `;
-
-const OperandContainer = styled.div`
-  position: relative;
-  padding: 0 5px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
-// const GhostOperand=styled
 
 const Calculator = styled.div`
   margin: 0 auto;
