@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Navigation from "./Navigation";
 import GlobalStyles from "./GlobalStyles";
 import EquationDiv from "./EquationDiv";
-import HamburgerSvg from "./HamburgerSvg";
 import Options from "./Options";
 import ActiveOperationHeading from "./ActiveOperationHeading";
 const equationVariants = {
@@ -14,7 +13,7 @@ const equationVariants = {
 
 const optionsVariants = {
   closed: { height: `0px` },
-  open: { height: `70vh` },
+  open: { height: `370px` },
 };
 
 export default function App() {
@@ -154,7 +153,8 @@ const OptionsContainer = styled(motion.div)`
   overflow: hidden;
   border-radius: 10px;
   width: 90vw;
-  top: 150px;
+  height: 350px;
+  top: 200px;
   color: var(--dark);
   background: var(--light);
   display: flex;

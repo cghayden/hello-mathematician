@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Operand from "./Operand";
 import DivideSvg from "./DivideSvg";
 import XSvg from "./XSvg";
-export default function Equation({
+export default function HundredsEquation({
   digits,
   view,
   isCorrect,
@@ -14,23 +14,23 @@ export default function Equation({
 }) {
   return (
     <Label htmlFor="answer">
-      <OperandContainer className="operandContainer">
+      <FirstOperandContainer className="operandContainer">
         <GhostOperand>{digits[0]}</GhostOperand>
         <Operand digit={digits[0]} />
-      </OperandContainer>
-      <OperationContainer>
+      </FirstOperandContainer>
+      <OperatorContainer>
         {view === "/" && <DivideSvg />}
         {view === "x" && <XSvg />}
         {view === "+" && <p>+</p>}
         {view === "-" && <p>-</p>}
-      </OperationContainer>
-      <OperandContainer>
+      </OperatorContainer>
+      <SecondOperandContainer>
         <GhostOperand>{digits[1]}</GhostOperand>
         <Operand digit={digits[1]} />
-      </OperandContainer>
-      <p className="equals">=</p>
+      </SecondOperandContainer>
+      {/* <p className="equals">=</p> */}
 
-      <div style={{ position: "relative" }}>
+      <InputDiv>
         {isCorrect === false && <RevealCorrect>{solution}</RevealCorrect>}
         <Input
           disabled={options === true}
@@ -43,56 +43,80 @@ export default function Equation({
           name="answer"
           onChange={(e) => handleInputChange(e)}
         />
-      </div>
+      </InputDiv>
     </Label>
   );
 }
 
 const Label = styled.label`
   padding: 20px 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 145px 145px;
+  grid-template-rows: 80px 80px 80px;
+  grid-template-areas:
+    "empty digit0"
+    "operator digit1"
+    "blank answer";
 `;
 
 const RevealCorrect = styled.span`
   color: red;
   position: absolute;
   top: 0px;
-  left: 10px;
+  /* left: 10px; */
 `;
 
-const OperationContainer = styled.div`
-  display: grid;
-  place-items: center;
-  padding-bottom: 5px;
+const OperatorContainer = styled.div`
+  justify-self: end;
+  grid-area: operator;
 `;
 
 const GhostOperand = styled.p`
   color: transparent;
 `;
 
+const InputDiv = styled.div`
+  position: relative;
+  grid-area: answer;
+  border-top: 2px solid var(--white);
+  direction: rtl;
+`;
+
 const Input = styled.input`
+  /* grid-area: answer; */
+  /* justify-self: end; */
   padding: 0;
-  height: 100%;
+  /* height: 100%; */
   font: inherit;
   background: transparent;
   border: none;
-  width: 3ch;
+  /* width: 3ch; */
   color: ${(props) => (props.hide ? `transparent` : "white")};
   caret-color: white;
-  margin-left: 16px;
+  /* margin-left: 16px; */
   &:focus {
     outline: none;
   }
 `;
 
-const OperandContainer = styled.div`
+const FirstOperandContainer = styled.div`
+  grid-area: digit0;
   position: relative;
   padding: 0 5px;
   height: 100%;
   display: flex;
   justify-content: center;
+  justify-self: end;
 `;
-
+const SecondOperandContainer = styled.div`
+  grid-area: digit1;
+  position: relative;
+  padding: 0 5px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  justify-self: end;
+`;
 //  <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
 //       <div className="right-wrong">
 //           <p>Right!</p>

@@ -4,7 +4,7 @@ import SmallPillButton from "./SmallPillButton";
 import styled from "styled-components";
 
 const ScoreDiv = styled(motion.div)`
-  font-size: 22px;
+  font-size: 26px;
   margin: 0px auto;
   padding-top: 20px;
   h3 {
@@ -14,6 +14,7 @@ const ScoreDiv = styled(motion.div)`
 `;
 
 const ScoreButton = styled(SmallPillButton)`
+  font-size: 22px;
   max-width: 200px;
   margin-bottom: 20px;
 `;
