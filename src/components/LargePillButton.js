@@ -7,8 +7,8 @@ const LargePillButton = styled.button`
   border: none;
   border-radius: 50px;
   margin-top: 5px;
-  color: rgba(34, 124, 195, 1);
-  background-color: white;
+  color: var(--dark);
+  background-color: var(--light);
   :focus {
     border: 1px solid blue;
   }

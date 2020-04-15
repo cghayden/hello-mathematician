@@ -6,10 +6,16 @@ import styled from "styled-components";
 const ScoreDiv = styled(motion.div)`
   font-size: 22px;
   margin: 0px auto;
+  padding-top: 20px;
+  h3 {
+    grid-column: 1/-1;
+    padding-bottom: 5px;
+  }
 `;
 
 const ScoreButton = styled(SmallPillButton)`
   max-width: 200px;
+  margin-bottom: 20px;
 `;
 
 const ScoreButtonsDiv = styled.div`
@@ -20,7 +26,14 @@ const ScoreButtonsDiv = styled.div`
   justify-items: center;
 `;
 
-export default function Score({ score, setScore, toggleScore, toggleTimer }) {
+export default function Score({
+  score,
+  setScore,
+  setOptionsView,
+  toggleOptions,
+  wrongOnes,
+  setWrongOnes,
+}) {
   return (
     <ScoreDiv
       key={"score"}
@@ -33,21 +46,37 @@ export default function Score({ score, setScore, toggleScore, toggleTimer }) {
         <ScoreButton
           onClick={() => {
             setScore(0);
-            toggleScore(false);
-            toggleTimer(true);
+            setOptionsView("timer");
+            setWrongOnes([]);
           }}
         >
           Play again
         </ScoreButton>
         <ScoreButton
           onClick={() => {
-            setScore(0);
-            toggleScore(false);
+            toggleOptions(false);
+            setTimeout(() => {
+              setOptionsView("timer");
+              setScore(0);
+              setWrongOnes([]);
+            }, 1000);
           }}
         >
           Practice
         </ScoreButton>
       </ScoreButtonsDiv>
+      <WrongOnesUl>
+        <h3>You Missed:</h3>
+        {wrongOnes.map((equation, index) => (
+          <li key={index}>{equation}</li>
+        ))}
+      </WrongOnesUl>
     </ScoreDiv>
   );
 }
+const WrongOnesUl = styled.ul`
+  font-size: 20px;
+  display: grid;
+  grid-template-columns: 120px 120px;
+  justify-items: center;
+`;

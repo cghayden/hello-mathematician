@@ -10,36 +10,27 @@ const starterVariants = {
 export default function Starter({
   toggleInProgress,
   setIsStarterActive,
-  isStarterActive,
   starterStep,
   setStarterStep,
-  toggleTimer,
+  setOptionsView,
 }) {
   useEffect(() => {
     let interval = null;
-    if (isStarterActive && starterStep < 4) {
+    if (starterStep < 4) {
       interval = setInterval(() => {
         setStarterStep((starterStep) => starterStep + 1);
-      }, 500);
+      }, 600);
     } else if (starterStep > 3) {
       clearInterval(interval);
-      toggleTimer(false);
       setStarterStep(1);
-      setIsStarterActive(false);
       toggleInProgress(true);
+      setOptionsView("score");
     }
     return () => clearInterval(interval);
-  }, [
-    isStarterActive,
-    setIsStarterActive,
-    starterStep,
-    setStarterStep,
-    toggleInProgress,
-    toggleTimer,
-  ]);
+  }, [starterStep, setStarterStep, toggleInProgress, setOptionsView]);
 
   return (
-    <ReadySetStyle>
+    <div>
       <AnimatePresence exitBeforeEnter>
         {starterStep === 1 && (
           <StarterMessage
@@ -75,16 +66,11 @@ export default function Starter({
           </StarterMessage>
         )}
       </AnimatePresence>
-    </ReadySetStyle>
+    </div>
   );
 }
 
-const ReadySetStyle = styled.div`
-  /* width: 100%; */
-  height: 30px;
-  /* text-align: center; */
-`;
 const StarterMessage = styled(motion.p)`
-  font-size: 22px;
+  font-size: 44px;
   display: inline-block;
 `;
