@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 // import { motion } from "framer-motion";
-// import Operand from "./Operand";
+import Operand from "./Operand";
 
 import SubmitPillButton from "./SubmitPillButton";
 import DivideSvg from "./DivideSvg";
 import XSvg from "./XSvg";
 
 function getRandom(maxValue) {
-  //get random from 1-max
   return Math.floor(Math.random() * maxValue) + 1;
 }
 
@@ -73,7 +72,6 @@ export default function EquationDiv({
     setAnswer("");
     setIsCorrect();
     setup();
-    // inputEl.current.focus();
   }
 
   function checkAnswer(e) {
@@ -94,9 +92,11 @@ export default function EquationDiv({
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   function handleCalcButton(e) {
     const number = e.target.innerHTML;
-    console.log("number pressed:", e.target.innerHTML);
     setAnswer((answer) => answer + number);
   }
+  // if(maxValue > 99) return(
+  //   <LargeEquation/>
+  // )
   return (
     <>
       <EquationMainWrapper>
@@ -108,24 +108,18 @@ export default function EquationDiv({
         >
           <label htmlFor="answer">
             <OperandContainer className="operandContainer">
-              {/* <GhostOperand>{digits[0]}</GhostOperand> */}
-              <p>{digits[0]}</p>
+              <GhostOperand>{digits[0]}</GhostOperand>
+              <Operand digit={digits[0]} />
             </OperandContainer>
-            {view === "/" && (
-              <p>
-                <DivideSvg />
-              </p>
-            )}
-            {view === "x" && (
-              <p>
-                <XSvg />
-              </p>
-            )}
-            {view === "+" && <p>+</p>}
-            {view === "-" && <p>-</p>}
+            <OperationContainer>
+              {view === "/" && <DivideSvg />}
+              {view === "x" && <XSvg />}
+              {view === "+" && <p>+</p>}
+              {view === "-" && <p>-</p>}
+            </OperationContainer>
             <OperandContainer>
-              {/* <GhostOperand>{digits[1]}</GhostOperand> */}
-              <p>{digits[1]}</p>
+              <GhostOperand>{digits[1]}</GhostOperand>
+              <Operand digit={digits[1]} />
             </OperandContainer>
             <p className="equals">=</p>
 
@@ -195,7 +189,18 @@ const FullEquation = styled.form`
     color: red;
     position: absolute;
     top: 0px;
+    left: 10px;
   }
+`;
+
+const OperationContainer = styled.div`
+  display: grid;
+  place-items: center;
+  padding-bottom: 5px;
+`;
+
+const GhostOperand = styled.p`
+  color: transparent;
 `;
 
 const Input = styled.input`
@@ -233,6 +238,8 @@ const OperandContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+// const GhostOperand=styled
 
 const Calculator = styled.div`
   margin: 0 auto;

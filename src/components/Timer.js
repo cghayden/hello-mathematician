@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Starter from "./Starter";
 import MinusCircleSvg from "./MinusCircleSvg";
-import AddCircleSvg from "./AddCircleSvg";
+import PlusCircleSvg from "./PlusCircleSvg";
 import LargePillButton from "./LargePillButton";
 
 export default function Timer({
@@ -27,13 +26,13 @@ export default function Timer({
   return (
     <TimerStyle>
       <Time>
-        <h3>Timer:</h3>
+        <p>Timer:</p>
         <p>
           {minutes}:{seconds === 0 ? "00" : seconds}
         </p>
         <TimeButtons>
           <AlterTimeButton onClick={() => addTime()}>
-            <AddCircleSvg />
+            <PlusCircleSvg />
           </AlterTimeButton>
           <AlterTimeButton
             disabled={minutes === 0 && seconds === 15}
@@ -59,7 +58,7 @@ const TimerStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 22px;
+  font-size: 26px;
 `;
 
 const Time = styled.div`
@@ -90,21 +89,6 @@ const StartPillButton = styled(LargePillButton)`
   grid-column: 1/-1;
   width: 200px;
   margin-bottom: 20px;
-  margin-top: 30px;
+  margin-top: 20px;
   background: var(--white);
 `;
-
-// useEffect(() => {
-//   let interval = null;
-//   if (isStarterActive && starterStep < 4) {
-//     interval = setInterval(() => {
-//       setStarterStep((starterStep) => starterStep + 1);
-//     }, 600);
-//   } else if (starterStep > 3) {
-//     clearInterval(interval);
-//     setIsStarterActive(false);
-//     setStarterStep(1);
-//     toggleInProgress(true);
-//   }
-//   return () => clearInterval(interval);
-// }, [isStarterActive, starterStep, setStarterStep, toggleInProgress]);
