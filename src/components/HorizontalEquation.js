@@ -73,7 +73,7 @@ const Form = styled.form`
     color: var(--green);
   }
   @media screen and (max-width: 414px) {
-    font-size: 3.5rem;
+    font-size: 4rem;
   }
 `;
 const Label = styled.label`

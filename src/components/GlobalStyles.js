@@ -7,9 +7,10 @@ const GlobalStyles = createGlobalStyle`
     --light: #33ffb4;
   --blue: #227cc3;
   --green: #5dc66a;
-  --orange: #dfc841;
-  --white: #e0f0f3;
   --red: #e7574b;
+  --orange: #dfc841;
+  --yellow: #e9d985;
+  --white: #e0f0f3;
 }
 
   body {
