@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 const HeadingStyles = styled.h2`
   color: var(--orange);
+  @media screen and (max-width: 414px) {
+    color: red;
+    font-size: 18px;
+  }
 `;
 
 export default function ActiveOperationHeading({ view, maxValue }) {

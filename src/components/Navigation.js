@@ -14,7 +14,9 @@ const Nav = styled.nav`
     align-items: center;
     font-size: 20px;
     justify-content: space-around;
-    font-size: 5vmin;
+    @media screen and (max-width: 414px) {
+      padding-bottom: 0px;
+    }
   }
 `;
 

@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import SubmitPillButton from "./SubmitPillButton";
 // import { motion } from "framer-motion";
-import Equation from "./Equation";
-import HundredsEquation from "./HundredsEquation";
-
+import HorizontalEquation from "./HorizontalEquation";
+import VerticalEquation from "./VerticalEquation";
+import DeleteSvg from "./DeleteSvg";
+import CheckmarkSvg from "./CheckmarkSvg";
 function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue) + 1;
 }
@@ -19,7 +20,7 @@ export default function EquationDiv({
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
-  // const inputEl = useRef(null);
+  const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
 
   // useEffect(() => {
@@ -92,51 +93,58 @@ export default function EquationDiv({
     const number = e.target.innerHTML;
     setAnswer((answer) => answer + number);
   }
+  function deleteOneInput() {
+    setAnswer((answer) => answer.slice(0, -1));
+    // inputEl.current.focus();
+  }
   // if(maxValue > 99) return(
   //   <LargeEquation/>
   // )
   return (
     <>
-      <Form
-        id="inputForm"
-        action="POST"
-        onSubmit={(e) => checkAnswer(e)}
-        className="fullEquation"
-      >
-        <fieldset disabled={options}>
-          {maxValue > 99 ? (
-            <HundredsEquation
-              digits={digits}
-              view={view}
-              isCorrect={isCorrect}
-              solution={solution}
-              answer={answer}
-              handleInputChange={handleInputChange}
-            />
-          ) : (
-            <Equation
-              digits={digits}
-              view={view}
-              isCorrect={isCorrect}
-              solution={solution}
-              answer={answer}
-              handleInputChange={handleInputChange}
-            />
-          )}
-        </fieldset>
-      </Form>
+      {maxValue < 49 ? (
+        <HorizontalEquation
+          digits={digits}
+          view={view}
+          isCorrect={isCorrect}
+          options={options}
+          solution={solution}
+          answer={answer}
+          handleInputChange={handleInputChange}
+          checkAnswer={checkAnswer}
+        />
+      ) : (
+        <VerticalEquation
+          digits={digits}
+          view={view}
+          isCorrect={isCorrect}
+          options={options}
+          solution={solution}
+          answer={answer}
+          handleInputChange={handleInputChange}
+          checkAnswer={checkAnswer}
+        />
+      )}
 
-      <SubmitPillButton type="submit" form="inputForm">
+      {/* <SubmitPillButton type="submit" form="inputForm">
         Submit
-      </SubmitPillButton>
+      </SubmitPillButton> */}
       <Calculator>
         {buttons.map((number) => (
           <CalcButton key={number} onClick={(e) => handleCalcButton(e)}>
             {number}
           </CalcButton>
         ))}
-        <CalcButton className="lastButton" onClick={(e) => handleCalcButton(e)}>
-          0
+        <CalcButton className="deleteButton" onClick={() => deleteOneInput()}>
+          <DeleteSvg />
+        </CalcButton>
+        <CalcButton onClick={(e) => handleCalcButton(e)}>0</CalcButton>
+        <CalcButton
+          className="submitCheckButton"
+          type="submit"
+          form="inputForm"
+        >
+          <CheckmarkSvg />
         </CalcButton>
       </Calculator>
       <audio
@@ -152,26 +160,6 @@ export default function EquationDiv({
   );
 }
 
-const Form = styled.form`
-  font-size: 4rem;
-  font-family: "Fira Sans";
-  position: relative;
-  background: transparent;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  color: var(--white);
-  fieldset {
-    border: none;
-  }
-  .right-wrong {
-    height: 28px;
-    font-size: 20px;
-    grid-column: 1/-1;
-    color: var(--green);
-  }
-`;
-
 const Calculator = styled.div`
   margin: 0 auto;
   width: 250px;
@@ -179,14 +167,11 @@ const Calculator = styled.div`
   grid-template-columns: 60px 60px 60px;
   grid-template-rows: auto;
   grid-gap: 10px;
-  padding: 20px 10px;
+  /* padding: 20px 10px; */
   margin-top: 15px;
   justify-content: center;
-  border-radius: 20px;
-  .lastButton {
-    grid-column: 2;
-  }
-  @media screen and (min-width: 600px) {
+
+  @media screen and (min-width: 769px) {
     display: none;
   }
 `;
@@ -202,4 +187,12 @@ const CalcButton = styled.button`
   color: var(--dark);
   display: grid;
   place-items: center;
+  &.deleteButton {
+    padding: 12px 0px 12px 13px;
+    place-items: unset;
+  }
+  &.submitCheckButton {
+    padding: 15px 13px 13px 13px;
+    place-items: unset;
+  }
 `;
