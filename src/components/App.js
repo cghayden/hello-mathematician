@@ -60,14 +60,13 @@ export default function App() {
             <HamburgerSvg />
           </button> */}
         </Header>
-        <Navigation
-          inProgress={inProgress}
+        <Navigation inProgress={inProgress} view={view} setView={setView} />
+        <ActiveOperationHeading
           view={view}
-          setView={setView}
+          maxValue={maxValue}
           toggleOptions={toggleOptions}
           options={options}
         />
-        <ActiveOperationHeading view={view} maxValue={maxValue} />
 
         <AnimatePresence exitBeforeEnter>
           <motion.div
@@ -167,11 +166,12 @@ const OptionsContainer = styled(motion.div)`
 `;
 const CloseOptionsSvg = styled.div`
   position: fixed;
-  right: 12px;
-  top: 12px;
+  right: 8px;
+  top: 8px;
   button {
     padding: 3px 14px;
     border-radius: 36px;
     font-size: 20px;
+    border: none;
   }
 `;

@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import SubmitPillButton from "./SubmitPillButton";
-// import { motion } from "framer-motion";
 import HorizontalEquation from "./HorizontalEquation";
 import VerticalEquation from "./VerticalEquation";
 import DeleteSvg from "./DeleteSvg";
@@ -20,7 +18,7 @@ export default function EquationDiv({
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
-  const inputEl = useRef(null);
+  // const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
 
   // useEffect(() => {
@@ -166,7 +164,8 @@ const Calculator = styled.div`
   display: grid;
   grid-template-columns: 60px 60px 60px;
   grid-template-rows: auto;
-  grid-gap: 10px;
+  row-gap: 10px;
+  column-gap: 26px;
   /* padding: 20px 10px; */
   margin-top: 15px;
   justify-content: center;
@@ -177,8 +176,8 @@ const Calculator = styled.div`
 `;
 
 const CalcButton = styled.button`
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   padding: 0;
   border-radius: 50%;
   border: none;
@@ -188,11 +187,11 @@ const CalcButton = styled.button`
   display: grid;
   place-items: center;
   &.deleteButton {
-    padding: 12px 0px 12px 13px;
+    padding: 19px 0px 0px 19px;
     place-items: unset;
   }
   &.submitCheckButton {
-    padding: 15px 13px 13px 13px;
+    padding: 20px 0px 0px 20px;
     place-items: unset;
   }
 `;
