@@ -187,11 +187,15 @@ const CalcButton = styled.button`
   display: grid;
   place-items: center;
   &.deleteButton {
-    padding: 19px 0px 0px 19px;
-    place-items: unset;
+    svg {
+      display: block;
+      margin: auto;
+    }
   }
   &.submitCheckButton {
-    padding: 20px 0px 0px 20px;
-    place-items: unset;
+    svg {
+      display: block;
+      margin: auto;
+    }
   }
 `;
