@@ -13,7 +13,7 @@ const equationVariants = {
 
 const optionsVariants = {
   closed: { height: `0px` },
-  open: { height: `370px` },
+  open: { height: `400px` },
 };
 
 export default function App() {
@@ -23,8 +23,8 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [inProgress, toggleInProgress] = useState(false);
   const [isStarterActive, setIsStarterActive] = useState(false);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(15);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(0);
   const [starterStep, setStarterStep] = useState(1);
   const [view, setView] = useState("+");
   const [wrongOnes, setWrongOnes] = useState([]);
@@ -94,8 +94,11 @@ export default function App() {
           initial="closed"
           animate={options ? "open" : "closed"}
           exit={"close"}
-          transition={{ duration: optionsView === "starter" ? 3 : 0.5 }}
+          transition={{ duration: optionsView === "starter" ? 2.5 : 0.5 }}
         >
+          <CloseOptionsSvg>
+            <button onClick={() => toggleOptions(false)}>X</button>
+          </CloseOptionsSvg>
           <Options
             score={score}
             setScore={setScore}
@@ -127,21 +130,22 @@ export default function App() {
 
 const AppContainer = styled.div`
   max-width: 600px;
+  place-content: center;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 70px auto 60px 1fr;
   align-items: center;
   text-align: center;
   margin: 0 auto;
-  height: 100vh;
 `;
 const Header = styled.header`
   h1 {
     font-size: 30px;
   }
 
-  @media screen and (max-width: 370px) {
+  @media screen and (max-width: 768px) {
     font-size: 16px;
+    grid-template-rows: 70px 50px 20px 1fr;
   }
 `;
 
@@ -153,7 +157,6 @@ const OptionsContainer = styled(motion.div)`
   overflow: hidden;
   border-radius: 10px;
   width: 90vw;
-  height: 350px;
   top: 200px;
   color: var(--dark);
   background: var(--light);
@@ -161,4 +164,14 @@ const OptionsContainer = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   z-index: 100;
+`;
+const CloseOptionsSvg = styled.div`
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  button {
+    padding: 3px 14px;
+    border-radius: 36px;
+    font-size: 20px;
+  }
 `;

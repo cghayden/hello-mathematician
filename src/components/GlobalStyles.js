@@ -79,5 +79,10 @@ ${"" /* framer styles */}
   background: transparent;
 }
 
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
 `;
 export default GlobalStyles;

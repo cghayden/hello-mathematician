@@ -66,12 +66,24 @@ export default function Score({
           Practice
         </ScoreButton>
       </ScoreButtonsDiv>
-      <WrongOnesUl>
-        <h3>You Missed:</h3>
-        {wrongOnes.map((equation, index) => (
-          <li key={index}>{equation}</li>
-        ))}
-      </WrongOnesUl>
+
+      {!wrongOnes.length && (
+        <div>
+          <p>Great Job! </p>
+          <p>You answered all the problems correctly!</p>
+        </div>
+      )}
+
+      {wrongOnes.length > 0 && (
+        <div>
+          <h3>You Missed:</h3>
+          <WrongOnesUl>
+            {wrongOnes.map((equation, index) => (
+              <li key={index}>{equation}</li>
+            ))}
+          </WrongOnesUl>
+        </div>
+      )}
     </ScoreDiv>
   );
 }

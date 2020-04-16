@@ -35,6 +35,11 @@ const MaxDigit = styled.p`
 
 const SetMaxButtonsRow = styled.div`
   display: flex;
+  @media screen and (max-width: 414px) {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-gap: 10px;
+  }
   /* justify-content: space-around; */
 `;
 
