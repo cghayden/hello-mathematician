@@ -66,6 +66,7 @@ export default function App() {
           maxValue={maxValue}
           toggleOptions={toggleOptions}
           options={options}
+          setOptionsView={setOptionsView}
         />
 
         <AnimatePresence exitBeforeEnter>
@@ -96,7 +97,14 @@ export default function App() {
           transition={{ duration: optionsView === "starter" ? 2.5 : 0.5 }}
         >
           <CloseOptionsSvg>
-            <button onClick={() => toggleOptions(false)}>X</button>
+            <button
+              onClick={() => {
+                toggleOptions(false);
+                setOptionsView("timer");
+              }}
+            >
+              X
+            </button>
           </CloseOptionsSvg>
           <Options
             score={score}

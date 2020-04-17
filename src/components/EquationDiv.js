@@ -149,9 +149,11 @@ export default function EquationDiv({
         ref={correctAudio}
         preload="true"
         src="https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav"
+        // src="../../public/hihat.wav"
       />
       <audio
         ref={wrongAudio}
+        preload="true"
         src="https://res.cloudinary.com/coreytesting/video/upload/v1584721830/sounds/wrongSoft.mp3"
       />
     </>

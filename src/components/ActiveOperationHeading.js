@@ -32,7 +32,7 @@ export default function ActiveOperationHeading({
   view,
   maxValue,
   toggleOptions,
-  options,
+  setOptionsView,
 }) {
   const [viewString, setViewString] = useState("Addition");
   useEffect(() => {
@@ -50,12 +50,17 @@ export default function ActiveOperationHeading({
     }
   }, [view]);
 
+  const handleClick = () => {
+    toggleOptions((options) => !options);
+    setOptionsView("timer");
+  };
+
   return (
     <HeadingStyles>
-      <h2 role="button" onClick={() => toggleOptions((options) => !options)}>
+      <h2 role="button" onClick={handleClick}>
         {viewString} to {maxValue}
       </h2>
-      <MenuButton onClick={() => toggleOptions((options) => !options)}>
+      <MenuButton onClick={handleClick}>
         <ChevronsDown />
         {/* <MoreVerticalSvg /> */}
       </MenuButton>
