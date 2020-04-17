@@ -8,6 +8,7 @@ const HeadingStyles = styled.div`
   justify-items: center;
   justify-content: center;
   color: var(--yellow);
+  align-items: center;
   h2 {
     font-size: 26px;
     @media screen and (max-width: 414px) {
@@ -18,7 +19,7 @@ const HeadingStyles = styled.div`
 const MenuButton = styled.button`
   border: none;
   padding: 10px;
-  /* margin-left: auto; */
+  margin-left: 8px;
   color: var(--yellow);
   /* color: var(--white); */
   background: transparent;

@@ -187,15 +187,18 @@ const CalcButton = styled.button`
   display: grid;
   place-items: center;
   &.deleteButton {
+    padding-right: 2px;
     svg {
       display: block;
       margin: auto;
+      /* color: var(--red); */
     }
   }
   &.submitCheckButton {
     svg {
       display: block;
       margin: auto;
+      /* color: var(--light); */
     }
   }
 `;
