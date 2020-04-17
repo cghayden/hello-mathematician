@@ -15,6 +15,9 @@ export default function EquationDiv({
   options,
   wrongOnes,
   setWrongOnes,
+  count,
+  setCount,
+  inProgress,
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
@@ -73,15 +76,22 @@ export default function EquationDiv({
 
   function checkAnswer(e) {
     e.preventDefault();
+    if (inProgress) {
+      setCount((count) => count + 1);
+    }
     if (parseInt(answer, 10) === solution) {
       setIsCorrect(true);
       correctAudio.current.play();
-      setScore((score) => score + 1);
+      if (inProgress) {
+        setScore((score) => score + 1);
+      }
     } else {
       setIsCorrect(false);
       wrongAudio.current.play();
       const equation = `${digits[0]} ${view} ${digits[1]} = ${solution}`;
-      setWrongOnes([...wrongOnes, equation]);
+      if (inProgress) {
+        setWrongOnes([...wrongOnes, equation]);
+      }
     }
     setTimeout(() => nextProblem(), 400);
   }
@@ -95,9 +105,6 @@ export default function EquationDiv({
     setAnswer((answer) => answer.slice(0, -1));
     // inputEl.current.focus();
   }
-  // if(maxValue > 99) return(
-  //   <LargeEquation/>
-  // )
   return (
     <>
       {maxValue < 49 ? (

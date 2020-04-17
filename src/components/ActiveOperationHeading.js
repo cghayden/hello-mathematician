@@ -4,6 +4,7 @@ import MoreVerticalSvg from "./MoreVerticalSvg";
 import ChevronsDown from "./ChevronsDown";
 
 const HeadingStyles = styled.div`
+  cursor: pointer;
   display: flex;
   justify-items: center;
   justify-content: center;
@@ -32,7 +33,9 @@ export default function ActiveOperationHeading({
   view,
   maxValue,
   toggleOptions,
-  setOptionsView,
+  inProgress,
+  options,
+  reset,
 }) {
   const [viewString, setViewString] = useState("Addition");
   useEffect(() => {
@@ -51,16 +54,25 @@ export default function ActiveOperationHeading({
   }, [view]);
 
   const handleClick = () => {
-    toggleOptions((options) => !options);
-    setOptionsView("timer");
+    if (!inProgress) {
+      if (!options) {
+        toggleOptions(true);
+      }
+      if (options) {
+        toggleOptions(false);
+        setTimeout(() => {
+          reset();
+        }, 1000);
+      }
+    }
   };
 
   return (
     <HeadingStyles>
-      <h2 role="button" onClick={handleClick}>
+      <h2 role="button" disabled={inProgress} onClick={handleClick}>
         {viewString} to {maxValue}
       </h2>
-      <MenuButton onClick={handleClick}>
+      <MenuButton disabled={inProgress} onClick={handleClick}>
         <ChevronsDown />
         {/* <MoreVerticalSvg /> */}
       </MenuButton>

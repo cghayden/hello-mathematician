@@ -30,6 +30,7 @@ const GlobalStyles = createGlobalStyle`
 
 button {
   touch-action: manipulation;
+  cursor: pointer;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

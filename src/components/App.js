@@ -21,6 +21,7 @@ export default function App() {
   const [optionsView, setOptionsView] = useState("timer");
   const [maxValue, setMaxValue] = useState(10);
   const [score, setScore] = useState(0);
+  const [count, setCount] = useState(0);
   const [inProgress, toggleInProgress] = useState(false);
   const [isStarterActive, setIsStarterActive] = useState(false);
   const [minutes, setMinutes] = useState(1);
@@ -50,15 +51,18 @@ export default function App() {
     }
   }
 
+  function reset() {
+    setScore(0);
+    setCount(0);
+    setOptionsView("timer");
+    setWrongOnes([]);
+  }
   return (
     <React.Fragment>
       <GlobalStyles />
       <AppContainer>
         <Header>
           <h1>Hello Mathematician!</h1>
-          {/* <button onClick={() => toggleOptions((options) => !options)}>
-            <HamburgerSvg />
-          </button> */}
         </Header>
         <Navigation inProgress={inProgress} view={view} setView={setView} />
         <ActiveOperationHeading
@@ -66,9 +70,9 @@ export default function App() {
           maxValue={maxValue}
           toggleOptions={toggleOptions}
           options={options}
-          setOptionsView={setOptionsView}
+          inProgress={inProgress}
+          reset={reset}
         />
-
         <AnimatePresence exitBeforeEnter>
           <motion.div
             variants={equationVariants}
@@ -85,10 +89,12 @@ export default function App() {
               setScore={setScore}
               wrongOnes={wrongOnes}
               setWrongOnes={setWrongOnes}
+              count={count}
+              setCount={setCount}
+              inProgress={inProgress}
             />
           </motion.div>
         </AnimatePresence>
-
         <OptionsContainer
           variants={optionsVariants}
           initial="closed"
@@ -100,13 +106,16 @@ export default function App() {
             <button
               onClick={() => {
                 toggleOptions(false);
-                setOptionsView("timer");
+                setTimeout(() => {
+                  reset();
+                }, 1000);
               }}
             >
               X
             </button>
           </CloseOptionsSvg>
           <Options
+            reset={reset}
             score={score}
             setScore={setScore}
             toggleInProgress={toggleInProgress}
@@ -128,6 +137,8 @@ export default function App() {
             setOptionsView={setOptionsView}
             wrongOnes={wrongOnes}
             setWrongOnes={setWrongOnes}
+            view={view}
+            count={count}
           />
         </OptionsContainer>
       </AppContainer>
