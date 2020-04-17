@@ -25,6 +25,11 @@ const GlobalStyles = createGlobalStyle`
        "" /* background: linear-gradient(336deg, rgba(34,124,195,1) 60%, rgba(35,58,196,1) 100%); */
      }
     margin:0;
+    touch-action:manipulation;
+}
+
+button {
+  touch-action: manipulation;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
