@@ -21,12 +21,8 @@ export default function EquationDiv({
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
-  // const inputEl = useRef(null);
+  const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
-
-  // useEffect(() => {
-  //   inputEl.current.focus();
-  // });
 
   useEffect(() => {
     if (view === "+") {
@@ -65,7 +61,6 @@ export default function EquationDiv({
     } else {
       setDigits(array);
     }
-    // inputEl.current.focus();
   }
 
   function nextProblem() {
@@ -103,7 +98,6 @@ export default function EquationDiv({
   }
   function deleteOneInput() {
     setAnswer((answer) => answer.slice(0, -1));
-    // inputEl.current.focus();
   }
   return (
     <>
@@ -117,6 +111,7 @@ export default function EquationDiv({
           answer={answer}
           handleInputChange={handleInputChange}
           checkAnswer={checkAnswer}
+          inputEl={inputEl}
         />
       ) : (
         <VerticalEquation
@@ -128,6 +123,7 @@ export default function EquationDiv({
           answer={answer}
           handleInputChange={handleInputChange}
           checkAnswer={checkAnswer}
+          inputEl={inputEl}
         />
       )}
 

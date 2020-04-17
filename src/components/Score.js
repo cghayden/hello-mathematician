@@ -11,6 +11,9 @@ const ScoreDiv = styled(motion.div)`
     grid-column: 1/-1;
     padding-bottom: 5px;
   }
+  p {
+    padding: 0 10px;
+  }
 `;
 
 const ScoreButton = styled(SmallPillButton)`

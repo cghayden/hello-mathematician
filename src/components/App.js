@@ -151,19 +151,18 @@ const AppContainer = styled.div`
   place-content: center;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 70px auto 60px 1fr;
+  grid-template-rows: 100px auto 80px 1fr;
   align-items: center;
   text-align: center;
   margin: 0 auto;
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+    grid-template-rows: 70px auto 60px 1fr;
+  }
 `;
 const Header = styled.header`
   h1 {
     font-size: 30px;
-  }
-
-  @media screen and (max-width: 768px) {
-    font-size: 16px;
-    grid-template-rows: 70px 50px 20px 1fr;
   }
 `;
 
