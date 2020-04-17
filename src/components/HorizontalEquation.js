@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Operand from "./Operand";
 import DivideSvg from "./DivideSvg";
@@ -12,7 +12,11 @@ export default function Equation({
   answer,
   handleInputChange,
   checkAnswer,
+  inputEl,
 }) {
+  useEffect(() => {
+    inputEl.current.focus();
+  });
   return (
     <Form
       id="inputForm"
@@ -37,7 +41,6 @@ export default function Equation({
             <Operand digit={digits[1]} />
           </OperandContainer>
           <p className="equals">=</p>
-
           <div style={{ position: "relative" }}>
             {isCorrect === false && <RevealCorrect>{solution}</RevealCorrect>}
             <Input
@@ -46,7 +49,7 @@ export default function Equation({
               id="answer"
               type="number"
               pattern="[0-9]*"
-              // ref={inputEl}
+              ref={inputEl}
               value={answer}
               name="answer"
               onChange={(e) => handleInputChange(e)}
@@ -59,7 +62,7 @@ export default function Equation({
 }
 
 const Form = styled.form`
-  font-size: 4rem;
+  font-size: 5rem;
   font-family: "Fira Sans";
   position: relative;
   display: flex;
@@ -72,7 +75,7 @@ const Form = styled.form`
     grid-column: 1/-1;
     color: var(--green);
   }
-  @media screen and (max-width: 414px) {
+  @media screen and (max-width: 768px) {
     font-size: 4rem;
   }
 `;

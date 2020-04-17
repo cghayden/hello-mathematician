@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Operand from "./Operand";
 import DivideSvg from "./DivideSvg";
@@ -12,7 +12,11 @@ export default function HundredsEquation({
   answer,
   handleInputChange,
   checkAnswer,
+  inputEl,
 }) {
+  useEffect(() => {
+    inputEl.current.focus();
+  });
   return (
     <Form
       id="inputForm"
@@ -26,7 +30,6 @@ export default function HundredsEquation({
             <GhostOperand>{digits[0]}</GhostOperand>
             <Operand digit={digits[0]} />
           </OperandContainer>
-
           <OperandContainer>
             <OperatorContainer>
               {view === "/" && <DivideSvg />}
@@ -38,7 +41,6 @@ export default function HundredsEquation({
             <Operand digit={digits[1]} />
           </OperandContainer>
           {/* <p className="equals">=</p> */}
-
           <InputDiv>
             {isCorrect === false && <RevealCorrect>{solution}</RevealCorrect>}
             <Input
@@ -47,7 +49,7 @@ export default function HundredsEquation({
               id="answer"
               type="number"
               pattern="[0-9]*"
-              // ref={inputEl}
+              ref={inputEl}
               value={answer}
               name="answer"
               onChange={(e) => handleInputChange(e)}
@@ -60,7 +62,7 @@ export default function HundredsEquation({
 }
 
 const Form = styled.form`
-  font-size: 4rem;
+  font-size: 5rem;
   font-family: "Fira Sans";
   position: relative;
   height: 3.5em;
@@ -75,7 +77,7 @@ const Form = styled.form`
     grid-column: 1/-1;
     color: var(--green);
   }
-  @media screen and (max-width: 370px) {
+  @media screen and (max-width: 768px) {
     font-size: 4rem;
   }
 `;
