@@ -22,6 +22,9 @@ export default function Options({
   setOptionsView,
   wrongOnes,
   setWrongOnes,
+  reset,
+  view,
+  count,
 }) {
   if (optionsView === "timer")
     return (
@@ -35,7 +38,7 @@ export default function Options({
           toggleOptions={toggleOptions}
           setOptionsView={setOptionsView}
         />
-        <MaxValue maxValue={maxValue} setMaxValue={setMaxValue} />
+        <MaxValue maxValue={maxValue} setMaxValue={setMaxValue} view={view} />
       </>
     );
 
@@ -55,12 +58,11 @@ export default function Options({
   if (optionsView === "score")
     return (
       <Score
+        reset={reset}
         score={score}
-        setScore={setScore}
-        setOptionsView={setOptionsView}
+        count={count}
         toggleOptions={toggleOptions}
         wrongOnes={wrongOnes}
-        setWrongOnes={setWrongOnes}
       />
     );
 }

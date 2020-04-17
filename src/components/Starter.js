@@ -24,7 +24,7 @@ export default function Starter({
       clearInterval(interval);
       setStarterStep(1);
       toggleInProgress(true);
-      setOptionsView("score");
+      // setOptionsView("score");
     }
     return () => clearInterval(interval);
   }, [starterStep, setStarterStep, toggleInProgress, setOptionsView]);

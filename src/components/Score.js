@@ -34,6 +34,8 @@ export default function Score({
   toggleOptions,
   wrongOnes,
   setWrongOnes,
+  reset,
+  count,
 }) {
   return (
     <ScoreDiv
@@ -46,9 +48,7 @@ export default function Score({
       <ScoreButtonsDiv>
         <ScoreButton
           onClick={() => {
-            setScore(0);
-            setOptionsView("timer");
-            setWrongOnes([]);
+            reset();
           }}
         >
           Play again
@@ -57,9 +57,7 @@ export default function Score({
           onClick={() => {
             toggleOptions(false);
             setTimeout(() => {
-              setOptionsView("timer");
-              setScore(0);
-              setWrongOnes([]);
+              reset();
             }, 1000);
           }}
         >
@@ -67,10 +65,11 @@ export default function Score({
         </ScoreButton>
       </ScoreButtonsDiv>
 
-      {!wrongOnes.length && (
+      {count > 0 && (
         <div>
-          <p>Great Job! </p>
-          <p>You answered all the problems correctly!</p>
+          <p>
+            You answered {score} out of {count} correctly
+          </p>
         </div>
       )}
 

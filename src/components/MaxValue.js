@@ -52,14 +52,18 @@ const MaxValueDisplay = styled.div`
   padding-bottom: 20px;
 `;
 
-export default function MaxValue({ maxValue, setMaxValue }) {
+export default function MaxValue({ maxValue, setMaxValue, view }) {
   return (
     <MaxValueContainer className="maxValueContainer">
       <SetMaxButtonsRow>
         <SetMaxButton onClick={() => setMaxValue(10)}>To 10</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(20)}>To 20</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(100)}>To 100</SetMaxButton>
-        <SetMaxButton onClick={() => setMaxValue(1000)}>To 1,000</SetMaxButton>
+        {view !== "x" && (
+          <SetMaxButton onClick={() => setMaxValue(1000)}>
+            To 1,000
+          </SetMaxButton>
+        )}
       </SetMaxButtonsRow>
       <MaxValueDisplay>
         <p>Max Value:</p>
