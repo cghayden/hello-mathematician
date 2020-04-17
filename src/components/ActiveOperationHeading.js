@@ -52,7 +52,7 @@ export default function ActiveOperationHeading({
 
   return (
     <HeadingStyles>
-      <h2>
+      <h2 role="button" onClick={() => toggleOptions((options) => !options)}>
         {viewString} to {maxValue}
       </h2>
       <MenuButton onClick={() => toggleOptions((options) => !options)}>
