@@ -59,7 +59,7 @@ export default function MaxValue({ maxValue, setMaxValue, view }) {
         <SetMaxButton onClick={() => setMaxValue(10)}>To 10</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(20)}>To 20</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(100)}>To 100</SetMaxButton>
-        {view !== "x" && (
+        {view !== "x" && view !== "/" && (
           <SetMaxButton onClick={() => setMaxValue(1000)}>
             To 1,000
           </SetMaxButton>
