@@ -13,7 +13,7 @@ const HeadingStyles = styled.div`
   h2 {
     font-size: 26px;
     @media screen and (max-width: 414px) {
-      font-size: 24px;
+      font-size: 20px;
     }
   }
 `;

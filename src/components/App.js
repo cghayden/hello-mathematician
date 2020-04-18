@@ -157,7 +157,7 @@ const AppContainer = styled.div`
   margin: 0 auto;
   @media screen and (max-width: 768px) {
     font-size: 16px;
-    grid-template-rows: 70px auto 60px 1fr;
+    grid-template-rows: 70px auto 52px 1fr;
   }
 `;
 const Header = styled.header`
@@ -174,14 +174,19 @@ const OptionsContainer = styled(motion.div)`
   overflow: hidden;
   border-radius: 10px;
   width: 90vw;
-  top: 200px;
+  top: 180px;
   color: var(--dark);
   background: var(--light);
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 100;
+
+  @media screen and (max-width: 768px) {
+    top: 200px;
+  }
 `;
+
 const CloseOptionsSvg = styled.div`
   position: fixed;
   right: 8px;

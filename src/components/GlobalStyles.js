@@ -6,11 +6,19 @@ const GlobalStyles = createGlobalStyle`
     --dark: #004466;
     --light: #33ffb4;
   --blue: #227cc3;
+  --lightBlue:#A8D0DB;
   --green: #5dc66a;
   --red: #e7574b;
   --orange: #dfc841;
-  --yellow: #e9d985;
-  --white: #e0f0f3;
+  ${"" /* --yellow: #e9d985; OLD*/}
+  --yellow: #f4d25e;
+  ${"" /* --white: #e0f0f3; OLD*/}
+   --white: #E4FDE1;
+  --black: #01161e;
+  --teal: #598392;
+  --eggshell: #ebebd3;
+  --gray: #aec3b0;
+  --lavenderGray: #C4CBCA
 }
 
   body {

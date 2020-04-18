@@ -14,15 +14,24 @@ const Nav = styled.nav`
     align-items: center;
     font-size: 20px;
     justify-content: space-around;
-    @media screen and (max-width: 414px) {
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+    @media screen and (max-width: 768px) {
       padding-bottom: 0px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 `;
 
 const NavButton = styled.button`
-  background: ${(props) => (props.active ? "white" : "transparent")};
-  color: ${(props) => (props.active ? "var(--blue)" : "white")};
+  background: ${(props) => (props.active ? "var(--white)" : "transparent")};
+  color: ${(props) => (props.active ? "var(--dark)" : "var(--white)")};
   box-shadow: ${(props) =>
     props.active ? `0px 0px 2px 2px lightblue` : "none"};
   padding: 12px;
@@ -31,6 +40,9 @@ const NavButton = styled.button`
   border: none;
   :focus {
     box-shadow: 0px 0px 2px 2px lightblue;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 10px;
   }
 `;
 

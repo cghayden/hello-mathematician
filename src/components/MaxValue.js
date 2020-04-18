@@ -24,8 +24,8 @@ const AlterMaxButton = styled.button`
   &:focus,
   &:active {
     outline: none;
-    border: 1px solid white;
-    box-shadow: 0 0 1px 1px white;
+    border: 1px solid var(--white);
+    box-shadow: 0 0 1px 1px var(--white);
   }
 `;
 
@@ -59,7 +59,7 @@ export default function MaxValue({ maxValue, setMaxValue, view }) {
         <SetMaxButton onClick={() => setMaxValue(10)}>To 10</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(20)}>To 20</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(100)}>To 100</SetMaxButton>
-        {view !== "x" && (
+        {view !== "x" && view !== "/" && (
           <SetMaxButton onClick={() => setMaxValue(1000)}>
             To 1,000
           </SetMaxButton>

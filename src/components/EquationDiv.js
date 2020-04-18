@@ -101,7 +101,18 @@ export default function EquationDiv({
   }
   return (
     <>
-      {maxValue < 49 ? (
+      <HorizontalEquation
+        digits={digits}
+        view={view}
+        isCorrect={isCorrect}
+        options={options}
+        solution={solution}
+        answer={answer}
+        handleInputChange={handleInputChange}
+        checkAnswer={checkAnswer}
+        inputEl={inputEl}
+      />
+      {/* {maxValue < 49 ? (
         <HorizontalEquation
           digits={digits}
           view={view}
@@ -125,7 +136,7 @@ export default function EquationDiv({
           checkAnswer={checkAnswer}
           inputEl={inputEl}
         />
-      )}
+      )} */}
 
       {/* <SubmitPillButton type="submit" form="inputForm">
         Submit
@@ -152,7 +163,6 @@ export default function EquationDiv({
         ref={correctAudio}
         preload="true"
         src="https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav"
-        // src="../../public/hihat.wav"
       />
       <audio
         ref={wrongAudio}
@@ -169,9 +179,8 @@ const Calculator = styled.div`
   display: grid;
   grid-template-columns: 60px 60px 60px;
   grid-template-rows: auto;
-  row-gap: 10px;
+  row-gap: 8px;
   column-gap: 26px;
-  /* padding: 20px 10px; */
   margin-top: 15px;
   justify-content: center;
 
@@ -181,13 +190,13 @@ const Calculator = styled.div`
 `;
 
 const CalcButton = styled.button`
-  width: 64px;
-  height: 64px;
+  width: 62px;
+  height: 62px;
   padding: 0;
   border-radius: 50%;
   border: none;
   font-size: 32px;
-  background: white;
+  background: var(--white);
   color: var(--dark);
   display: grid;
   place-items: center;
@@ -196,14 +205,12 @@ const CalcButton = styled.button`
     svg {
       display: block;
       margin: auto;
-      /* color: var(--red); */
     }
   }
   &.submitCheckButton {
     svg {
       display: block;
       margin: auto;
-      /* color: var(--light); */
     }
   }
 `;
