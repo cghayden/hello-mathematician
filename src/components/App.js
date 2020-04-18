@@ -157,7 +157,7 @@ const AppContainer = styled.div`
   margin: 0 auto;
   @media screen and (max-width: 768px) {
     font-size: 16px;
-    grid-template-rows: 70px auto 60px 1fr;
+    grid-template-rows: 70px auto 52px 1fr;
   }
 `;
 const Header = styled.header`

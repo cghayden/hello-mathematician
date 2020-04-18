@@ -107,7 +107,7 @@ const Input = styled.input`
   font: inherit;
   background: transparent;
   border: none;
-  width: 2ch;
+  width: 3ch;
   color: ${(props) => (props.hide ? `transparent` : "white")};
   caret-color: white;
   margin-left: 5px;

@@ -101,7 +101,18 @@ export default function EquationDiv({
   }
   return (
     <>
-      {maxValue < 49 ? (
+      <HorizontalEquation
+        digits={digits}
+        view={view}
+        isCorrect={isCorrect}
+        options={options}
+        solution={solution}
+        answer={answer}
+        handleInputChange={handleInputChange}
+        checkAnswer={checkAnswer}
+        inputEl={inputEl}
+      />
+      {/* {maxValue < 49 ? (
         <HorizontalEquation
           digits={digits}
           view={view}
@@ -125,7 +136,7 @@ export default function EquationDiv({
           checkAnswer={checkAnswer}
           inputEl={inputEl}
         />
-      )}
+      )} */}
 
       {/* <SubmitPillButton type="submit" form="inputForm">
         Submit
@@ -169,7 +180,7 @@ const Calculator = styled.div`
   display: grid;
   grid-template-columns: 60px 60px 60px;
   grid-template-rows: auto;
-  row-gap: 10px;
+  row-gap: 8px;
   column-gap: 26px;
   /* padding: 20px 10px; */
   margin-top: 15px;
@@ -181,8 +192,8 @@ const Calculator = styled.div`
 `;
 
 const CalcButton = styled.button`
-  width: 64px;
-  height: 64px;
+  width: 62px;
+  height: 62px;
   padding: 0;
   border-radius: 50%;
   border: none;
