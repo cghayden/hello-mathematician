@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import SmallPillButton from "./SmallPillButton";
 import styled from "styled-components";
+import MissedEquations from "./MissedEquations";
 
 const ScoreDiv = styled(motion.div)`
   font-size: 26px;
@@ -31,14 +32,12 @@ const ScoreButtonsDiv = styled.div`
 `;
 
 export default function Score({
+  reset,
   score,
-  setScore,
-  setOptionsView,
+  count,
   toggleOptions,
   wrongOnes,
-  setWrongOnes,
-  reset,
-  count,
+  view,
 }) {
   return (
     <ScoreDiv
@@ -77,21 +76,8 @@ export default function Score({
       )}
 
       {wrongOnes.length > 0 && (
-        <div>
-          <h3>You Missed:</h3>
-          <WrongOnesUl>
-            {wrongOnes.map((equation, index) => (
-              <li key={index}>{equation}</li>
-            ))}
-          </WrongOnesUl>
-        </div>
+        <MissedEquations wrongOnes={wrongOnes} view={view} />
       )}
     </ScoreDiv>
   );
 }
-const WrongOnesUl = styled.ul`
-  font-size: 20px;
-  display: grid;
-  grid-template-columns: 120px 120px;
-  justify-items: center;
-`;

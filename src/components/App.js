@@ -117,7 +117,6 @@ export default function App() {
           <Options
             reset={reset}
             score={score}
-            setScore={setScore}
             toggleInProgress={toggleInProgress}
             isStarterActive={isStarterActive}
             setIsStarterActive={setIsStarterActive}
@@ -136,7 +135,6 @@ export default function App() {
             optionsView={optionsView}
             setOptionsView={setOptionsView}
             wrongOnes={wrongOnes}
-            setWrongOnes={setWrongOnes}
             view={view}
             count={count}
           />
@@ -174,7 +172,7 @@ const OptionsContainer = styled(motion.div)`
   overflow: hidden;
   border-radius: 10px;
   width: 90vw;
-  top: 180px;
+  top: 230px;
   color: var(--dark);
   background: var(--light);
   display: flex;
@@ -183,7 +181,7 @@ const OptionsContainer = styled(motion.div)`
   z-index: 100;
 
   @media screen and (max-width: 768px) {
-    top: 200px;
+    top: 180px;
   }
 `;
 
