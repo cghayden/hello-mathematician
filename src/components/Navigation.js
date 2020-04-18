@@ -30,8 +30,8 @@ const Nav = styled.nav`
 `;
 
 const NavButton = styled.button`
-  background: ${(props) => (props.active ? "white" : "transparent")};
-  color: ${(props) => (props.active ? "var(--blue)" : "white")};
+  background: ${(props) => (props.active ? "var(--white)" : "transparent")};
+  color: ${(props) => (props.active ? "var(--dark)" : "var(--white)")};
   box-shadow: ${(props) =>
     props.active ? `0px 0px 2px 2px lightblue` : "none"};
   padding: 12px;

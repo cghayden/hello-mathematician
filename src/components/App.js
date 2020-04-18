@@ -174,14 +174,19 @@ const OptionsContainer = styled(motion.div)`
   overflow: hidden;
   border-radius: 10px;
   width: 90vw;
-  top: 200px;
+  top: 180px;
   color: var(--dark);
   background: var(--light);
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 100;
+
+  @media screen and (max-width: 768px) {
+    top: 200px;
+  }
 `;
+
 const CloseOptionsSvg = styled.div`
   position: fixed;
   right: 8px;

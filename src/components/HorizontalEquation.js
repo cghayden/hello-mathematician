@@ -108,8 +108,8 @@ const Input = styled.input`
   background: transparent;
   border: none;
   width: 3ch;
-  color: ${(props) => (props.hide ? `transparent` : "white")};
-  caret-color: white;
+  color: ${(props) => (props.hide ? `transparent` : `var(--white)`)};
+  caret-color: var(--white);
   margin-left: 5px;
   &:focus {
     outline: none;

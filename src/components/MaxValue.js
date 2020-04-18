@@ -24,8 +24,8 @@ const AlterMaxButton = styled.button`
   &:focus,
   &:active {
     outline: none;
-    border: 1px solid white;
-    box-shadow: 0 0 1px 1px white;
+    border: 1px solid var(--white);
+    box-shadow: 0 0 1px 1px var(--white);
   }
 `;
 

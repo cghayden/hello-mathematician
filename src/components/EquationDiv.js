@@ -163,7 +163,6 @@ export default function EquationDiv({
         ref={correctAudio}
         preload="true"
         src="https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav"
-        // src="../../public/hihat.wav"
       />
       <audio
         ref={wrongAudio}
@@ -182,7 +181,6 @@ const Calculator = styled.div`
   grid-template-rows: auto;
   row-gap: 8px;
   column-gap: 26px;
-  /* padding: 20px 10px; */
   margin-top: 15px;
   justify-content: center;
 
@@ -198,7 +196,7 @@ const CalcButton = styled.button`
   border-radius: 50%;
   border: none;
   font-size: 32px;
-  background: white;
+  background: var(--white);
   color: var(--dark);
   display: grid;
   place-items: center;
@@ -207,14 +205,12 @@ const CalcButton = styled.button`
     svg {
       display: block;
       margin: auto;
-      /* color: var(--red); */
     }
   }
   &.submitCheckButton {
     svg {
       display: block;
       margin: auto;
-      /* color: var(--light); */
     }
   }
 `;
