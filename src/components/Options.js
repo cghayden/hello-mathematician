@@ -5,7 +5,6 @@ import MaxValue from "./MaxValue";
 import Score from "./Score";
 export default function Options({
   score,
-  setScore,
   toggleInProgress,
   isStarterActive,
   setIsStarterActive,
@@ -21,7 +20,6 @@ export default function Options({
   optionsView,
   setOptionsView,
   wrongOnes,
-  setWrongOnes,
   reset,
   view,
   count,
@@ -63,6 +61,7 @@ export default function Options({
         count={count}
         toggleOptions={toggleOptions}
         wrongOnes={wrongOnes}
+        view={view}
       />
     );
 }
