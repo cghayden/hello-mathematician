@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import HorizontalEquation from "./HorizontalEquation";
-import VerticalEquation from "./VerticalEquation";
+// import VerticalEquation from "./VerticalEquation";
 import DeleteSvg from "./DeleteSvg";
 import CheckmarkSvg from "./CheckmarkSvg";
 function getRandom(maxValue) {

@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
-// import DivideSvg from './DivideSvg';
 export default function MissedEquations({ wrongOnes, view }) {
-  // const [wrongDivisionSets, setWrongDivisionSets]= useState();
-  // useEffect(() => {
-  //   if (view === "/") {
-  //     formatDivisionView(wrongOnes);
-  //   }
-  // }, [view]);
-
-  // function formatDivisionView(wrongOnes) {
-  //   console.log("wrongOnes:", wrongOnes);
-  // }
   if (view === "/") {
     return (
       <div>
