@@ -22,18 +22,7 @@ export default function EquationDiv({
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
   const [reduceEquationSize, setReduceEquationSize] = useState(false);
-  useEffect(() => {
-    if (view === "x" || "/") {
-      if (maxValue > 31) {
-        setReduceEquationSize(true);
-      }
-    }
-    if (view === "+" || "-") {
-      if (maxValue > 499) {
-        setReduceEquationSize(true);
-      }
-    }
-  }, [maxValue, view, setReduceEquationSize]);
+
   const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
 
@@ -51,6 +40,23 @@ export default function EquationDiv({
       setSolution(digits[0] / digits[1]);
     }
   }, [view, digits]);
+
+  useEffect(() => {
+    if (view === "x" || "/") {
+      if (maxValue > 31) {
+        setReduceEquationSize(true);
+      } else {
+        setReduceEquationSize(false);
+      }
+    }
+    if (view === "+" || "-") {
+      if (maxValue > 499) {
+        setReduceEquationSize(true);
+      } else {
+        setReduceEquationSize(false);
+      }
+    }
+  }, [maxValue, view, setReduceEquationSize]);
 
   const [answer, setAnswer] = useState("");
   const [isCorrect, setIsCorrect] = useState();
