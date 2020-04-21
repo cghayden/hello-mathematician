@@ -13,6 +13,7 @@ export default function Equation({
   handleInputChange,
   checkAnswer,
   inputEl,
+  reduceEquationSize,
 }) {
   useEffect(() => {
     inputEl.current.focus();
@@ -23,6 +24,7 @@ export default function Equation({
       action="POST"
       onSubmit={(e) => checkAnswer(e)}
       className="fullEquation"
+      reduceEquationSize={reduceEquationSize}
     >
       <fieldset disabled={options}>
         <Label htmlFor="answer">
@@ -46,6 +48,7 @@ export default function Equation({
             <Input
               disabled={options === true}
               hide={isCorrect === false}
+              reduceEquationSize={reduceEquationSize}
               id="answer"
               type="number"
               pattern="[0-9]*"
@@ -76,10 +79,11 @@ const Form = styled.form`
     color: var(--green);
   }
   @media screen and (max-width: 768px) {
-    font-size: 4rem;
+    font-size: ${(props) => (props.reduceEquationSize ? `50px` : "4rem")};
   }
 `;
 const Label = styled.label`
+  font: inherit;
   padding: 20px 0;
   display: flex;
 `;
@@ -107,12 +111,17 @@ const Input = styled.input`
   font: inherit;
   background: transparent;
   border: none;
-  width: 3ch;
+  /* reduce width of equation to accomodate larger values */
+  width: 5ch;
   color: ${(props) => (props.hide ? `transparent` : `var(--white)`)};
   caret-color: var(--white);
   margin-left: 5px;
   &:focus {
     outline: none;
+  }
+  @media screen and (max-width: 768px) {
+    width: ${(props) => (props.reduceEquationSize ? `4ch` : "3ch")};
+    /* font-size: ${(props) => (props.reduceEquationSize ? `50px` : "4rem")}; */
   }
 `;
 

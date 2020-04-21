@@ -5,6 +5,7 @@ import MaxValue from "./MaxValue";
 import Score from "./Score";
 export default function Options({
   score,
+  inProgress,
   toggleInProgress,
   isStarterActive,
   setIsStarterActive,
@@ -40,7 +41,7 @@ export default function Options({
       </>
     );
 
-  if (optionsView === "starter")
+  if (optionsView === "starter" && !inProgress)
     return (
       <Starter
         key={"starter"}
@@ -50,6 +51,7 @@ export default function Options({
         starterStep={starterStep}
         setStarterStep={setStarterStep}
         setOptionsView={setOptionsView}
+        toggleOptions={toggleOptions}
       />
     );
 

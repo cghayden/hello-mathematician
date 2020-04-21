@@ -14,6 +14,7 @@ const equationVariants = {
 const optionsVariants = {
   closed: { height: `0px` },
   open: { height: `400px` },
+  // transition: { duration: optionsView === "starter" ? 2.5 : 0.5 },
 };
 
 export default function App() {
@@ -64,7 +65,13 @@ export default function App() {
         <Header>
           <h1>Hello Mathematician!</h1>
         </Header>
-        <Navigation inProgress={inProgress} view={view} setView={setView} />
+        <Navigation
+          maxValue={maxValue}
+          setMaxValue={setMaxValue}
+          inProgress={inProgress}
+          view={view}
+          setView={setView}
+        />
         <ActiveOperationHeading
           view={view}
           maxValue={maxValue}
@@ -100,7 +107,11 @@ export default function App() {
           initial="closed"
           animate={options ? "open" : "closed"}
           exit={"close"}
-          transition={{ duration: optionsView === "starter" ? 2.5 : 0.5 }}
+          transition={{
+            duration: 0.4,
+            // ease: [0.01, 0.01, 0.9, 0.01],
+            // duration: optionsView === "starter" ? 2.0 : 0.5,
+          }}
         >
           <CloseOptionsSvg>
             <button
@@ -117,6 +128,7 @@ export default function App() {
           <Options
             reset={reset}
             score={score}
+            inProgress={inProgress}
             toggleInProgress={toggleInProgress}
             isStarterActive={isStarterActive}
             setIsStarterActive={setIsStarterActive}
@@ -131,7 +143,6 @@ export default function App() {
             toggleOptions={toggleOptions}
             maxValue={maxValue}
             setMaxValue={setMaxValue}
-            inProgress={inProgress}
             optionsView={optionsView}
             setOptionsView={setOptionsView}
             wrongOnes={wrongOnes}

@@ -1,8 +1,18 @@
 import React from "react";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import MinusCircleSvg from "./MinusCircleSvg";
 import PlusCircleSvg from "./PlusCircleSvg";
 import LargePillButton from "./LargePillButton";
+
+const variants = {
+  open: { opacity: 1 },
+  transition: {
+    staggerChildren: 0.1,
+    delayChildren: 0.2,
+  },
+  closed: { opacity: 0 },
+};
 
 export default function Timer({
   toggleInProgress,
@@ -15,7 +25,7 @@ export default function Timer({
 }) {
   function go() {
     setOptionsView("starter");
-    toggleOptions(false);
+    // toggleOptions(false);
     const time = minutes * 60000 + seconds * 1000;
     setTimeout(function () {
       setOptionsView("score");
@@ -25,7 +35,7 @@ export default function Timer({
   }
 
   return (
-    <TimerStyle>
+    <TimerStyle variants={variants}>
       <Time>
         <p>Timer:</p>
         <p>
@@ -54,7 +64,7 @@ export default function Timer({
   );
 }
 
-const TimerStyle = styled.div`
+const TimerStyle = styled(motion.div)`
   padding-top: 30px;
   display: flex;
   flex-direction: column;

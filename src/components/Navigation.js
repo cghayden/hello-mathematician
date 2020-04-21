@@ -46,7 +46,13 @@ const NavButton = styled.button`
   }
 `;
 
-export default function Navigation({ view, setView, inProgress }) {
+export default function Navigation({
+  view,
+  setView,
+  inProgress,
+  maxValue,
+  setMaxValue,
+}) {
   return (
     <Nav>
       <ul>
@@ -72,7 +78,12 @@ export default function Navigation({ view, setView, inProgress }) {
           <NavButton
             disabled={inProgress}
             active={view === "x"}
-            onClick={() => setView("x")}
+            onClick={() => {
+              if (maxValue > 100) {
+                setMaxValue(100);
+                setView("x");
+              }
+            }}
           >
             <XSvg />
           </NavButton>
@@ -81,7 +92,12 @@ export default function Navigation({ view, setView, inProgress }) {
           <NavButton
             disabled={inProgress}
             active={view === "/"}
-            onClick={() => setView("/")}
+            onClick={() => {
+              if (maxValue > 100) {
+                setMaxValue(100);
+                setView("/");
+              }
+            }}
           >
             <DivideSvg />
           </NavButton>

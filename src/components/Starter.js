@@ -13,6 +13,7 @@ export default function Starter({
   starterStep,
   setStarterStep,
   setOptionsView,
+  toggleOptions,
 }) {
   useEffect(() => {
     let interval = null;
@@ -24,10 +25,17 @@ export default function Starter({
       clearInterval(interval);
       setStarterStep(1);
       toggleInProgress(true);
-      // setOptionsView("score");
+      toggleOptions(false);
+      setOptionsView("score");
     }
     return () => clearInterval(interval);
-  }, [starterStep, setStarterStep, toggleInProgress, setOptionsView]);
+  }, [
+    starterStep,
+    setStarterStep,
+    toggleInProgress,
+    setOptionsView,
+    toggleOptions,
+  ]);
 
   return (
     <div>
@@ -71,6 +79,7 @@ export default function Starter({
 }
 
 const StarterMessage = styled(motion.p)`
+  padding-top: 20px;
   font-size: 44px;
   display: inline-block;
 `;

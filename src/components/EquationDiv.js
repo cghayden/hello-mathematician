@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import HorizontalEquation from "./HorizontalEquation";
-import VerticalEquation from "./VerticalEquation";
+// import VerticalEquation from "./VerticalEquation";
 import DeleteSvg from "./DeleteSvg";
 import CheckmarkSvg from "./CheckmarkSvg";
 function getRandom(maxValue) {
@@ -21,6 +21,19 @@ export default function EquationDiv({
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
+  const [reduceEquationSize, setReduceEquationSize] = useState(false);
+  useEffect(() => {
+    if (view === "x" || "/") {
+      if (maxValue > 31) {
+        setReduceEquationSize(true);
+      }
+    }
+    if (view === "+" || "-") {
+      if (maxValue > 499) {
+        setReduceEquationSize(true);
+      }
+    }
+  }, [maxValue, view, setReduceEquationSize]);
   const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
 
@@ -99,6 +112,7 @@ export default function EquationDiv({
   function deleteOneInput() {
     setAnswer((answer) => answer.slice(0, -1));
   }
+
   return (
     <>
       <HorizontalEquation
@@ -111,6 +125,7 @@ export default function EquationDiv({
         handleInputChange={handleInputChange}
         checkAnswer={checkAnswer}
         inputEl={inputEl}
+        reduceEquationSize={reduceEquationSize}
       />
       {/* {maxValue < 49 ? (
         <HorizontalEquation
