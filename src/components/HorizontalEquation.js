@@ -72,18 +72,17 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   color: var(--white);
-  .right-wrong {
+  /* .right-wrong {
     height: 28px;
     font-size: 20px;
     grid-column: 1/-1;
     color: var(--green);
-  }
+  } */
   @media screen and (max-width: 768px) {
     font-size: ${(props) => (props.reduceEquationSize ? `50px` : "4rem")};
   }
 `;
 const Label = styled.label`
-  font: inherit;
   padding: 20px 0;
   display: flex;
 `;
@@ -111,7 +110,6 @@ const Input = styled.input`
   font: inherit;
   background: transparent;
   border: none;
-  /* reduce width of equation to accomodate larger values */
   width: 5ch;
   color: ${(props) => (props.hide ? `transparent` : `var(--white)`)};
   caret-color: var(--white);
@@ -120,8 +118,8 @@ const Input = styled.input`
     outline: none;
   }
   @media screen and (max-width: 768px) {
-    width: ${(props) => (props.reduceEquationSize ? `4ch` : "3ch")};
-    /* font-size: ${(props) => (props.reduceEquationSize ? `50px` : "4rem")}; */
+    /* reduce width of equation to accomodate larger values */
+    width: ${(props) => (props.reduceEquationSize ? `4ch` : `3ch`)};
   }
 `;
 

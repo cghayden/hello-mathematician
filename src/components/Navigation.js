@@ -81,8 +81,8 @@ export default function Navigation({
             onClick={() => {
               if (maxValue > 100) {
                 setMaxValue(100);
-                setView("x");
               }
+              setView("x");
             }}
           >
             <XSvg />
@@ -95,8 +95,8 @@ export default function Navigation({
             onClick={() => {
               if (maxValue > 100) {
                 setMaxValue(100);
-                setView("/");
               }
+              setView("/");
             }}
           >
             <DivideSvg />

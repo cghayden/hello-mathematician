@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import ChevronUpSvg from "./ChevronUpSvg";
 import ChevronDownSvg from "./ChevronDownSvg";
@@ -40,7 +40,6 @@ const SetMaxButtonsRow = styled.div`
     grid-template-columns: 100px 100px;
     grid-gap: 10px;
   }
-  /* justify-content: space-around; */
 `;
 
 const SetMaxButton = styled(Button)`
@@ -53,14 +52,6 @@ const MaxValueDisplay = styled.div`
 `;
 
 export default function MaxValue({ maxValue, setMaxValue, view }) {
-  // useEffect(() => {
-  //   if (view === `x` || `/`) {
-  //     if (maxValue > 100) {
-  //       setMaxValue(100);
-  //     }
-  //   }
-  // }, [view, maxValue]);
-
   const increaseMaxValue = () => {
     if (view === "x" || "/") {
       if (maxValue < 100) {
