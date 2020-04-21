@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ChevronUpSvg from "./ChevronUpSvg";
 import ChevronDownSvg from "./ChevronDownSvg";
@@ -53,6 +53,24 @@ const MaxValueDisplay = styled.div`
 `;
 
 export default function MaxValue({ maxValue, setMaxValue, view }) {
+  // useEffect(() => {
+  //   if (view === `x` || `/`) {
+  //     if (maxValue > 100) {
+  //       setMaxValue(100);
+  //     }
+  //   }
+  // }, [view, maxValue]);
+
+  const increaseMaxValue = () => {
+    if (view === "x" || "/") {
+      if (maxValue < 100) {
+        setMaxValue((maxValue) => maxValue + 1);
+      }
+    } else {
+      setMaxValue((maxValue) => maxValue + 1);
+    }
+  };
+
   return (
     <MaxValueContainer className="maxValueContainer">
       <SetMaxButtonsRow>
@@ -69,13 +87,15 @@ export default function MaxValue({ maxValue, setMaxValue, view }) {
         <p>Max Value:</p>
         <MaxDigit>{maxValue}</MaxDigit>
         <ChangeButtons>
-          <AlterMaxButton
-            onClick={() => setMaxValue((maxValue) => maxValue + 1)}
-          >
+          <AlterMaxButton onClick={increaseMaxValue}>
             <ChevronUpSvg />
           </AlterMaxButton>
           <AlterMaxButton
-            onClick={() => setMaxValue((maxValue) => maxValue - 1)}
+            onClick={() => {
+              if (maxValue > 5) {
+                setMaxValue((maxValue) => maxValue - 1);
+              }
+            }}
           >
             <ChevronDownSvg />
           </AlterMaxButton>

@@ -79,6 +79,7 @@ export default function Starter({
 }
 
 const StarterMessage = styled(motion.p)`
+  padding-top: 20px;
   font-size: 44px;
   display: inline-block;
 `;

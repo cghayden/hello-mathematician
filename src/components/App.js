@@ -65,7 +65,13 @@ export default function App() {
         <Header>
           <h1>Hello Mathematician!</h1>
         </Header>
-        <Navigation inProgress={inProgress} view={view} setView={setView} />
+        <Navigation
+          maxValue={maxValue}
+          setMaxValue={setMaxValue}
+          inProgress={inProgress}
+          view={view}
+          setView={setView}
+        />
         <ActiveOperationHeading
           view={view}
           maxValue={maxValue}
