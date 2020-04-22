@@ -68,6 +68,7 @@ export default function Equation({
 
 const Form = styled.form`
   font-size: 5rem;
+  padding-top: 15px;
   font-family: "Fira Sans";
   position: relative;
   display: flex;
@@ -82,6 +83,7 @@ const Form = styled.form`
   } */
   @media screen and (max-width: 768px) {
     font-size: ${(props) => (props.reduceEquationSize ? `50px` : "4rem")};
+    padding-top: 0px;
   }
 `;
 const Label = styled.label`

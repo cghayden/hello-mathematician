@@ -130,7 +130,7 @@ export default function EquationDiv({
         setWrongOnes([...wrongOnes, equation]);
       }
     }
-    setTimeout(() => nextProblem(), 750);
+    setTimeout(() => nextProblem(), 800);
   }
 
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
