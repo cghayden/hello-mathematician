@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// import MoreVerticalSvg from "./MoreVerticalSvg";
 import ChevronsDown from "./ChevronsDown";
 
 const HeadingStyles = styled.div`

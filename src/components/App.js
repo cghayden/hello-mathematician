@@ -6,6 +6,8 @@ import GlobalStyles from "./GlobalStyles";
 import EquationDiv from "./EquationDiv";
 import Options from "./Options";
 import ActiveOperationHeading from "./ActiveOperationHeading";
+// import ClockSvg from "./ClockSvg";
+
 const equationVariants = {
   active: { opacity: 1 },
   hidden: { opacity: 0 },
@@ -30,6 +32,7 @@ export default function App() {
   const [starterStep, setStarterStep] = useState(1);
   const [view, setView] = useState("+");
   const [wrongOnes, setWrongOnes] = useState([]);
+  const [timeoutId, setTimeoutId] = useState();
 
   function addTime() {
     if (seconds === 45) {
@@ -57,7 +60,28 @@ export default function App() {
     setCount(0);
     setOptionsView("timer");
     setWrongOnes([]);
+    setStarterStep(1);
   }
+
+  function cancelTimer(timeoutId) {
+    console.log("cancel timer");
+    clearTimeout(timeoutId);
+    toggleInProgress(false);
+    reset();
+  }
+
+  function go() {
+    setOptionsView("starter");
+    // toggleOptions(false);
+    const time = minutes * 60000 + seconds * 1000;
+    const newTimeoutID = setTimeout(function () {
+      setOptionsView("score");
+      toggleOptions(true);
+      toggleInProgress(false);
+    }, time);
+    setTimeoutId(newTimeoutID);
+  }
+
   return (
     <React.Fragment>
       <GlobalStyles />
@@ -71,6 +95,8 @@ export default function App() {
           inProgress={inProgress}
           view={view}
           setView={setView}
+          cancelTimer={cancelTimer}
+          timeoutId={timeoutId}
         />
         <ActiveOperationHeading
           view={view}
@@ -148,6 +174,7 @@ export default function App() {
             wrongOnes={wrongOnes}
             view={view}
             count={count}
+            go={go}
           />
         </OptionsContainer>
       </AppContainer>
@@ -207,3 +234,6 @@ const CloseOptionsSvg = styled.div`
     border: none;
   }
 `;
+// const TimerOn = styled.div`
+//   margin-left: auto;
+// `;
