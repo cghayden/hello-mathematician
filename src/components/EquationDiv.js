@@ -4,6 +4,15 @@ import HorizontalEquation from "./HorizontalEquation";
 // import VerticalEquation from "./VerticalEquation";
 import DeleteSvg from "./DeleteSvg";
 import CheckmarkSvg from "./CheckmarkSvg";
+
+const soundEffectSources = [
+  `https://res.cloudinary.com/coreytesting/video/upload/v1587575773/sounds/yippee.wav`,
+  `https://res.cloudinary.com/coreytesting/video/upload/v1587575766/sounds/jingleWin1.wav`,
+  `https://res.cloudinary.com/coreytesting/video/upload/v1587575762/sounds/homerWoohoo1.wav`,
+  `https://res.cloudinary.com/coreytesting/video/upload/v1587575747/sounds/coin1.wav`,
+  `https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav`,
+];
+
 function getRandom(maxValue) {
   return Math.floor(Math.random() * maxValue) + 1;
 }
@@ -15,16 +24,21 @@ export default function EquationDiv({
   options,
   wrongOnes,
   setWrongOnes,
-  count,
   setCount,
   inProgress,
 }) {
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
   const [reduceEquationSize, setReduceEquationSize] = useState(false);
+  const [correctSoundSrc, setCorrectSoundSrc] = useState();
 
   const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
+
+  useEffect(() => {
+    const soundIndex = Math.floor(Math.random() * 5);
+    setCorrectSoundSrc(soundEffectSources[soundIndex]);
+  }, [digits]);
 
   useEffect(() => {
     if (view === "+") {
@@ -107,7 +121,7 @@ export default function EquationDiv({
         setWrongOnes([...wrongOnes, equation]);
       }
     }
-    setTimeout(() => nextProblem(), 400);
+    setTimeout(() => nextProblem(), 750);
   }
 
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -180,11 +194,7 @@ export default function EquationDiv({
           <CheckmarkSvg />
         </CalcButton>
       </Calculator>
-      <audio
-        ref={correctAudio}
-        preload="true"
-        src="https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav"
-      />
+      <audio ref={correctAudio} preload="true" src={correctSoundSrc} />
       <audio
         ref={wrongAudio}
         preload="true"
