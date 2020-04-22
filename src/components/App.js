@@ -189,8 +189,9 @@ const AppContainer = styled.div`
   grid-template-rows: 100px auto 80px 1fr;
   align-items: center;
   text-align: center;
-  margin: 0 auto;
+  margin: 15px auto 0;
   @media screen and (max-width: 768px) {
+    margin: 0 auto 0;
     font-size: 16px;
     grid-template-rows: 70px auto 52px 1fr;
   }

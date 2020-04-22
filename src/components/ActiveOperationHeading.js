@@ -55,8 +55,13 @@ export default function ActiveOperationHeading({
         </MenuButton>
       </HeadingAndToggler>
       {inProgress && (
-        <TimerActiveIcon>
-          <ClockSvg />
+        <TimerActiveIcon
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <OneHandClockSvg />
+          <OverlayOneHandClockSvg />
         </TimerActiveIcon>
       )}
     </HeadingStyles>
@@ -102,7 +107,7 @@ const TimerActiveIcon = styled(motion.div)`
   display: grid;
   justify-self: left;
   position: relative;
-  padding-left: 15px;
+  /* padding-left: 15px; */
   .overlay {
     position: absolute;
   }
