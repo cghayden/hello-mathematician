@@ -78,7 +78,10 @@ const HeadingStyles = styled.div`
   align-items: center;
   h2 {
     font-size: 26px;
-    @media screen and (max-width: 414px) {
+  }
+  @media screen and (max-width: 475px) {
+    grid-template-columns: 1fr 190px 1fr 1fr 1fr;
+    h2 {
       font-size: 20px;
     }
   }
@@ -110,6 +113,10 @@ const TimerActiveIcon = styled(motion.div)`
   /* padding-left: 15px; */
   .overlay {
     position: absolute;
+  }
+  @media screen and (max-width: 475px) {
+    justify-self: center;
+    grid-column: 4;
   }
 `;
 //<TimerActiveIcon
