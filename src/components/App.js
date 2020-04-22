@@ -6,7 +6,6 @@ import GlobalStyles from "./GlobalStyles";
 import EquationDiv from "./EquationDiv";
 import Options from "./Options";
 import ActiveOperationHeading from "./ActiveOperationHeading";
-// import ClockSvg from "./ClockSvg";
 
 const equationVariants = {
   active: { opacity: 1 },
