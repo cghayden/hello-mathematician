@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Operand from "./Operand";
 import DivideSvg from "./DivideSvg";
 import XSvg from "./XSvg";
+import PlusSvg from "./PlusSvg";
+import MinusSvg from "./MinusSvg";
 export default function Equation({
   digits,
   view,
@@ -33,10 +35,10 @@ export default function Equation({
             <Operand digit={digits[0]} />
           </OperandContainer>
           <OperationContainer>
+            {view === "+" && <PlusSvg />}
+            {view === "-" && <MinusSvg />}
             {view === "/" && <DivideSvg />}
             {view === "x" && <XSvg />}
-            {view === "+" && <p>+</p>}
-            {view === "-" && <p>-</p>}
           </OperationContainer>
           <OperandContainer>
             <GhostOperand>{digits[1]}</GhostOperand>

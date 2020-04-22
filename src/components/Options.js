@@ -24,6 +24,7 @@ export default function Options({
   reset,
   view,
   count,
+  go,
 }) {
   if (optionsView === "timer")
     return (
@@ -36,6 +37,7 @@ export default function Options({
           seconds={seconds}
           toggleOptions={toggleOptions}
           setOptionsView={setOptionsView}
+          go={go}
         />
         <MaxValue maxValue={maxValue} setMaxValue={setMaxValue} view={view} />
       </>
@@ -66,4 +68,5 @@ export default function Options({
         view={view}
       />
     );
+  return null;
 }

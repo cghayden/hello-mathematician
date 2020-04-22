@@ -51,6 +51,8 @@ export default function Navigation({
   setView,
   inProgress,
   maxValue,
+  cancelTimer,
+  timeoutId,
   setMaxValue,
 }) {
   return (
@@ -58,30 +60,37 @@ export default function Navigation({
       <ul>
         <li>
           <NavButton
-            disabled={inProgress}
+            // disabled={inProgress}
             active={view === "+"}
-            onClick={() => setView("+")}
+            onClick={() => {
+              cancelTimer(timeoutId);
+              setView("+");
+            }}
           >
             <PlusSvg />
           </NavButton>
         </li>
         <li>
           <NavButton
-            disabled={inProgress}
+            // disabled={inProgress}
             active={view === "-"}
-            onClick={() => setView("-")}
+            onClick={() => {
+              cancelTimer(timeoutId);
+              setView("-");
+            }}
           >
             <MinusSvg />
           </NavButton>
         </li>
         <li>
           <NavButton
-            disabled={inProgress}
+            // disabled={inProgress}
             active={view === "x"}
             onClick={() => {
               if (maxValue > 100) {
                 setMaxValue(100);
               }
+              cancelTimer(timeoutId);
               setView("x");
             }}
           >
@@ -90,23 +99,19 @@ export default function Navigation({
         </li>
         <li>
           <NavButton
-            disabled={inProgress}
+            // disabled={inProgress}
             active={view === "/"}
             onClick={() => {
               if (maxValue > 100) {
                 setMaxValue(100);
               }
+              cancelTimer(timeoutId);
               setView("/");
             }}
           >
             <DivideSvg />
           </NavButton>
         </li>
-        {/* <li>
-          <MenuButton onClick={() => toggleOptions((options) => !options)}>
-            <MoreVerticalSvg />
-          </MenuButton>
-        </li> */}
       </ul>
     </Nav>
   );

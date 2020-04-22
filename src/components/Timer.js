@@ -22,18 +22,8 @@ export default function Timer({
   seconds,
   toggleOptions,
   setOptionsView,
+  go,
 }) {
-  function go() {
-    setOptionsView("starter");
-    // toggleOptions(false);
-    const time = minutes * 60000 + seconds * 1000;
-    setTimeout(function () {
-      setOptionsView("score");
-      toggleOptions(true);
-      toggleInProgress(false);
-    }, time);
-  }
-
   return (
     <TimerStyle variants={variants}>
       <Time>
