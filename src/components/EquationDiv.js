@@ -6,15 +6,15 @@ import DeleteSvg from "./DeleteSvg";
 import CheckmarkSvg from "./CheckmarkSvg";
 
 const correctSoundSources = [
+  `https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1587575773/sounds/yippee.wav`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1587575766/sounds/jingleWin1.wav`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1587575762/sounds/homerWoohoo1.wav`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1587575747/sounds/coin1.wav`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav`,
 ];
 const wrongSoundSources = [
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587575755/sounds/Doh.wav`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1584721830/sounds/wrongSoft.mp3`,
+  `https://res.cloudinary.com/coreytesting/video/upload/v1587575755/sounds/Doh.wav`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1587576928/sounds/wrong2.mp3`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1587577359/sounds/negativeBeep.wav`,
   `https://res.cloudinary.com/coreytesting/video/upload/v1587577571/sounds/cartoonBingLow.wav`,
@@ -43,11 +43,11 @@ export default function EquationDiv({
   const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);
 
-  useEffect(() => {
-    const soundIndex = Math.floor(Math.random() * 5);
-    setCorrectSoundSrc(correctSoundSources[soundIndex]);
-    setWrongSoundSrc(wrongSoundSources[soundIndex]);
-  }, [digits]);
+  // useEffect(() => {
+  //   const soundIndex = Math.floor(Math.random() * 5);
+  //   setCorrectSoundSrc(correctSoundSources[soundIndex]);
+  //   setWrongSoundSrc(wrongSoundSources[soundIndex]);
+  // }, [digits]);
 
   useEffect(() => {
     if (view === "+") {
@@ -130,7 +130,7 @@ export default function EquationDiv({
         setWrongOnes([...wrongOnes, equation]);
       }
     }
-    setTimeout(() => nextProblem(), 800);
+    setTimeout(() => nextProblem(), 400);
   }
 
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -203,8 +203,8 @@ export default function EquationDiv({
           <CheckmarkSvg />
         </CalcButton>
       </Calculator>
-      <audio ref={correctAudio} preload="true" src={correctSoundSrc} />
-      <audio ref={wrongAudio} preload="true" src={wrongSoundSrc} />
+      <audio ref={correctAudio} preload="true" src={correctSoundSources[0]} />
+      <audio ref={wrongAudio} preload="true" src={wrongSoundSources[0]} />
     </>
   );
 }
