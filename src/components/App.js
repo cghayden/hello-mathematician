@@ -6,6 +6,7 @@ import GlobalStyles from "./GlobalStyles";
 import EquationDiv from "./EquationDiv";
 import Options from "./Options";
 import ActiveOperationHeading from "./ActiveOperationHeading";
+import Footer from "./Footer";
 
 const equationVariants = {
   active: { opacity: 1 },
@@ -32,6 +33,7 @@ export default function App() {
   const [view, setView] = useState("+");
   const [wrongOnes, setWrongOnes] = useState([]);
   const [timeoutId, setTimeoutId] = useState();
+  const [footer, toggleFooter] = useState(false);
 
   function addTime() {
     if (seconds === 45) {
@@ -176,6 +178,18 @@ export default function App() {
             go={go}
           />
         </OptionsContainer>
+        {/* {!footer && ( */}
+        <ShowFooterButton
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ delay: 0.5 }}
+          onClick={() => toggleFooter((footer) => !footer)}
+        >
+          ?
+        </ShowFooterButton>
+        {/* )} */}
+        <Footer isToggled={footer} toggleFooter={toggleFooter} />
       </AppContainer>
     </React.Fragment>
   );
@@ -234,6 +248,21 @@ const CloseOptionsSvg = styled.div`
     border: none;
   }
 `;
-// const TimerOn = styled.div`
-//   margin-left: auto;
-// `;
+const ShowFooterButton = styled(motion.button)`
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  position: fixed;
+  bottom: 3%;
+  right: 3%;
+  background: none;
+  padding: 10px;
+  outline: none;
+  border: none;
+  color: var(--white);
+  :focus {
+    box-shadow: 0px 0px 2px 2px var(--white);
+  }
+  @media screen and (max-width: 768px) {
+    bottom: 1%;
+  }
+`;
