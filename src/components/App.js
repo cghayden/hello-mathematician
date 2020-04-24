@@ -178,12 +178,17 @@ export default function App() {
             go={go}
           />
         </OptionsContainer>
-        <ShowFooter
-          footerVisible={footer}
+        {/* {!footer && ( */}
+        <ShowFooterButton
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ delay: 0.5 }}
           onClick={() => toggleFooter((footer) => !footer)}
         >
           ?
-        </ShowFooter>
+        </ShowFooterButton>
+        {/* )} */}
         <Footer isToggled={footer} toggleFooter={toggleFooter} />
       </AppContainer>
     </React.Fragment>
@@ -243,22 +248,21 @@ const CloseOptionsSvg = styled.div`
     border: none;
   }
 `;
-const ShowFooter = styled(motion.button)`
+const ShowFooterButton = styled(motion.button)`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   position: fixed;
-  bottom: 10px;
-  right: 10px;
-  z-index: 101;
+  bottom: 3%;
+  right: 3%;
   background: none;
   padding: 10px;
   outline: none;
   border: none;
-  color: ${(props) => (props.footerVisible ? "var(--dark)" : `var(--white)`)};
+  color: var(--white);
   :focus {
-    box-shadow: ${(props) =>
-      props.footerVisible
-        ? "0px 0px 2px 2px var(--light)"
-        : "0px 0px 2px 2px var(--white)"};
+    box-shadow: 0px 0px 2px 2px var(--white);
+  }
+  @media screen and (max-width: 768px) {
+    bottom: 1%;
   }
 `;
