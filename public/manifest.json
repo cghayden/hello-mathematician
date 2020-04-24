@@ -1,0 +1,9 @@
+{
+  "name": "Hello Mathematician!",
+  "short_name": "Hello Math",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#004466",
+  "theme_color": "#33ffb4",
+  "orientation": "portrait-primary"
+}
