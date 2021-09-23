@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import styled from "styled-components";
-import Navigation from "./Navigation";
-import GlobalStyles from "./GlobalStyles";
-import EquationDiv from "./EquationDiv";
-import Options from "./Options";
-import ActiveOperationHeading from "./ActiveOperationHeading";
-import Footer from "./Footer";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import styled from 'styled-components';
+import Navigation from './Navigation';
+import GlobalStyles from './GlobalStyles';
+import EquationDiv from './EquationDiv';
+import Options from './Options';
+import ActiveOperationHeading from './ActiveOperationHeading';
+import Footer from './Footer';
 
 const equationVariants = {
   active: { opacity: 1 },
@@ -19,9 +19,11 @@ const optionsVariants = {
   // transition: { duration: optionsView === "starter" ? 2.5 : 0.5 },
 };
 
+type ITimeoutId = {};
+
 export default function App() {
   const [options, toggleOptions] = useState(false);
-  const [optionsView, setOptionsView] = useState("timer");
+  const [optionsView, setOptionsView] = useState('timer');
   const [maxValue, setMaxValue] = useState(10);
   const [score, setScore] = useState(0);
   const [count, setCount] = useState(0);
@@ -30,9 +32,9 @@ export default function App() {
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
   const [starterStep, setStarterStep] = useState(1);
-  const [view, setView] = useState("+");
+  const [view, setView] = useState('+');
   const [wrongOnes, setWrongOnes] = useState([]);
-  const [timeoutId, setTimeoutId] = useState();
+  const [timeoutId, setTimeoutId] = React.useState<ITimeoutId | null>(null);
   const [footer, toggleFooter] = useState(false);
 
   function addTime() {
@@ -59,27 +61,28 @@ export default function App() {
   function reset() {
     setScore(0);
     setCount(0);
-    setOptionsView("timer");
+    setOptionsView('timer');
     setWrongOnes([]);
     setStarterStep(1);
   }
 
-  function cancelTimer(timeoutId) {
-    console.log("cancel timer");
+  function cancelTimer(timeoutId: number) {
+    console.log('cancel timer');
     clearTimeout(timeoutId);
     toggleInProgress(false);
     reset();
   }
 
   function go() {
-    setOptionsView("starter");
+    setOptionsView('starter');
     // toggleOptions(false);
     const time = minutes * 60000 + seconds * 1000;
     const newTimeoutID = setTimeout(function () {
-      setOptionsView("score");
+      setOptionsView('score');
       toggleOptions(true);
       toggleInProgress(false);
     }, time);
+
     setTimeoutId(newTimeoutID);
   }
 
@@ -93,7 +96,6 @@ export default function App() {
         <Navigation
           maxValue={maxValue}
           setMaxValue={setMaxValue}
-          inProgress={inProgress}
           view={view}
           setView={setView}
           cancelTimer={cancelTimer}
@@ -110,11 +112,11 @@ export default function App() {
         <AnimatePresence exitBeforeEnter>
           <motion.div
             variants={equationVariants}
-            key={"equation"}
-            initial="hidden"
-            animate={options ? "hidden" : "active"}
-            exit={"hidden"}
-            style={{ alignSelf: "start" }}
+            key={'equation'}
+            initial='hidden'
+            animate={options ? 'hidden' : 'active'}
+            exit={'hidden'}
+            style={{ alignSelf: 'start' }}
           >
             <EquationDiv
               view={view}
@@ -123,7 +125,6 @@ export default function App() {
               setScore={setScore}
               wrongOnes={wrongOnes}
               setWrongOnes={setWrongOnes}
-              count={count}
               setCount={setCount}
               inProgress={inProgress}
             />
@@ -131,9 +132,9 @@ export default function App() {
         </AnimatePresence>
         <OptionsContainer
           variants={optionsVariants}
-          initial="closed"
-          animate={options ? "open" : "closed"}
-          exit={"close"}
+          initial='closed'
+          animate={options ? 'open' : 'closed'}
+          exit={'close'}
           transition={{
             duration: 0.4,
             // ease: [0.01, 0.01, 0.9, 0.01],
@@ -162,9 +163,7 @@ export default function App() {
             addTime={addTime}
             subtractTime={subtractTime}
             minutes={minutes}
-            setMinutes={setMinutes}
             seconds={seconds}
-            setSeconds={setSeconds}
             starterStep={starterStep}
             setStarterStep={setStarterStep}
             toggleOptions={toggleOptions}
