@@ -16,10 +16,7 @@ const equationVariants = {
 const optionsVariants = {
   closed: { height: `0px` },
   open: { height: `400px` },
-  // transition: { duration: optionsView === "starter" ? 2.5 : 0.5 },
 };
-
-type ITimeoutId = {};
 
 export default function App() {
   const [options, toggleOptions] = useState(false);
@@ -34,7 +31,7 @@ export default function App() {
   const [starterStep, setStarterStep] = useState(1);
   const [view, setView] = useState('+');
   const [wrongOnes, setWrongOnes] = useState([]);
-  const [timeoutId, setTimeoutId] = React.useState<ITimeoutId | null>(null);
+  const [timeoutId, setTimeoutId] = useState(1);
   const [footer, toggleFooter] = useState(false);
 
   function addTime() {
@@ -77,7 +74,8 @@ export default function App() {
     setOptionsView('starter');
     // toggleOptions(false);
     const time = minutes * 60000 + seconds * 1000;
-    const newTimeoutID = setTimeout(function () {
+    //use window.setTimeout because typescript was confusing it with global(Node) version
+    const newTimeoutID = window.setTimeout(() => {
       setOptionsView('score');
       toggleOptions(true);
       toggleInProgress(false);
