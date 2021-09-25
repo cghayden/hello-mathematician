@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import HorizontalEquation from "./HorizontalEquation";
-// import VerticalEquation from "./VerticalEquation";
-import DeleteSvg from "./DeleteSvg";
-import CheckmarkSvg from "./CheckmarkSvg";
+import { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import HorizontalEquation from './HorizontalEquation';
+import DeleteSvg from './DeleteSvg';
+import CheckmarkSvg from './CheckmarkSvg';
 
 const correctSoundSources = [
   `https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav`,
@@ -50,29 +49,29 @@ export default function EquationDiv({
   // }, [digits]);
 
   useEffect(() => {
-    if (view === "+") {
+    if (view === '+') {
       setSolution(digits[0] + digits[1]);
     }
-    if (view === "-") {
+    if (view === '-') {
       setSolution(digits[0] - digits[1]);
     }
-    if (view === "x") {
+    if (view === 'x') {
       setSolution(digits[0] * digits[1]);
     }
-    if (view === "/") {
+    if (view === '/') {
       setSolution(digits[0] / digits[1]);
     }
   }, [view, digits]);
 
   useEffect(() => {
-    if (view === "x" || "/") {
+    if (view === 'x' || '/') {
       if (maxValue > 31) {
         setReduceEquationSize(true);
       } else {
         setReduceEquationSize(false);
       }
     }
-    if (view === "+" || "-") {
+    if (view === '+' || '-') {
       if (maxValue > 499) {
         setReduceEquationSize(true);
       } else {
@@ -81,7 +80,7 @@ export default function EquationDiv({
     }
   }, [maxValue, view, setReduceEquationSize]);
 
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState();
   const correctAudio = useRef(null);
   const wrongAudio = useRef(null);
@@ -94,10 +93,10 @@ export default function EquationDiv({
     const n1 = getRandom(maxValue);
     const n2 = getRandom(maxValue);
     const array = [n1, n2];
-    if (view === "-") {
+    if (view === '-') {
       setDigits(array.sort((a, b) => b - a));
     }
-    if (view === "/") {
+    if (view === '/') {
       const dividend = n1 * n2;
       setDigits([dividend, n1]);
     } else {
@@ -106,7 +105,7 @@ export default function EquationDiv({
   }
 
   function nextProblem() {
-    setAnswer("");
+    setAnswer('');
     setIsCorrect();
     setup();
   }
@@ -156,55 +155,27 @@ export default function EquationDiv({
         inputEl={inputEl}
         reduceEquationSize={reduceEquationSize}
       />
-      {/* {maxValue < 49 ? (
-        <HorizontalEquation
-          digits={digits}
-          view={view}
-          isCorrect={isCorrect}
-          options={options}
-          solution={solution}
-          answer={answer}
-          handleInputChange={handleInputChange}
-          checkAnswer={checkAnswer}
-          inputEl={inputEl}
-        />
-      ) : (
-        <VerticalEquation
-          digits={digits}
-          view={view}
-          isCorrect={isCorrect}
-          options={options}
-          solution={solution}
-          answer={answer}
-          handleInputChange={handleInputChange}
-          checkAnswer={checkAnswer}
-          inputEl={inputEl}
-        />
-      )} */}
 
-      {/* <SubmitPillButton type="submit" form="inputForm">
-        Submit
-      </SubmitPillButton> */}
       <Calculator>
         {buttons.map((number) => (
           <CalcButton key={number} onClick={(e) => handleCalcButton(e)}>
             {number}
           </CalcButton>
         ))}
-        <CalcButton className="deleteButton" onClick={() => deleteOneInput()}>
+        <CalcButton className='deleteButton' onClick={() => deleteOneInput()}>
           <DeleteSvg />
         </CalcButton>
         <CalcButton onClick={(e) => handleCalcButton(e)}>0</CalcButton>
         <CalcButton
-          className="submitCheckButton"
-          type="submit"
-          form="inputForm"
+          className='submitCheckButton'
+          type='submit'
+          form='inputForm'
         >
           <CheckmarkSvg />
         </CalcButton>
       </Calculator>
-      <audio ref={correctAudio} preload="true" src={correctSoundSources[0]} />
-      <audio ref={wrongAudio} preload="true" src={wrongSoundSources[0]} />
+      <audio ref={correctAudio} preload='true' src={correctSoundSources[0]} />
+      <audio ref={wrongAudio} preload='true' src={wrongSoundSources[0]} />
     </>
   );
 }

@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 import PlusSvg from './PlusSvg';
 import XSvg from './XSvg';
 import MinusSvg from './MinusSvg';
 import DivideSvg from './DivideSvg';
+import React from 'react';
 
 const Nav = styled.nav`
   ul {
@@ -48,13 +48,14 @@ const NavButton = styled.button<NavButtonProps>`
     padding: 10px;
   }
 `;
+
 type Props = {
-  view: any;
-  setView: any;
-  maxValue: any;
-  cancelTimer: any;
-  timeoutId: any;
-  setMaxValue: any;
+  view: View;
+  setView: React.Dispatch<React.SetStateAction<View>>;
+  maxValue: number;
+  cancelTimer: Function;
+  timeoutId: number;
+  setMaxValue: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function Navigation({

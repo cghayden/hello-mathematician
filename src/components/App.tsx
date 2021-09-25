@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 import Navigation from './Navigation';
@@ -29,7 +29,7 @@ export default function App() {
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
   const [starterStep, setStarterStep] = useState(1);
-  const [view, setView] = useState('+');
+  const [view, setView] = useState<View>('+');
   const [wrongOnes, setWrongOnes] = useState([]);
   const [timeoutId, setTimeoutId] = useState(1);
   const [footer, toggleFooter] = useState(false);
@@ -85,12 +85,12 @@ export default function App() {
   }
 
   return (
-    <React.Fragment>
+    <>
       <GlobalStyles />
-      <AppContainer>
-        <Header>
+      <AppContainerStyles>
+        <HeaderStyles>
           <h1>Hello Mathematician!</h1>
-        </Header>
+        </HeaderStyles>
         <Navigation
           maxValue={maxValue}
           setMaxValue={setMaxValue}
@@ -135,8 +135,6 @@ export default function App() {
           exit={'close'}
           transition={{
             duration: 0.4,
-            // ease: [0.01, 0.01, 0.9, 0.01],
-            // duration: optionsView === "starter" ? 2.0 : 0.5,
           }}
         >
           <CloseOptionsSvg>
@@ -175,7 +173,6 @@ export default function App() {
             go={go}
           />
         </OptionsContainer>
-        {/* {!footer && ( */}
         <ShowFooterButton
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -185,14 +182,13 @@ export default function App() {
         >
           ?
         </ShowFooterButton>
-        {/* )} */}
         <Footer isToggled={footer} toggleFooter={toggleFooter} />
-      </AppContainer>
-    </React.Fragment>
+      </AppContainerStyles>
+    </>
   );
 }
 
-const AppContainer = styled.div`
+const AppContainerStyles = styled.div`
   max-width: 600px;
   place-content: center;
   display: grid;
@@ -207,7 +203,7 @@ const AppContainer = styled.div`
     grid-template-rows: 70px auto 52px 1fr;
   }
 `;
-const Header = styled.header`
+const HeaderStyles = styled.header`
   h1 {
     font-size: 30px;
   }

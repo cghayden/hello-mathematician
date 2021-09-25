@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import ChevronsDown from "./ChevronsDown";
-import OneHandClockSvg from "./OneHandClockSvg";
-import OverlayOneHandClockSvg from "./OverlayOneHandClockSvg";
-import ClockSvg from "./ClockSvg";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import ChevronsDown from './ChevronsDown';
+import OneHandClockSvg from './OneHandClockSvg';
+import OverlayOneHandClockSvg from './OverlayOneHandClockSvg';
+
+type Props = {
+  view: View;
+  maxValue: number;
+  toggleOptions: React.Dispatch<React.SetStateAction<boolean>>;
+  inProgress: boolean;
+  options: boolean;
+  reset: Function;
+};
 
 export default function ActiveOperationHeading({
   view,
@@ -13,20 +21,20 @@ export default function ActiveOperationHeading({
   inProgress,
   options,
   reset,
-}) {
-  const [viewString, setViewString] = useState("Addition");
+}: Props) {
+  const [viewString, setViewString] = useState('Addition');
   useEffect(() => {
-    if (view === "+") {
-      setViewString("Addition");
+    if (view === '+') {
+      setViewString('Addition');
     }
-    if (view === "-") {
-      setViewString("Subtraction");
+    if (view === '-') {
+      setViewString('Subtraction');
     }
-    if (view === "x") {
-      setViewString("Multiplication");
+    if (view === 'x') {
+      setViewString('Multiplication');
     }
-    if (view === "/") {
-      setViewString("Division");
+    if (view === '/') {
+      setViewString('Division');
     }
   }, [view]);
 
@@ -47,7 +55,7 @@ export default function ActiveOperationHeading({
   return (
     <HeadingStyles>
       <HeadingAndToggler>
-        <h2 role="button" disabled={inProgress} onClick={handleClick}>
+        <h2 role='button' onClick={handleClick}>
           {viewString} to {maxValue}
         </h2>
         <MenuButton disabled={inProgress} onClick={handleClick}>
@@ -119,34 +127,3 @@ const TimerActiveIcon = styled(motion.div)`
     grid-column: 4;
   }
 `;
-//<TimerActiveIcon
-//      initial={{ opacity: 0 }}
-//    animate={{ opacity: 1 }}
-// animate={{
-//   opacity: [0, 1, 0],
-//   // scale: [1, 1.2, 1],
-//   // borderRadius: ["20%", "20%", "50%", "50%", "20%"]
-// }}
-// transition={{
-//   duration: 2,
-//   // ease: "easeInOut",
-//   times: [0, 0.5, 1],
-//   loop: Infinity,
-//   // repeatDelay:
-// }}
-// >
-// <OneHandClockSvg /> <OverlayOneHandClockSvg />
-// <motion.div
-//   className="overlay"
-//   animate={{
-//     rotate: [0, 360],
-//   }}
-//   transition={{
-//     duration: 5,
-//     // times: [0, 0.2, 0.5, 0.8, 1],
-//     loop: Infinity,
-//     repeatDelay: 0,
-//   }}
-// >
-//   <OverlayOneHandClockSvg />
-// </motion.div>

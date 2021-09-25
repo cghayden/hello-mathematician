@@ -1,8 +1,7 @@
-import React from "react";
-import Starter from "./Starter";
-import Timer from "./Timer";
-import MaxValue from "./MaxValue";
-import Score from "./Score";
+import Starter from './Starter';
+import Timer from './Timer';
+import MaxValue from './MaxValue';
+import Score from './Score';
 export default function Options({
   score,
   inProgress,
@@ -26,7 +25,7 @@ export default function Options({
   count,
   go,
 }) {
-  if (optionsView === "timer")
+  if (optionsView === 'timer')
     return (
       <>
         <Timer
@@ -43,10 +42,10 @@ export default function Options({
       </>
     );
 
-  if (optionsView === "starter" && !inProgress)
+  if (optionsView === 'starter' && !inProgress)
     return (
       <Starter
-        key={"starter"}
+        key={'starter'}
         toggleInProgress={toggleInProgress}
         isStarterActive={isStarterActive}
         setIsStarterActive={setIsStarterActive}
@@ -57,7 +56,7 @@ export default function Options({
       />
     );
 
-  if (optionsView === "score")
+  if (optionsView === 'score')
     return (
       <Score
         reset={reset}
