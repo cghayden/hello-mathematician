@@ -25,21 +25,18 @@ function getRandom(maxValue) {
 }
 
 export default function EquationDiv({
-  // view,
-  // maxValue = 10,
   setScore,
-  options,
   wrongOnes,
   setWrongOnes,
   setCount,
   inProgress,
 }) {
-  const { maxValue, view } = useGlobalState();
+  const { maxValue, view, options } = useGlobalState();
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
   const [reduceEquationSize, setReduceEquationSize] = useState(false);
-  const [correctSoundSrc, setCorrectSoundSrc] = useState();
-  const [wrongSoundSrc, setWrongSoundSrc] = useState();
+  // const [correctSoundSrc, setCorrectSoundSrc] = useState();
+  // const [wrongSoundSrc, setWrongSoundSrc] = useState();
 
   const inputEl = useRef(null);
   useEffect(setup, [view, maxValue]);

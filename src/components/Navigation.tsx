@@ -51,22 +51,11 @@ const NavButton = styled.button<NavButtonProps>`
 `;
 
 type Props = {
-  // view: View;
-  // setView: React.Dispatch<React.SetStateAction<View>>;
-  // maxValue: number;
   cancelTimer: Function;
   timeoutId: number;
-  // setMaxValue: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function Navigation({
-  // view,
-  // setView,
-  // maxValue,
-  cancelTimer,
-  timeoutId,
-}: // setMaxValue,
-Props) {
+function Navigation({ cancelTimer, timeoutId }: Props) {
   const { maxValue, setMaxValue, view, setView } = useGlobalState();
   return (
     <Nav>

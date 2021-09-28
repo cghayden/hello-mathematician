@@ -7,6 +7,8 @@ interface GlobalCtxInterface {
   setMaxValue: (val: number) => void;
   view: View;
   setView: React.Dispatch<React.SetStateAction<View>>;
+  options: boolean;
+  toggleOptions: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CtxInitialValue: GlobalCtxInterface = {
@@ -14,6 +16,8 @@ const CtxInitialValue: GlobalCtxInterface = {
   setMaxValue: () => {},
   view: '+',
   setView: () => {},
+  options: false,
+  toggleOptions: () => {},
 };
 
 const GlobalCtx = createContext<GlobalCtxInterface>(CtxInitialValue);
@@ -21,6 +25,7 @@ const GlobalCtx = createContext<GlobalCtxInterface>(CtxInitialValue);
 const GlobalProvider: React.FC = ({ children }) => {
   const [maxValue, setMaxValue] = useState(10);
   const [view, setView] = useState<View>('+');
+  const [options, toggleOptions] = useState(false);
 
   return (
     <GlobalCtx.Provider
@@ -29,6 +34,8 @@ const GlobalProvider: React.FC = ({ children }) => {
         setMaxValue,
         view,
         setView,
+        options,
+        toggleOptions,
       }}
     >
       {children}
