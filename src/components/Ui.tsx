@@ -19,7 +19,6 @@ const optionsVariants = {
 };
 
 export default function Ui() {
-  const [optionsView, setOptionsView] = useState('timer');
   const [score, setScore] = useState(0);
   const [count, setCount] = useState(0);
   const [isStarterActive, setIsStarterActive] = useState(false);
@@ -29,8 +28,8 @@ export default function Ui() {
   const [wrongOnes, setWrongOnes] = useState([]);
   const [timeoutId, setTimeoutId] = useState(1);
   const [footer, toggleFooter] = useState(false);
-
-  const { options, toggleOptions, toggleInProgress } = useGlobalState();
+  const { options, toggleOptions, toggleInProgress, setOptionsView } =
+    useGlobalState();
 
   function addTime() {
     if (seconds === 45) {
@@ -63,7 +62,6 @@ export default function Ui() {
 
   function go() {
     setOptionsView('starter');
-    // toggleOptions(false);
     const time = minutes * 60000 + seconds * 1000;
     //use window.setTimeout because typescript was confusing it with global(Node) version
     const newTimeoutID = window.setTimeout(() => {
@@ -74,6 +72,7 @@ export default function Ui() {
 
     setTimeoutId(newTimeoutID);
   }
+
   return (
     <>
       <HeaderStyles>
@@ -132,10 +131,7 @@ export default function Ui() {
           starterStep={starterStep}
           setStarterStep={setStarterStep}
           toggleOptions={toggleOptions}
-          optionsView={optionsView}
-          setOptionsView={setOptionsView}
           wrongOnes={wrongOnes}
-          // view={view}
           count={count}
           go={go}
         />
