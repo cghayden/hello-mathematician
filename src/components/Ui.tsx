@@ -22,7 +22,6 @@ export default function Ui() {
   const [optionsView, setOptionsView] = useState('timer');
   const [score, setScore] = useState(0);
   const [count, setCount] = useState(0);
-  const [inProgress, toggleInProgress] = useState(false);
   const [isStarterActive, setIsStarterActive] = useState(false);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
@@ -31,7 +30,7 @@ export default function Ui() {
   const [timeoutId, setTimeoutId] = useState(1);
   const [footer, toggleFooter] = useState(false);
 
-  const { options, toggleOptions } = useGlobalState();
+  const { options, toggleOptions, toggleInProgress } = useGlobalState();
 
   function addTime() {
     if (seconds === 45) {
@@ -62,13 +61,6 @@ export default function Ui() {
     setStarterStep(1);
   }
 
-  function cancelTimer(timeoutId: number) {
-    console.log('cancel timer');
-    clearTimeout(timeoutId);
-    toggleInProgress(false);
-    reset();
-  }
-
   function go() {
     setOptionsView('starter');
     // toggleOptions(false);
@@ -87,8 +79,8 @@ export default function Ui() {
       <HeaderStyles>
         <h1>Hello Mathematician!</h1>
       </HeaderStyles>
-      <Navigation cancelTimer={cancelTimer} timeoutId={timeoutId} />
-      <ActiveOperationHeading inProgress={inProgress} reset={reset} />
+      <Navigation timeoutId={timeoutId} />
+      <ActiveOperationHeading reset={reset} />
       <AnimatePresence exitBeforeEnter>
         <motion.div
           variants={equationVariants}
@@ -103,7 +95,6 @@ export default function Ui() {
             wrongOnes={wrongOnes}
             setWrongOnes={setWrongOnes}
             setCount={setCount}
-            inProgress={inProgress}
           />
         </motion.div>
       </AnimatePresence>
@@ -131,7 +122,6 @@ export default function Ui() {
         <Options
           reset={reset}
           score={score}
-          inProgress={inProgress}
           toggleInProgress={toggleInProgress}
           isStarterActive={isStarterActive}
           setIsStarterActive={setIsStarterActive}

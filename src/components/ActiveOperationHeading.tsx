@@ -7,12 +7,12 @@ import OverlayOneHandClockSvg from './OverlayOneHandClockSvg';
 import { useGlobalState } from './GlobalState';
 
 type Props = {
-  inProgress: boolean;
   reset: Function;
 };
 
-export default function ActiveOperationHeading({ inProgress, reset }: Props) {
-  const { maxValue, view, options, toggleOptions } = useGlobalState();
+export default function ActiveOperationHeading({ reset }: Props) {
+  const { maxValue, view, options, toggleOptions, inProgress } =
+    useGlobalState();
   const [viewString, setViewString] = useState('Addition');
   useEffect(() => {
     if (view === '+') {

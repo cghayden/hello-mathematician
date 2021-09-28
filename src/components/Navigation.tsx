@@ -51,12 +51,22 @@ const NavButton = styled.button<NavButtonProps>`
 `;
 
 type Props = {
-  cancelTimer: Function;
   timeoutId: number;
 };
 
-function Navigation({ cancelTimer, timeoutId }: Props) {
-  const { maxValue, setMaxValue, view, setView } = useGlobalState();
+function Navigation({ timeoutId }: Props) {
+  const { maxValue, setMaxValue, view, setView, toggleInProgress } =
+    useGlobalState();
+
+  const reset = () => {};
+
+  function cancelTimer(timeoutId: number) {
+    console.log('cancel timer');
+    clearTimeout(timeoutId);
+    toggleInProgress(false);
+    reset();
+  }
+
   return (
     <Nav>
       <ul>

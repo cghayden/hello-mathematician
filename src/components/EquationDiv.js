@@ -29,9 +29,8 @@ export default function EquationDiv({
   wrongOnes,
   setWrongOnes,
   setCount,
-  inProgress,
 }) {
-  const { maxValue, view, options } = useGlobalState();
+  const { maxValue, view, options, inProgress } = useGlobalState();
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
   const [reduceEquationSize, setReduceEquationSize] = useState(false);

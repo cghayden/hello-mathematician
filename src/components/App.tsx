@@ -1,12 +1,5 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
-import Navigation from './Navigation';
 import GlobalStyles from './GlobalStyles';
-import EquationDiv from './EquationDiv';
-import Options from './Options';
-import ActiveOperationHeading from './ActiveOperationHeading';
-import Footer from './Footer';
 import { GlobalProvider } from './GlobalState';
 import Ui from './Ui';
 
