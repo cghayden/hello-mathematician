@@ -2,6 +2,7 @@ import Starter from './Starter';
 import Timer from './Timer';
 import MaxValue from './MaxValue';
 import Score from './Score';
+import { useGlobalState } from './GlobalState';
 export default function Options({
   score,
   inProgress,
@@ -15,16 +16,17 @@ export default function Options({
   starterStep,
   setStarterStep,
   toggleOptions,
-  maxValue,
-  setMaxValue,
+  // maxValue,
+  // setMaxValue,
   optionsView,
   setOptionsView,
   wrongOnes,
   reset,
-  view,
+  // view,
   count,
   go,
 }) {
+  const { maxValue, setMaxValue, view } = useGlobalState();
   if (optionsView === 'timer')
     return (
       <>

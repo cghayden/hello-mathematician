@@ -4,6 +4,7 @@ import XSvg from './XSvg';
 import MinusSvg from './MinusSvg';
 import DivideSvg from './DivideSvg';
 import React from 'react';
+import { useGlobalState } from './GlobalState';
 
 const Nav = styled.nav`
   ul {
@@ -50,22 +51,23 @@ const NavButton = styled.button<NavButtonProps>`
 `;
 
 type Props = {
-  view: View;
-  setView: React.Dispatch<React.SetStateAction<View>>;
-  maxValue: number;
+  // view: View;
+  // setView: React.Dispatch<React.SetStateAction<View>>;
+  // maxValue: number;
   cancelTimer: Function;
   timeoutId: number;
-  setMaxValue: React.Dispatch<React.SetStateAction<number>>;
+  // setMaxValue: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function Navigation({
-  view,
-  setView,
-  maxValue,
+  // view,
+  // setView,
+  // maxValue,
   cancelTimer,
   timeoutId,
-  setMaxValue,
-}: Props) {
+}: // setMaxValue,
+Props) {
+  const { maxValue, setMaxValue, view, setView } = useGlobalState();
   return (
     <Nav>
       <ul>

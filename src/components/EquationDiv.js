@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import HorizontalEquation from './HorizontalEquation';
 import DeleteSvg from './DeleteSvg';
 import CheckmarkSvg from './CheckmarkSvg';
+import { useGlobalState } from './GlobalState';
 
 const correctSoundSources = [
   `https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav`,
@@ -24,8 +25,8 @@ function getRandom(maxValue) {
 }
 
 export default function EquationDiv({
-  view,
-  maxValue = 10,
+  // view,
+  // maxValue = 10,
   setScore,
   options,
   wrongOnes,
@@ -33,6 +34,7 @@ export default function EquationDiv({
   setCount,
   inProgress,
 }) {
+  const { maxValue, view } = useGlobalState();
   const [digits, setDigits] = useState([]);
   const [solution, setSolution] = useState();
   const [reduceEquationSize, setReduceEquationSize] = useState(false);

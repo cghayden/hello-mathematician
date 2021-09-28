@@ -7,6 +7,7 @@ import EquationDiv from './EquationDiv';
 import Options from './Options';
 import ActiveOperationHeading from './ActiveOperationHeading';
 import Footer from './Footer';
+import { GlobalProvider } from './GlobalState';
 
 const equationVariants = {
   active: { opacity: 1 },
@@ -21,7 +22,6 @@ const optionsVariants = {
 export default function App() {
   const [options, toggleOptions] = useState(false);
   const [optionsView, setOptionsView] = useState('timer');
-  const [maxValue, setMaxValue] = useState(10);
   const [score, setScore] = useState(0);
   const [count, setCount] = useState(0);
   const [inProgress, toggleInProgress] = useState(false);
@@ -29,7 +29,7 @@ export default function App() {
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
   const [starterStep, setStarterStep] = useState(1);
-  const [view, setView] = useState<View>('+');
+  // const [view, setView] = useState<View>('+');
   const [wrongOnes, setWrongOnes] = useState([]);
   const [timeoutId, setTimeoutId] = useState(1);
   const [footer, toggleFooter] = useState(false);
@@ -85,23 +85,20 @@ export default function App() {
   }
 
   return (
-    <>
+    <GlobalProvider>
       <GlobalStyles />
       <AppContainerStyles>
         <HeaderStyles>
           <h1>Hello Mathematician!</h1>
         </HeaderStyles>
         <Navigation
-          maxValue={maxValue}
-          setMaxValue={setMaxValue}
-          view={view}
-          setView={setView}
+          // view={view}
+          // setView={setView}
           cancelTimer={cancelTimer}
           timeoutId={timeoutId}
         />
         <ActiveOperationHeading
-          view={view}
-          maxValue={maxValue}
+          // view={view}
           toggleOptions={toggleOptions}
           options={options}
           inProgress={inProgress}
@@ -117,9 +114,8 @@ export default function App() {
             style={{ alignSelf: 'start' }}
           >
             <EquationDiv
-              view={view}
+              // view={view}
               options={options}
-              maxValue={maxValue}
               setScore={setScore}
               wrongOnes={wrongOnes}
               setWrongOnes={setWrongOnes}
@@ -128,7 +124,7 @@ export default function App() {
             />
           </motion.div>
         </AnimatePresence>
-        <OptionsContainer
+        <OptionsContainerStyles
           variants={optionsVariants}
           initial='closed'
           animate={options ? 'open' : 'closed'}
@@ -163,16 +159,14 @@ export default function App() {
             starterStep={starterStep}
             setStarterStep={setStarterStep}
             toggleOptions={toggleOptions}
-            maxValue={maxValue}
-            setMaxValue={setMaxValue}
             optionsView={optionsView}
             setOptionsView={setOptionsView}
             wrongOnes={wrongOnes}
-            view={view}
+            // view={view}
             count={count}
             go={go}
           />
-        </OptionsContainer>
+        </OptionsContainerStyles>
         <ShowFooterButton
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -184,7 +178,7 @@ export default function App() {
         </ShowFooterButton>
         <Footer isToggled={footer} toggleFooter={toggleFooter} />
       </AppContainerStyles>
-    </>
+    </GlobalProvider>
   );
 }
 
@@ -209,7 +203,7 @@ const HeaderStyles = styled.header`
   }
 `;
 
-const OptionsContainer = styled(motion.div)`
+const OptionsContainerStyles = styled(motion.div)`
   max-width: 600px;
   position: fixed;
   left: 50%;

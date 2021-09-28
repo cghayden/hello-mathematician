@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import ChevronsDown from './ChevronsDown';
 import OneHandClockSvg from './OneHandClockSvg';
 import OverlayOneHandClockSvg from './OverlayOneHandClockSvg';
+import { useGlobalState } from './GlobalState';
 
 type Props = {
-  view: View;
-  maxValue: number;
+  // view: View;
+  // maxValue: number;
   toggleOptions: React.Dispatch<React.SetStateAction<boolean>>;
   inProgress: boolean;
   options: boolean;
@@ -15,13 +16,14 @@ type Props = {
 };
 
 export default function ActiveOperationHeading({
-  view,
-  maxValue,
+  // view,
+  // maxValue,
   toggleOptions,
   inProgress,
   options,
   reset,
 }: Props) {
+  const { maxValue, view } = useGlobalState();
   const [viewString, setViewString] = useState('Addition');
   useEffect(() => {
     if (view === '+') {
