@@ -19,7 +19,6 @@ const optionsVariants = {
 };
 
 export default function Ui() {
-  const [score, setScore] = useState(0);
   const [count, setCount] = useState(0);
   const [isStarterActive, setIsStarterActive] = useState(false);
   const [minutes, setMinutes] = useState(1);
@@ -28,7 +27,7 @@ export default function Ui() {
   const [wrongOnes, setWrongOnes] = useState([]);
   const [timeoutId, setTimeoutId] = useState(1);
   const [footer, toggleFooter] = useState(false);
-  const { options, toggleOptions, toggleInProgress, setOptionsView } =
+  const { options, toggleOptions, toggleInProgress, setOptionsView, setScore } =
     useGlobalState();
 
   function addTime() {
@@ -90,7 +89,6 @@ export default function Ui() {
           style={{ alignSelf: 'start' }}
         >
           <EquationDiv
-            setScore={setScore}
             wrongOnes={wrongOnes}
             setWrongOnes={setWrongOnes}
             setCount={setCount}
@@ -120,7 +118,6 @@ export default function Ui() {
         </CloseOptionsSvg>
         <Options
           reset={reset}
-          score={score}
           toggleInProgress={toggleInProgress}
           isStarterActive={isStarterActive}
           setIsStarterActive={setIsStarterActive}

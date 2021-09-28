@@ -20,31 +20,25 @@ const wrongSoundSources = [
   `https://res.cloudinary.com/coreytesting/video/upload/v1587577571/sounds/cartoonBingLow.wav`,
 ];
 
-function getRandom(maxValue) {
+function getRandom(maxValue: number) {
   return Math.floor(Math.random() * maxValue) + 1;
 }
 
-export default function EquationDiv({
-  setScore,
-  wrongOnes,
-  setWrongOnes,
-  setCount,
-}) {
-  const { maxValue, view, options, inProgress } = useGlobalState();
-  const [digits, setDigits] = useState([]);
-  const [solution, setSolution] = useState();
+type IisCorrect = {};
+
+export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
+  const { maxValue, view, options, inProgress, setScore } = useGlobalState();
+  const [digits, setDigits] = useState<number[]>([]);
+  const [solution, setSolution] = useState(0);
   const [reduceEquationSize, setReduceEquationSize] = useState(false);
-  // const [correctSoundSrc, setCorrectSoundSrc] = useState();
-  // const [wrongSoundSrc, setWrongSoundSrc] = useState();
+  const [answer, setAnswer] = useState('');
+  const [isCorrect, setIsCorrect] = useState<IisCorrect | null>(null);
 
-  const inputEl = useRef(null);
+  const correctAudio = useRef<HTMLAudioElement>(null);
+  const wrongAudio = useRef<HTMLAudioElement>(null);
+  const inputEl = useRef<HTMLInputElement>(null);
+
   useEffect(setup, [view, maxValue]);
-
-  // useEffect(() => {
-  //   const soundIndex = Math.floor(Math.random() * 5);
-  //   setCorrectSoundSrc(correctSoundSources[soundIndex]);
-  //   setWrongSoundSrc(wrongSoundSources[soundIndex]);
-  // }, [digits]);
 
   useEffect(() => {
     if (view === '+') {
@@ -78,13 +72,8 @@ export default function EquationDiv({
     }
   }, [maxValue, view, setReduceEquationSize]);
 
-  const [answer, setAnswer] = useState('');
-  const [isCorrect, setIsCorrect] = useState();
-  const correctAudio = useRef(null);
-  const wrongAudio = useRef(null);
-
   function handleInputChange(e) {
-    setAnswer(e.target.value, 10);
+    setAnswer(e.target.value);
   }
 
   function setup() {
@@ -104,7 +93,7 @@ export default function EquationDiv({
 
   function nextProblem() {
     setAnswer('');
-    setIsCorrect();
+    setIsCorrect(null);
     setup();
   }
 
@@ -115,13 +104,13 @@ export default function EquationDiv({
     }
     if (parseInt(answer, 10) === solution) {
       setIsCorrect(true);
-      correctAudio.current.play();
+      correctAudio.current?.play();
       if (inProgress) {
-        setScore((score) => score + 1);
+        setScore((score: number) => score + 1);
       }
     } else {
       setIsCorrect(false);
-      wrongAudio.current.play();
+      wrongAudio.current?.play();
       const equation = `${digits[0]} ${view} ${digits[1]} = ${solution}`;
       if (inProgress) {
         setWrongOnes([...wrongOnes, equation]);

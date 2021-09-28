@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 const starterVariants = {
   enter: { opacity: 0 },
   center: { opacity: 1 },
@@ -9,7 +9,6 @@ const starterVariants = {
 
 export default function Starter({
   toggleInProgress,
-  setIsStarterActive,
   starterStep,
   setStarterStep,
   setOptionsView,
@@ -26,7 +25,7 @@ export default function Starter({
       setStarterStep(1);
       toggleInProgress(true);
       toggleOptions(false);
-      setTimeout(() => setOptionsView("score"), 1000);
+      setTimeout(() => setOptionsView('score'), 1000);
     }
     return () => clearInterval(interval);
   }, [
@@ -44,9 +43,9 @@ export default function Starter({
           <StarterMessage
             key={1}
             variants={starterVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
+            initial='enter'
+            animate='center'
+            exit='exit'
           >
             Ready...
           </StarterMessage>
@@ -55,9 +54,9 @@ export default function Starter({
           <StarterMessage
             key={2}
             variants={starterVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
+            initial='enter'
+            animate='center'
+            exit='exit'
           >
             Set...
           </StarterMessage>
@@ -66,9 +65,9 @@ export default function Starter({
           <StarterMessage
             key={3}
             variants={starterVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
+            initial='enter'
+            animate='center'
+            exit='exit'
           >
             Go!...
           </StarterMessage>
