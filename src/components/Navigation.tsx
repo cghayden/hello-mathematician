@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import PlusSvg from "./PlusSvg";
-import XSvg from "./XSvg";
-import MinusSvg from "./MinusSvg";
-import DivideSvg from "./DivideSvg";
-// import HamburgerSvg from "./HamburgerSvg";
+import styled from 'styled-components';
+import PlusSvg from './PlusSvg';
+import XSvg from './XSvg';
+import MinusSvg from './MinusSvg';
+import DivideSvg from './DivideSvg';
+import React from 'react';
+import { useGlobalState } from './GlobalState';
 
 const Nav = styled.nav`
   ul {
@@ -29,11 +29,15 @@ const Nav = styled.nav`
   }
 `;
 
-const NavButton = styled.button`
-  background: ${(props) => (props.active ? "var(--white)" : "transparent")};
-  color: ${(props) => (props.active ? "var(--dark)" : "var(--white)")};
+interface NavButtonProps {
+  active: boolean;
+}
+
+const NavButton = styled.button<NavButtonProps>`
+  background: ${(props) => (props.active ? 'var(--white)' : 'transparent')};
+  color: ${(props) => (props.active ? 'var(--dark)' : 'var(--white)')};
   box-shadow: ${(props) =>
-    props.active ? `0px 0px 2px 2px lightblue` : "none"};
+    props.active ? `0px 0px 2px 2px lightblue` : 'none'};
   padding: 12px;
   border-radius: 50%;
   display: grid;
@@ -46,25 +50,28 @@ const NavButton = styled.button`
   }
 `;
 
-export default function Navigation({
-  view,
-  setView,
-  inProgress,
-  maxValue,
-  cancelTimer,
-  timeoutId,
-  setMaxValue,
-}) {
+function Navigation() {
+  const { maxValue, setMaxValue, view, setView, toggleInProgress, timeoutId } =
+    useGlobalState();
+
+  const reset = () => {};
+
+  function cancelTimer(timeoutId: number) {
+    console.log('cancel timer');
+    clearTimeout(timeoutId);
+    toggleInProgress(false);
+    reset();
+  }
+
   return (
     <Nav>
       <ul>
         <li>
           <NavButton
-            // disabled={inProgress}
-            active={view === "+"}
+            active={view === '+'}
             onClick={() => {
               cancelTimer(timeoutId);
-              setView("+");
+              setView('+');
             }}
           >
             <PlusSvg />
@@ -72,11 +79,10 @@ export default function Navigation({
         </li>
         <li>
           <NavButton
-            // disabled={inProgress}
-            active={view === "-"}
+            active={view === '-'}
             onClick={() => {
               cancelTimer(timeoutId);
-              setView("-");
+              setView('-');
             }}
           >
             <MinusSvg />
@@ -84,14 +90,13 @@ export default function Navigation({
         </li>
         <li>
           <NavButton
-            // disabled={inProgress}
-            active={view === "x"}
+            active={view === 'x'}
             onClick={() => {
               if (maxValue > 100) {
                 setMaxValue(100);
               }
               cancelTimer(timeoutId);
-              setView("x");
+              setView('x');
             }}
           >
             <XSvg />
@@ -99,14 +104,13 @@ export default function Navigation({
         </li>
         <li>
           <NavButton
-            // disabled={inProgress}
-            active={view === "/"}
+            active={view === '/'}
             onClick={() => {
               if (maxValue > 100) {
                 setMaxValue(100);
               }
               cancelTimer(timeoutId);
-              setView("/");
+              setView('/');
             }}
           >
             <DivideSvg />
@@ -116,3 +120,5 @@ export default function Navigation({
     </Nav>
   );
 }
+
+export default Navigation;

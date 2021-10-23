@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import Operand from "./Operand";
-import DivideSvg from "./DivideSvg";
-import XSvg from "./XSvg";
-import PlusSvg from "./PlusSvg";
-import MinusSvg from "./MinusSvg";
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import Operand from './Operand';
+import DivideSvg from './DivideSvg';
+import XSvg from './XSvg';
+import PlusSvg from './PlusSvg';
+import MinusSvg from './MinusSvg';
+
 export default function Equation({
   digits,
   view,
@@ -22,41 +23,41 @@ export default function Equation({
   });
   return (
     <Form
-      id="inputForm"
-      action="POST"
+      id='inputForm'
+      action='POST'
       onSubmit={(e) => checkAnswer(e)}
-      className="fullEquation"
+      className='fullEquation'
       reduceEquationSize={reduceEquationSize}
     >
       <fieldset disabled={options}>
-        <Label htmlFor="answer">
-          <OperandContainer className="operandContainer">
+        <Label htmlFor='answer'>
+          <OperandContainer className='operandContainer'>
             <GhostOperand>{digits[0]}</GhostOperand>
             <Operand digit={digits[0]} />
           </OperandContainer>
           <OperationContainer>
-            {view === "+" && <PlusSvg />}
-            {view === "-" && <MinusSvg />}
-            {view === "/" && <DivideSvg />}
-            {view === "x" && <XSvg />}
+            {view === '+' && <PlusSvg />}
+            {view === '-' && <MinusSvg />}
+            {view === '/' && <DivideSvg />}
+            {view === 'x' && <XSvg />}
           </OperationContainer>
           <OperandContainer>
             <GhostOperand>{digits[1]}</GhostOperand>
             <Operand digit={digits[1]} />
           </OperandContainer>
-          <p className="equals">=</p>
-          <div style={{ position: "relative" }}>
+          <p className='equals'>=</p>
+          <div style={{ position: 'relative' }}>
             {isCorrect === false && <RevealCorrect>{solution}</RevealCorrect>}
             <Input
               disabled={options === true}
               hide={isCorrect === false}
               reduceEquationSize={reduceEquationSize}
-              id="answer"
-              type="number"
-              pattern="[0-9]*"
+              id='answer'
+              type='number'
+              pattern='[0-9]*'
               ref={inputEl}
               value={answer}
-              name="answer"
+              name='answer'
               onChange={(e) => handleInputChange(e)}
             />
           </div>
@@ -69,20 +70,15 @@ export default function Equation({
 const Form = styled.form`
   font-size: 5rem;
   padding-top: 15px;
-  font-family: "Fira Sans";
+  font-family: 'Fira Sans';
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--white);
-  /* .right-wrong {
-    height: 28px;
-    font-size: 20px;
-    grid-column: 1/-1;
-    color: var(--green);
-  } */
+
   @media screen and (max-width: 768px) {
-    font-size: ${(props) => (props.reduceEquationSize ? `50px` : "4rem")};
+    font-size: ${(props) => (props.reduceEquationSize ? `50px` : '4rem')};
     padding-top: 0px;
   }
 `;
@@ -134,8 +130,3 @@ const OperandContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-//  <div className="right-wrong">{isCorrect && <p>Right!</p>}</div>
-//       <div className="right-wrong">
-//           <p>Right!</p>
-//         </div>

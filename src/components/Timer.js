@@ -1,9 +1,10 @@
-import React from "react";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import MinusCircleSvg from "./MinusCircleSvg";
-import PlusCircleSvg from "./PlusCircleSvg";
-import LargePillButton from "./LargePillButton";
+import React from 'react';
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import MinusCircleSvg from './MinusCircleSvg';
+import PlusCircleSvg from './PlusCircleSvg';
+import LargePillButton from './LargePillButton';
+import { useGlobalState } from './GlobalState';
 
 const variants = {
   open: { opacity: 1 },
@@ -14,22 +15,14 @@ const variants = {
   closed: { opacity: 0 },
 };
 
-export default function Timer({
-  toggleInProgress,
-  addTime,
-  subtractTime,
-  minutes,
-  seconds,
-  toggleOptions,
-  setOptionsView,
-  go,
-}) {
+export default function Timer() {
+  const { addTime, subtractTime, minutes, seconds, go } = useGlobalState();
   return (
     <TimerStyle variants={variants}>
       <Time>
         <p>Timer:</p>
         <p>
-          {minutes}:{seconds === 0 ? "00" : seconds}
+          {minutes}:{seconds === 0 ? '00' : seconds}
         </p>
         <TimeButtons>
           <AlterTimeButton onClick={() => addTime()}>
