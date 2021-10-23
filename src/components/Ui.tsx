@@ -20,36 +20,13 @@ const optionsVariants = {
 
 export default function Ui() {
   const [count, setCount] = useState(0);
-  const [isStarterActive, setIsStarterActive] = useState(false);
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(0);
+
   const [starterStep, setStarterStep] = useState(1);
   const [wrongOnes, setWrongOnes] = useState([]);
-  const [timeoutId, setTimeoutId] = useState(1);
+
   const [footer, toggleFooter] = useState(false);
   const { options, toggleOptions, toggleInProgress, setOptionsView, setScore } =
     useGlobalState();
-
-  function addTime() {
-    if (seconds === 45) {
-      setMinutes((minutes) => minutes + 1);
-      setSeconds(0);
-    } else {
-      setSeconds((seconds) => seconds + 15);
-    }
-  }
-
-  function subtractTime() {
-    if (seconds === 15 && minutes === 0) {
-      return;
-    }
-    if (seconds === 0) {
-      setSeconds(45);
-      setMinutes((minutes) => minutes - 1);
-    } else {
-      setSeconds((seconds) => seconds - 15);
-    }
-  }
 
   function reset() {
     setScore(0);
@@ -59,25 +36,12 @@ export default function Ui() {
     setStarterStep(1);
   }
 
-  function go() {
-    setOptionsView('starter');
-    const time = minutes * 60000 + seconds * 1000;
-    //use window.setTimeout because typescript was confusing it with global(Node) version
-    const newTimeoutID = window.setTimeout(() => {
-      setOptionsView('score');
-      toggleOptions(true);
-      toggleInProgress(false);
-    }, time);
-
-    setTimeoutId(newTimeoutID);
-  }
-
   return (
     <>
       <HeaderStyles>
         <h1>Hello Mathematician!</h1>
       </HeaderStyles>
-      <Navigation timeoutId={timeoutId} />
+      <Navigation />
       <ActiveOperationHeading reset={reset} />
       <AnimatePresence exitBeforeEnter>
         <motion.div
@@ -119,18 +83,10 @@ export default function Ui() {
         <Options
           reset={reset}
           toggleInProgress={toggleInProgress}
-          isStarterActive={isStarterActive}
-          setIsStarterActive={setIsStarterActive}
-          addTime={addTime}
-          subtractTime={subtractTime}
-          minutes={minutes}
-          seconds={seconds}
           starterStep={starterStep}
           setStarterStep={setStarterStep}
-          toggleOptions={toggleOptions}
           wrongOnes={wrongOnes}
           count={count}
-          go={go}
         />
       </OptionsContainerStyles>
       <ShowFooterButton

@@ -3,22 +3,17 @@ import Timer from './Timer';
 import MaxValue from './MaxValue';
 import Score from './Score';
 import { useGlobalState } from './GlobalState';
+import { useState } from 'react';
 export default function Options({
   toggleInProgress,
-  isStarterActive,
-  setIsStarterActive,
-  addTime,
-  subtractTime,
-  minutes,
-  seconds,
   starterStep,
   setStarterStep,
-  toggleOptions,
   wrongOnes,
   reset,
   count,
-  go,
 }) {
+  const [isStarterActive, setIsStarterActive] = useState(false);
+
   const {
     maxValue,
     setMaxValue,
@@ -27,19 +22,15 @@ export default function Options({
     optionsView,
     setOptionsView,
     score,
+    toggleOptions,
   } = useGlobalState();
   if (optionsView === 'timer')
     return (
       <>
         <Timer
           toggleInProgress={toggleInProgress}
-          addTime={addTime}
-          subtractTime={subtractTime}
-          minutes={minutes}
-          seconds={seconds}
           toggleOptions={toggleOptions}
           setOptionsView={setOptionsView}
-          go={go}
         />
         <MaxValue maxValue={maxValue} setMaxValue={setMaxValue} view={view} />
       </>

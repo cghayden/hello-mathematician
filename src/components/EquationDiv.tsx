@@ -6,18 +6,18 @@ import CheckmarkSvg from './CheckmarkSvg';
 import { useGlobalState } from './GlobalState';
 
 const correctSoundSources = [
-  `https://res.cloudinary.com/coreytesting/video/upload/v1584720407/sounds/wooYeah.wav`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587575773/sounds/yippee.wav`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587575766/sounds/jingleWin1.wav`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587575762/sounds/homerWoohoo1.wav`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587575747/sounds/coin1.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1584720407/sounds/wooYeah.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587575773/sounds/yippee.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587575766/sounds/jingleWin1.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587575762/sounds/homerWoohoo1.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587575747/sounds/coin1.wav`,
 ];
 const wrongSoundSources = [
-  `https://res.cloudinary.com/coreytesting/video/upload/v1584721830/sounds/wrongSoft.mp3`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587575755/sounds/Doh.wav`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587576928/sounds/wrong2.mp3`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587577359/sounds/negativeBeep.wav`,
-  `https://res.cloudinary.com/coreytesting/video/upload/v1587577571/sounds/cartoonBingLow.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1584721830/sounds/wrongSoft.mp3`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587575755/sounds/Doh.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587576928/sounds/wrong2.mp3`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587577359/sounds/negativeBeep.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1587577571/sounds/cartoonBingLow.wav`,
 ];
 
 function getRandom(maxValue: number) {

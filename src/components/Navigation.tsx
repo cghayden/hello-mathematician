@@ -50,12 +50,8 @@ const NavButton = styled.button<NavButtonProps>`
   }
 `;
 
-type Props = {
-  timeoutId: number;
-};
-
-function Navigation({ timeoutId }: Props) {
-  const { maxValue, setMaxValue, view, setView, toggleInProgress } =
+function Navigation() {
+  const { maxValue, setMaxValue, view, setView, toggleInProgress, timeoutId } =
     useGlobalState();
 
   const reset = () => {};
