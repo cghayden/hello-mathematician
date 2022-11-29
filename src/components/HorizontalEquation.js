@@ -6,7 +6,7 @@ import XSvg from './XSvg';
 import PlusSvg from './PlusSvg';
 import MinusSvg from './MinusSvg';
 
-export default function Equation({
+export default function HorizontalEquation({
   digits,
   view,
   isCorrect,
