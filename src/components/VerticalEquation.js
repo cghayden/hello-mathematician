@@ -109,7 +109,7 @@ const VerticalInput = styled.input`
   height: 100%;
   font: inherit;
   background: transparent;
-  /* width: 4ch; */
+  width: 7ch;
   color: ${(props) => (props.hide ? `transparent` : 'var(--white)')};
   caret-color: var(--white);
   &:focus {
