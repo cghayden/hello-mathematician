@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import HorizontalEquation from './HorizontalEquation';
+import VerticalEquation from './VerticalEquation';
 import DeleteSvg from './DeleteSvg';
 import CheckmarkSvg from './CheckmarkSvg';
 import { useGlobalState } from './GlobalState';
@@ -130,18 +131,33 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
 
   return (
     <>
-      <HorizontalEquation
-        digits={digits}
-        view={view}
-        isCorrect={isCorrect}
-        options={options}
-        solution={solution}
-        answer={answer}
-        handleInputChange={handleInputChange}
-        checkAnswer={checkAnswer}
-        inputEl={inputEl}
-        reduceEquationSize={reduceEquationSize}
-      />
+      {maxValue > 99 ? (
+        <VerticalEquation
+          digits={digits}
+          view={view}
+          isCorrect={isCorrect}
+          options={options}
+          solution={solution}
+          answer={answer}
+          handleInputChange={handleInputChange}
+          checkAnswer={checkAnswer}
+          inputEl={inputEl}
+          reduceEquationSize={true}
+        />
+      ) : (
+        <HorizontalEquation
+          digits={digits}
+          view={view}
+          isCorrect={isCorrect}
+          options={options}
+          solution={solution}
+          answer={answer}
+          handleInputChange={handleInputChange}
+          checkAnswer={checkAnswer}
+          inputEl={inputEl}
+          reduceEquationSize={reduceEquationSize}
+        />
+      )}
 
       <Calculator>
         {buttons.map((number) => (

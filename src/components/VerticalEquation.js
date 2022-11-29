@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import Operand from "./Operand";
-import DivideSvg from "./DivideSvg";
-import XSvg from "./XSvg";
-export default function HundredsEquation({
+import { useEffect } from 'react';
+import styled from 'styled-components';
+import Operand from './Operand';
+import DivideSvg from './DivideSvg';
+import XSvg from './XSvg';
+export default function VerticalEquation({
   digits,
   view,
   isCorrect,
@@ -13,48 +13,50 @@ export default function HundredsEquation({
   handleInputChange,
   checkAnswer,
   inputEl,
+  reduceEquationSize,
 }) {
   useEffect(() => {
     inputEl.current.focus();
   });
   return (
     <Form
-      id="inputForm"
-      action="POST"
+      id='inputForm'
+      action='POST'
       onSubmit={(e) => checkAnswer(e)}
-      className="fullEquation"
+      className='fullEquation'
+      reduceEquationSize={reduceEquationSize}
     >
       <fieldset disabled={options}>
-        <Label htmlFor="answer">
-          <OperandContainer className="operandContainer">
+        <Label htmlFor='answer'>
+          <OperandContainer className='operandContainer'>
             <GhostOperand>{digits[0]}</GhostOperand>
             <Operand digit={digits[0]} />
           </OperandContainer>
           <OperandContainer>
             <OperatorContainer>
-              {view === "/" && <DivideSvg />}
-              {view === "x" && <XSvg />}
-              {view === "+" && <p>+</p>}
-              {view === "-" && <p>-</p>}
+              {view === '/' && <DivideSvg />}
+              {view === 'x' && <XSvg />}
+              {view === '+' && <p>+</p>}
+              {view === '-' && <p>-</p>}
             </OperatorContainer>
             <GhostOperand>{digits[1]}</GhostOperand>
             <Operand digit={digits[1]} />
           </OperandContainer>
           {/* <p className="equals">=</p> */}
-          <InputDiv>
+          <VerticalInputDiv>
             {isCorrect === false && <RevealCorrect>{solution}</RevealCorrect>}
-            <Input
+            <VerticalInput
               disabled={options === true}
               hide={isCorrect === false}
-              id="answer"
-              type="number"
-              pattern="[0-9]*"
+              id='answer'
+              type='number'
+              pattern='[0-9]*'
               ref={inputEl}
               value={answer}
-              name="answer"
+              name='answer'
               onChange={(e) => handleInputChange(e)}
             />
-          </InputDiv>
+          </VerticalInputDiv>
         </Label>
       </fieldset>
     </Form>
@@ -63,7 +65,7 @@ export default function HundredsEquation({
 
 const Form = styled.form`
   font-size: 5rem;
-  font-family: "Fira Sans";
+  font-family: 'Fira Sans';
   position: relative;
   height: 3.5em;
   display: flex;
@@ -92,21 +94,23 @@ const Label = styled.label`
 const GhostOperand = styled.p`
   color: transparent;
 `;
-const InputDiv = styled.div`
+const VerticalInputDiv = styled.div`
   align-self: flex-end;
-  width: 4ch;
+  width: 7ch;
+  position: absolute;
+
   bottom: -1.1em;
   border-top: 2px solid var(--white);
 `;
-const Input = styled.input`
+const VerticalInput = styled.input`
   direction: rtl;
   border: none;
   padding: 0;
   height: 100%;
   font: inherit;
   background: transparent;
-  width: 4ch;
-  color: ${(props) => (props.hide ? `transparent` : "var(--white)")};
+  /* width: 4ch; */
+  color: ${(props) => (props.hide ? `transparent` : 'var(--white)')};
   caret-color: var(--white);
   &:focus {
     outline: none;

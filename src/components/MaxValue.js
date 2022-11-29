@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import ChevronUpSvg from "./ChevronUpSvg";
-import ChevronDownSvg from "./ChevronDownSvg";
-import Button from "../styles/Button";
+import React from 'react';
+import styled from 'styled-components';
+import ChevronUpSvg from './ChevronUpSvg';
+import ChevronDownSvg from './ChevronDownSvg';
+import Button from '../styles/Button';
 const MaxValueContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@ const MaxValueDisplay = styled.div`
 
 export default function MaxValue({ maxValue, setMaxValue, view }) {
   const increaseMaxValue = () => {
-    if (view === "x" || "/") {
+    if (view === 'x' || '/') {
       if (maxValue < 100) {
         setMaxValue((maxValue) => maxValue + 1);
       }
@@ -63,16 +63,17 @@ export default function MaxValue({ maxValue, setMaxValue, view }) {
   };
 
   return (
-    <MaxValueContainer className="maxValueContainer">
+    <MaxValueContainer className='maxValueContainer'>
       <SetMaxButtonsRow>
         <SetMaxButton onClick={() => setMaxValue(10)}>To 10</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(20)}>To 20</SetMaxButton>
         <SetMaxButton onClick={() => setMaxValue(100)}>To 100</SetMaxButton>
-        {view !== "x" && view !== "/" && (
+        <SetMaxButton onClick={() => setMaxValue(1000)}>To 1,000</SetMaxButton>
+        {/* {view !== 'x' && view !== '/' && (
           <SetMaxButton onClick={() => setMaxValue(1000)}>
             To 1,000
           </SetMaxButton>
-        )}
+        )} */}
       </SetMaxButtonsRow>
       <MaxValueDisplay>
         <p>Max Value:</p>
