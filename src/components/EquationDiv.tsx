@@ -34,6 +34,7 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
   const [reduceEquationSize, setReduceEquationSize] = useState(false);
   const [answer, setAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState<IisCorrect | null>(null);
+  const [showNextButton, toggleShowNextButton] = useState(false);
 
   const correctAudio = useRef<HTMLAudioElement>(null);
   const wrongAudio = useRef<HTMLAudioElement>(null);
@@ -115,9 +116,14 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
       const equation = `${digits[0]} ${view} ${digits[1]} = ${solution}`;
       if (inProgress) {
         setWrongOnes([...wrongOnes, equation]);
+        setTimeout(() => nextProblem(), 400);
+      }
+      if (!inProgress) {
+        toggleShowNextButton(true);
+        // set ui to show a next button
+        // press button = reset next button ui and call nextProblem()
       }
     }
-    setTimeout(() => nextProblem(), 400);
   }
 
   const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -158,7 +164,19 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
           reduceEquationSize={reduceEquationSize}
         />
       )}
-
+      <div>
+        {showNextButton && (
+          <NextButton
+            role='button'
+            onClick={() => {
+              toggleShowNextButton(false);
+              nextProblem();
+            }}
+          >
+            Next Problem
+          </NextButton>
+        )}
+      </div>
       <Calculator>
         {buttons.map((number) => (
           <CalcButton key={number} onClick={(e) => handleCalcButton(e)}>
@@ -182,6 +200,15 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
     </>
   );
 }
+
+const NextButton = styled.button`
+  background: var(--white);
+  color: var(--dark);
+  padding: 0.75rem 1.5rem;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+`;
 
 const Calculator = styled.div`
   margin: 0 auto;

@@ -76,6 +76,11 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   color: var(--white);
+  margin-right: -2ch;
+
+  @media screen and (min-width: 769px) {
+    margin-right: -3ch;
+  }
 
   @media screen and (max-width: 768px) {
     font-size: ${(props) => (props.reduceEquationSize ? `50px` : '4rem')};
@@ -85,6 +90,10 @@ const Form = styled.form`
 const Label = styled.label`
   padding: 20px 0;
   display: flex;
+
+  .equals {
+    margin: -5px 5px 0 5px;
+  }
 `;
 
 const RevealCorrect = styled.span`
@@ -97,7 +106,7 @@ const RevealCorrect = styled.span`
 const OperationContainer = styled.div`
   display: grid;
   place-items: center;
-  padding-bottom: 5px;
+  padding: 0 5px 2px 5px;
 `;
 
 const GhostOperand = styled.p`
