@@ -72,7 +72,7 @@ const Form = styled.form`
   justify-content: center;
   align-items: start;
   color: var(--white);
-  /* background: red; */
+  margin-right: -1ch;
   .right-wrong {
     height: 28px;
     font-size: 20px;

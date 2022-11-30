@@ -76,6 +76,11 @@ const Form = styled.form`
   justify-content: center;
   align-items: center;
   color: var(--white);
+  margin-right: -2ch;
+
+  @media screen and (min-width: 769px) {
+    margin-right: -3ch;
+  }
 
   @media screen and (max-width: 768px) {
     font-size: ${(props) => (props.reduceEquationSize ? `50px` : '4rem')};
