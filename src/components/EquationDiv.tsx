@@ -110,6 +110,7 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
       if (inProgress) {
         setScore((score: number) => score + 1);
       }
+      nextProblem();
     } else {
       setIsCorrect(false);
       wrongAudio.current?.play();
