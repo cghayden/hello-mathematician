@@ -98,9 +98,17 @@ const VerticalInputDiv = styled.div`
   align-self: flex-end;
   width: 7ch;
   position: absolute;
-
   bottom: -1.1em;
-  border-top: 2px solid var(--white);
+  /* border-top: 2px solid var(--white); */
+
+  &:before {
+    content: '';
+    border-top: 2px solid var(--white);
+    width: 4ch;
+    position: absolute;
+    right: 0;
+    margin-top: -2px;
+  }
 `;
 const VerticalInput = styled.input`
   direction: rtl;
