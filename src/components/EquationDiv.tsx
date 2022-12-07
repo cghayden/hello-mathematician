@@ -8,7 +8,8 @@ import { useGlobalState } from './GlobalState';
 import NextButton from './NextButton';
 
 const correctSoundSources = [
-  `https://res.cloudinary.com/haydentech/video/upload/v1670422686/sounds/Cayden_yes.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1670426167/sounds/Kadin_Yes.wav`,
+  `https://res.cloudinary.com/haydentech/video/upload/v1670426228/sounds/Kadin_Yes_M4a.m4a`,
   `https://res.cloudinary.com/haydentech/video/upload/v1584720407/sounds/wooYeah.wav`,
   `https://res.cloudinary.com/haydentech/video/upload/v1587575773/sounds/yippee.wav`,
   `https://res.cloudinary.com/haydentech/video/upload/v1587575766/sounds/jingleWin1.wav`,
