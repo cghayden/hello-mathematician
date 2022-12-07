@@ -21,7 +21,7 @@ export default function Timer() {
     <TimerStyle variants={variants}>
       <Time>
         <p>Timer:</p>
-        <p>
+        <p style={{ width: '50px' }}>
           {minutes}:{seconds === 0 ? '00' : seconds}
         </p>
         <TimeButtons>
@@ -56,6 +56,7 @@ const TimerStyle = styled(motion.div)`
 `;
 
 const Time = styled.div`
+  width: 200px;
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 2fr 1fr 1fr;
