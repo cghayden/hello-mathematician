@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import React from 'react';
+import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Footer({ isToggled, toggleFooter }) {
   return (
@@ -13,7 +13,8 @@ export default function Footer({ isToggled, toggleFooter }) {
           transition={{ duration: 0.5 }}
         >
           <p>&copy; Corey Hayden</p>
-          <a href="mailto:cghayden@gmail.com">cghayden@gmail.com</a>
+          <a href='mailto:cghayden@gmail.com'>cghayden@gmail.com</a>
+          <ShoutOutStyles>shout out to Kaydin!</ShoutOutStyles>
           <CloseFooterButton
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -32,7 +33,7 @@ const FooterStyle = styled(motion.footer)`
   position: relative;
   background: var(--dark);
   color: var(--white);
-  height: 80px;
+  height: 90px;
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -42,7 +43,7 @@ const FooterStyle = styled(motion.footer)`
   flex-direction: column;
   place-content: center;
   @media screen and (max-width: 768px) {
-    height: 60px;
+    height: 90px;
   }
 `;
 
@@ -63,4 +64,9 @@ const CloseFooterButton = styled(motion.button)`
   @media screen and (max-width: 768px) {
     bottom: 1%;
   }
+`;
+
+const ShoutOutStyles = styled.p`
+  color: var(--yellow);
+  font-size: 14px;
 `;
