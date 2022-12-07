@@ -7,6 +7,7 @@ import CheckmarkSvg from './CheckmarkSvg';
 import { useGlobalState } from './GlobalState';
 
 const correctSoundSources = [
+  `https://res.cloudinary.com/haydentech/video/upload/v1670422686/sounds/Cayden_yes.wav`,
   `https://res.cloudinary.com/haydentech/video/upload/v1584720407/sounds/wooYeah.wav`,
   `https://res.cloudinary.com/haydentech/video/upload/v1587575773/sounds/yippee.wav`,
   `https://res.cloudinary.com/haydentech/video/upload/v1587575766/sounds/jingleWin1.wav`,
