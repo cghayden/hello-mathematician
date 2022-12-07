@@ -5,6 +5,7 @@ import VerticalEquation from './VerticalEquation';
 import DeleteSvg from './DeleteSvg';
 import CheckmarkSvg from './CheckmarkSvg';
 import { useGlobalState } from './GlobalState';
+import NextButton from './NextButton';
 
 const correctSoundSources = [
   `https://res.cloudinary.com/haydentech/video/upload/v1670422686/sounds/Cayden_yes.wav`,
@@ -169,14 +170,9 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
       <div>
         {showNextButton && (
           <NextButton
-            role='button'
-            onClick={() => {
-              toggleShowNextButton(false);
-              nextProblem();
-            }}
-          >
-            Next Problem
-          </NextButton>
+            toggleShowNextButton={toggleShowNextButton}
+            nextProblem={nextProblem}
+          />
         )}
       </div>
       <Calculator>
@@ -202,15 +198,6 @@ export default function EquationDiv({ wrongOnes, setWrongOnes, setCount }) {
     </>
   );
 }
-
-const NextButton = styled.button`
-  background: var(--white);
-  color: var(--dark);
-  padding: 0.75rem 1.5rem;
-  font-size: 20px;
-  border-radius: 10px;
-  border: none;
-`;
 
 const Calculator = styled.div`
   margin: 0 auto;
