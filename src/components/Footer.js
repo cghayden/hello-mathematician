@@ -14,7 +14,7 @@ export default function Footer({ isToggled, toggleFooter }) {
         >
           <p>&copy; Corey Hayden</p>
           <a href='mailto:cghayden@gmail.com'>cghayden@gmail.com</a>
-          <ShoutOutStyles>shout out to Kaydin!</ShoutOutStyles>
+          <ShoutOutStyles>shout out to Kadin!</ShoutOutStyles>
           <CloseFooterButton
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
